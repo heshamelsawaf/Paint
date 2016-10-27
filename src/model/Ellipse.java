@@ -7,9 +7,10 @@ public class Ellipse implements Shape {
 
 	private double radiusX, radiusY;
 	private Point center;
-	private javafx.scene.shape.Ellipse ellipse = new javafx.scene.shape.Ellipse();
+	private javafx.scene.shape.Ellipse ellipse;
 
 	public Ellipse(Point center, double radiusX, double radiusY) {
+		ellipse = new javafx.scene.shape.Ellipse();
 		ellipse.setStroke(Paint.valueOf("BLACK"));
 		ellipse.setFill(Paint.valueOf("WHITE"));
 		this.center = center;

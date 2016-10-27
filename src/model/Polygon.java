@@ -7,10 +7,12 @@ import util.Point;
 
 public class Polygon implements Shape {
 
-	private ArrayList<Double> polygonVertices = new ArrayList<Double>();
-	private javafx.scene.shape.Polygon shape = new javafx.scene.shape.Polygon();
+	private ArrayList<Double> polygonVertices;
+	private javafx.scene.shape.Polygon shape;
 
 	public Polygon(Point... vertices) {
+		polygonVertices = new ArrayList<Double>();
+		shape = new javafx.scene.shape.Polygon();
 		shape.setStroke(Paint.valueOf("BLACK"));
 		shape.setFill(Paint.valueOf("WHITE"));
 		for (Point point : vertices) {
@@ -20,6 +22,8 @@ public class Polygon implements Shape {
 	}
 
 	public Polygon(double... vertices) {
+		polygonVertices = new ArrayList<Double>();
+		shape = new javafx.scene.shape.Polygon();
 		shape.setStroke(Paint.valueOf("BLACK"));
 		shape.setFill(Paint.valueOf("WHITE"));
 		for (double vertex : vertices) {
