@@ -22,12 +22,24 @@ public class Ellipse implements Shape {
 		this.center = center;
 	}
 
+	public Point getCenter() {
+		return this.center;
+	}
+
 	public void setRadiusX(double radiusX) {
 		this.radiusX = radiusX;
 	}
 
+	public double getRadiusX() {
+		return this.radiusX;
+	}
+
 	public void setRadiusY(double radiusY) {
 		this.radiusY = radiusY;
+	}
+
+	public double getRadiusY() {
+		return this.radiusY;
 	}
 
 	@Override
@@ -47,5 +59,25 @@ public class Ellipse implements Shape {
 	@Override
 	public void setFillColor(Paint value) {
 		ellipse.setFill(value);
+	}
+
+	@Override
+	public void setStrokeWidth(double value) {
+		ellipse.setStrokeWidth(value);
+	}
+
+	@Override
+	public Paint getStrokeColor() {
+		return ellipse.getStroke();
+	}
+
+	@Override
+	public Paint getFillColor() {
+		return ellipse.getFill();
+	}
+
+	@Override
+	public double getStrokeWidth() {
+		return ellipse.getStrokeWidth();
 	}
 }
