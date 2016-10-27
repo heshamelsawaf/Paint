@@ -24,4 +24,24 @@ public class Rectangle extends Polygon {
 	public void setFillColor(Paint value) {
 		super.setFillColor(value);
 	}
+
+	@Override
+	public void setStrokeWidth(double value) {
+		super.setStrokeWidth(value);
+	}
+
+	@Override
+	public Paint getStrokeColor() {
+		return super.getStrokeColor();
+	}
+
+	@Override
+	public Paint getFillColor() {
+		return super.getFillColor();
+	}
+
+	@Override
+	public double getStrokeWidth() {
+		return super.getStrokeWidth();
+	}
 }

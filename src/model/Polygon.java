@@ -48,4 +48,24 @@ public class Polygon implements Shape {
 	public void setFillColor(Paint value) {
 		shape.setFill(value);
 	}
+
+	@Override
+	public void setStrokeWidth(double value) {
+		shape.setStrokeWidth(value);
+	}
+
+	@Override
+	public Paint getStrokeColor() {
+		return shape.getStroke();
+	}
+
+	@Override
+	public Paint getFillColor() {
+		return shape.getFill();
+	}
+
+	@Override
+	public double getStrokeWidth() {
+		return shape.getStrokeWidth();
+	}
 }

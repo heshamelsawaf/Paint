@@ -18,4 +18,24 @@ public class Line extends Polygon {
 	public void setStrokeColor(Paint value) {
 		super.setStrokeColor(value);
 	}
+
+	@Override
+	public void setStrokeWidth(double value) {
+		super.setStrokeWidth(value);
+	}
+
+	@Override
+	public Paint getStrokeColor() {
+		return super.getStrokeColor();
+	}
+
+	@Override
+	public Paint getFillColor() {
+		return super.getFillColor();
+	}
+
+	@Override
+	public double getStrokeWidth() {
+		return super.getStrokeWidth();
+	}
 }
