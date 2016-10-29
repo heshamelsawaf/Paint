@@ -63,6 +63,9 @@ public class ToolBar extends javafx.scene.control.ToolBar {
     this.line = new ToggleButton();
     this.ellipse = new ToggleButton();
     this.circle = new ToggleButton();
+    
+    this.BuildToolBar();
+    //this.takeControl(false);
 
   }
 
@@ -72,7 +75,7 @@ public class ToolBar extends javafx.scene.control.ToolBar {
 
     this.fillColor.setDisable(!key);
     this.strokeColor.setDisable(!key);
-    this.action.setDisable(!key);
+  //  this.action.setDisable(!key);
 
     this.select.setDisable(!key);
     this.polygon.setDisable(!key);
@@ -83,8 +86,6 @@ public class ToolBar extends javafx.scene.control.ToolBar {
     this.ellipse.setDisable(!key);
     this.circle.setDisable(!key);
 
-    this.BuildToolBar();
-    this.takeControl(false);
   }
 
   private void BuildToolBar() {
@@ -117,7 +118,7 @@ public class ToolBar extends javafx.scene.control.ToolBar {
     this.redo.setOnAction(event -> {
 
     });
-    this.getItems().addAll(this.undo, this.redo, this.action);
+   // this.getItems().addAll(this.undo, this.redo, this.action);
   }
 
   private void buildFont() {
@@ -127,7 +128,7 @@ public class ToolBar extends javafx.scene.control.ToolBar {
     this.strokeColor.setOnAction(event -> {
 
     });
-    this.getItems().addAll(this.fillColor, this.strokeColor, this.strokeWidth);
+   // this.getItems().addAll(this.fillColor, this.strokeColor, this.strokeWidth);
   }
 
   private void buildTools() {

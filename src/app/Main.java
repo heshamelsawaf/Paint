@@ -1,9 +1,12 @@
 package app;
 	
+import controller.PaintController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import view.main.Home;
+import view.main.HomeScene;
 
 
 public class Main extends Application {
@@ -13,7 +16,7 @@ public class Main extends Application {
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
+			primaryStage.setScene(new HomeScene(new PaintController(), new Home(new PaintController(), primaryStage)));
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -64,6 +64,18 @@ public class MenuBar extends javafx.scene.control.MenuBar {
 
   }
 
+  public void selectView_Toolbars_MenuBar(boolean key) {
+    this.view.toolbars.menuBar.setSelected(key);
+  }
+
+  public void selectView_Toolbars_StatusBar(boolean key) {
+    this.view.toolbars.statusBar.setSelected(key);
+  }
+
+  public void selectView_Toolbars_ToolBar(boolean key) {
+    this.view.toolbars.toolBar.setSelected(key);
+  }
+
   private class File extends Menu {
     private MenuItem newFile;
     private MenuItem openFile;
@@ -78,14 +90,14 @@ public class MenuBar extends javafx.scene.control.MenuBar {
     public File(String text) {
       super();
       this.setText(text);
-      this.newFile = new MenuItem();
-      this.openFile = new MenuItem();
-      this.save = new MenuItem();
-      this.saveAs = new MenuItem();
-      this.exportFile = new MenuItem();
-      this.importFile = new MenuItem();
-      this.close = new MenuItem();
-      this.exit = new MenuItem();
+      this.newFile = new MenuItem(MenuBarConstants.FILE_NEWFILE);
+      this.openFile = new MenuItem(MenuBarConstants.FILE_OPENFILE);
+      this.save = new MenuItem(MenuBarConstants.FILE_SAVE);
+      this.saveAs = new MenuItem(MenuBarConstants.FILE_SAVEAS);
+      this.exportFile = new MenuItem(MenuBarConstants.FILE_EXPORT);
+      this.importFile = new MenuItem(MenuBarConstants.FILE_IMPORT);
+      this.close = new MenuItem(MenuBarConstants.FILE_CLOSE);
+      this.exit = new MenuItem(MenuBarConstants.FILE_EXIT);
       this.buildFileMenu();
       this.getItems().addAll(this.newFile, new SeparatorMenuItem(), this.openFile, this.save,
           this.saveAs, new SeparatorMenuItem(), this.exportFile, this.importFile,
@@ -173,12 +185,12 @@ public class MenuBar extends javafx.scene.control.MenuBar {
     public Edit(String text) {
       super();
       this.setText(text);
-      this.undo = new MenuItem();
-      this.redo = new MenuItem();
-      this.cut = new MenuItem();
-      this.copy = new MenuItem();
-      this.paste = new MenuItem();
-      this.clear = new MenuItem();
+      this.undo = new MenuItem(MenuBarConstants.EDIT_UNDO);
+      this.redo = new MenuItem(MenuBarConstants.EDIT_REDO);
+      this.cut = new MenuItem(MenuBarConstants.EDIT_CUT);
+      this.copy = new MenuItem(MenuBarConstants.EDIT_COPY);
+      this.paste = new MenuItem(MenuBarConstants.EDIT_PASTE);
+      this.clear = new MenuItem(MenuBarConstants.EDIT_CLEAR);
       this.buildFileMenu();
       this.getItems().addAll(this.undo, this.redo, new SeparatorMenuItem(), this.cut, this.copy,
           this.paste, new SeparatorMenuItem(), this.clear);
