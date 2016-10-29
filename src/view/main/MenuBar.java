@@ -9,12 +9,16 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import util.MenuBarConstants;
 
 public class MenuBar extends javafx.scene.control.MenuBar {
   private PaintController paintController;
 
-  // menus
+  // Menus
   private File file;
   private Edit edit;
   private View view;
@@ -107,27 +111,43 @@ public class MenuBar extends javafx.scene.control.MenuBar {
 
     private void buildFileMenu() {
 
+      this.newFile.setAccelerator(new KeyCodeCombination(KeyCode.N,
+    		  KeyCombination.CONTROL_DOWN));
       this.newFile.setOnAction(event -> {
 
       });
+      this.openFile.setAccelerator(new KeyCodeCombination(KeyCode.O,
+    		  KeyCombination.CONTROL_DOWN));
       this.openFile.setOnAction(event -> {
 
       });
+      this.save.setAccelerator(new KeyCodeCombination(KeyCode.S,
+    		  KeyCombination.CONTROL_DOWN));
       this.save.setOnAction(event -> {
 
       });
+      this.saveAs.setAccelerator(new KeyCodeCombination(KeyCode.S,
+    		  KeyCombination.ALT_DOWN, KeyCombination.CONTROL_DOWN));
       this.saveAs.setOnAction(event -> {
 
       });
+      this.exportFile.setAccelerator(new KeyCodeCombination(KeyCode.E,
+    		  KeyCombination.CONTROL_DOWN));
       this.exportFile.setOnAction(event -> {
 
       });
+      this.importFile.setAccelerator(new KeyCodeCombination(KeyCode.I,
+    		  KeyCombination.CONTROL_DOWN));
       this.importFile.setOnAction(event -> {
 
       });
+      this.close.setAccelerator(new KeyCodeCombination(KeyCode.W,
+    		  KeyCombination.CONTROL_DOWN));
       this.close.setOnAction(event -> {
 
       });
+      this.exit.setAccelerator(new KeyCodeCombination(KeyCode.F4,
+    		  KeyCombination.ALT_DOWN));
       this.exit.setOnAction(event -> {
 
       });
@@ -197,22 +217,33 @@ public class MenuBar extends javafx.scene.control.MenuBar {
     }
 
     private void buildFileMenu() {
-
+      this.undo.setAccelerator(new KeyCodeCombination(KeyCode.Z,
+    		  KeyCombination.CONTROL_DOWN));
       this.undo.setOnAction(event -> {
 
       });
+      this.redo.setAccelerator(new KeyCodeCombination(KeyCode.Y,
+    		  KeyCombination.CONTROL_DOWN));
       this.redo.setOnAction(event -> {
 
       });
+      this.cut.setAccelerator(new KeyCodeCombination(KeyCode.X,
+    		  KeyCombination.CONTROL_DOWN));
       this.cut.setOnAction(event -> {
 
       });
+      this.copy.setAccelerator(new KeyCodeCombination(KeyCode.C,
+    		  KeyCombination.CONTROL_DOWN));
       this.copy.setOnAction(event -> {
 
       });
+      this.paste.setAccelerator(new KeyCodeCombination(KeyCode.V,
+    		  KeyCombination.CONTROL_DOWN));
       this.paste.setOnAction(event -> {
 
       });
+      this.clear.setAccelerator(new KeyCodeCombination(KeyCode.C,
+    		  KeyCombination.ALT_DOWN, KeyCombination.CONTROL_DOWN));
       this.clear.setOnAction(event -> {
 
       });
@@ -260,6 +291,7 @@ public class MenuBar extends javafx.scene.control.MenuBar {
     }
 
     private void buildViewMenu() {
+      this.fullScreen.setAccelerator(new KeyCodeCombination(KeyCode.F11, KeyCombination.ALT_ANY));
       this.fullScreen.setOnAction(event -> {
 
       });
@@ -323,12 +355,18 @@ public class MenuBar extends javafx.scene.control.MenuBar {
       }
 
       private void buildZoomSubMenu() {
+    	this.zoomIn.setAccelerator(new KeyCodeCombination(KeyCode.PLUS,
+      		  	KeyCombination.CONTROL_DOWN));
         this.zoomIn.setOnAction(event -> {
 
         });
+        this.zoomOut.setAccelerator(new KeyCodeCombination(KeyCode.MINUS,
+        		  KeyCombination.CONTROL_DOWN));
         this.zoomOut.setOnAction(event -> {
 
         });
+        this.reset.setAccelerator(new KeyCodeCombination(KeyCode.DIGIT0,
+        		  KeyCombination.CONTROL_DOWN));
         this.reset.setOnAction(event -> {
 
         });
@@ -367,15 +405,23 @@ public class MenuBar extends javafx.scene.control.MenuBar {
     }
 
     private void buildActionsMenu() {
+      this.duplicate.setAccelerator(new KeyCodeCombination(KeyCode.D,
+        	    KeyCombination.ALT_DOWN, KeyCombination.CONTROL_DOWN));
       this.duplicate.setOnAction(event -> {
 
       });
+      this.delete.setAccelerator(new KeyCodeCombination(KeyCode.D,
+      	    	KeyCombination.CONTROL_DOWN));
       this.delete.setOnAction(event -> {
 
       });
+      this.rotateClockwise.setAccelerator(new KeyCodeCombination(KeyCode.PLUS,
+    	    	KeyCombination.SHIFT_DOWN, KeyCombination.CONTROL_DOWN));
       this.rotateClockwise.setOnAction(event -> {
 
       });
+      this.rotateCounterclockwise.setAccelerator(new KeyCodeCombination(KeyCode.MINUS,
+  	    	KeyCombination.SHIFT_DOWN, KeyCombination.CONTROL_DOWN));
       this.rotateCounterclockwise.setOnAction(event -> {
 
       });

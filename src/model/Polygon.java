@@ -68,4 +68,22 @@ public class Polygon implements Shape {
 	public double getStrokeWidth() {
 		return shape.getStrokeWidth();
 	}
+
+	@Override
+	public void resize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
 }

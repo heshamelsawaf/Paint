@@ -80,4 +80,22 @@ public class Ellipse implements Shape {
 	public double getStrokeWidth() {
 		return ellipse.getStrokeWidth();
 	}
+
+	@Override
+	public void resize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
 }
