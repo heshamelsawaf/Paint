@@ -10,6 +10,8 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
+import util.ToolBarConstants;
 
 public class ToolBar extends javafx.scene.control.ToolBar {
   private PaintController paintController;
@@ -99,12 +101,15 @@ public class ToolBar extends javafx.scene.control.ToolBar {
   }
 
   private void BuildFile() {
+	this._new.setTooltip(new Tooltip(ToolBarConstants.NEWFILE));
     this._new.setOnAction(event -> {
 
     });
+    this.open.setTooltip(new Tooltip(ToolBarConstants.OPENFILE));
     this.open.setOnAction(event -> {
 
     });
+    this.save.setTooltip(new Tooltip(ToolBarConstants.SAVEFILE));
     this.save.setOnAction(event -> {
 
     });
@@ -112,9 +117,11 @@ public class ToolBar extends javafx.scene.control.ToolBar {
   }
 
   private void BuildEdit() {
+	this.undo.setTooltip(new Tooltip(ToolBarConstants.UNDO));
     this.undo.setOnAction(event -> {
 
     });
+    this.redo.setTooltip(new Tooltip(ToolBarConstants.REDO));
     this.redo.setOnAction(event -> {
 
     });
@@ -133,34 +140,42 @@ public class ToolBar extends javafx.scene.control.ToolBar {
 
   private void buildTools() {
     this.select.setToggleGroup(this.group);
+    this.select.setTooltip(new Tooltip(ToolBarConstants.SELECT));
     this.select.setOnAction(event -> {
 
     });
     this.polygon.setToggleGroup(this.group);
+    this.polygon.setTooltip(new Tooltip(ToolBarConstants.POLYGON));
     this.polygon.setOnAction(event -> {
 
     });
     this.rectangle.setToggleGroup(this.group);
+    this.rectangle.setTooltip(new Tooltip(ToolBarConstants.RECTANGLE));
     this.rectangle.setOnAction(event -> {
 
     });
     this.square.setToggleGroup(this.group);
+    this.square.setTooltip(new Tooltip(ToolBarConstants.SQUARE));
     this.square.setOnAction(event -> {
 
     });
     this.triangle.setToggleGroup(this.group);
+    this.triangle.setTooltip(new Tooltip(ToolBarConstants.TRIANGLE));
     this.triangle.setOnAction(event -> {
 
     });
     this.line.setToggleGroup(this.group);
+    this.line.setTooltip(new Tooltip(ToolBarConstants.LINE));
     this.line.setOnAction(event -> {
 
     });
     this.ellipse.setToggleGroup(this.group);
+    this.ellipse.setTooltip(new Tooltip(ToolBarConstants.ELLIPSE));
     this.ellipse.setOnAction(event -> {
 
     });
     this.circle.setToggleGroup(this.group);
+    this.circle.setTooltip(new Tooltip(ToolBarConstants.CIRCLE));
     this.circle.setOnAction(event -> {
 
     });
