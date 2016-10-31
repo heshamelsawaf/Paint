@@ -5,61 +5,66 @@ import util.Point;
 
 public class Rectangle extends Polygon {
 
-	private boolean highlight = false;
-	public Rectangle(Point topLeftPoint, Point topRightPoint,
-					 Point bottomLeftPoint, Point bottomRightPoint) {
-		super(topLeftPoint, topRightPoint, bottomLeftPoint, bottomRightPoint);
-	}
+  private boolean highlight = false;
+  private javafx.scene.shape.Rectangle drwableRetangle;
 
-	public Rectangle() {
-		super(new Point(0,0), new Point(0,0), new Point(0,0), new Point(0,0));
-	}
+  public Rectangle(Point topLeftPoint, Point topRightPoint, Point bottomLeftPoint,
+      Point bottomRightPoint) {
+    super(topLeftPoint, topRightPoint, bottomLeftPoint, bottomRightPoint);
+  }
 
-	@Override
-	public javafx.scene.shape.Shape getDrawableShape() {
-		return super.getDrawableShape();
-	}
+  public Rectangle() {
+    super(new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0));
+  }
 
-	@Override
-	public void setDrawableShape(javafx.scene.shape.Shape shape) {
-		super.setDrawableShape(shape);
-	}
+  @Override
+  public javafx.scene.shape.Shape getDrawableShape() {
+    if (drwableRetangle == null)
+      return new javafx.scene.shape.Rectangle();
+    else
+      return this.drwableRetangle;
+  }
 
-	@Override
-	public void setStrokeColor(Paint value) {
-		super.setStrokeColor(value);
-	}
+  @Override
+  public void setDrawableShape(javafx.scene.shape.Shape shape) {
+    super.setDrawableShape(shape);
+  }
 
-	@Override
-	public void setFillColor(Paint value) {
-		super.setFillColor(value);
-	}
+  @Override
+  public void setStrokeColor(Paint value) {
+    super.setStrokeColor(value);
+  }
 
-	@Override
-	public void setStrokeWidth(double value) {
-		super.setStrokeWidth(value);
-	}
+  @Override
+  public void setFillColor(Paint value) {
+    super.setFillColor(value);
+  }
 
-	@Override
-	public Paint getStrokeColor() {
-		return super.getStrokeColor();
-	}
+  @Override
+  public void setStrokeWidth(double value) {
+    super.setStrokeWidth(value);
+  }
 
-	@Override
-	public Paint getFillColor() {
-		return super.getFillColor();
-	}
+  @Override
+  public Paint getStrokeColor() {
+    return super.getStrokeColor();
+  }
 
-	@Override
-	public double getStrokeWidth() {
-		return super.getStrokeWidth();
-	}
+  @Override
+  public Paint getFillColor() {
+    return super.getFillColor();
+  }
 
-	public void setHighlighted(boolean highlight) {
-		this.highlight = highlight;
-	}
+  @Override
+  public double getStrokeWidth() {
+    return super.getStrokeWidth();
+  }
 
-	public boolean isHighlighted() {
-		return this.highlight;
-	}
+  public void setHighlighted(boolean highlight) {
+    this.highlight = highlight;
+  }
+
+  public boolean isHighlighted() {
+    return this.highlight;
+  }
 }
