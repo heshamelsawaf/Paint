@@ -5,13 +5,17 @@ import util.Point;
 
 public class Rectangle extends Polygon {
 
-	private boolean highlight = false;
+	private boolean highlight;
 
 	public Rectangle(Point topLeftPoint, Point topRightPoint,
 					 Point bottomLeftPoint, Point bottomRightPoint) {
 		super(topLeftPoint, topRightPoint, bottomLeftPoint, bottomRightPoint);
 	}
 
+	public Rectangle() {
+		super();
+	}
+	
 	@Override
 	public javafx.scene.shape.Shape getDrawableShape() {
 		return super.getDrawableShape();
@@ -52,9 +56,6 @@ public class Rectangle extends Polygon {
 	}
 
 	public boolean isHighlighted() {
-		if (this.highlight == true) {
-			return true;
-		}
-		return false;
+		return this.highlight;
 	}
 }

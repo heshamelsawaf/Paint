@@ -10,6 +10,10 @@ public class Polygon implements Shape {
 	private ArrayList<Double> polygonVertices;
 	private javafx.scene.shape.Polygon shape;
 
+	public Polygon() {
+		shape = new javafx.scene.shape.Polygon();
+	}
+
 	public Polygon(Point... vertices) {
 		polygonVertices = new ArrayList<Double>();
 		shape = new javafx.scene.shape.Polygon();
