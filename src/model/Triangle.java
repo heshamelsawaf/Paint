@@ -15,6 +15,11 @@ public class Triangle extends Polygon {
 	}
 
 	@Override
+	public void setDrawableShape(javafx.scene.shape.Shape shape) {
+		super.setDrawableShape(shape);
+	}
+
+	@Override
 	public void setStrokeColor(Paint value) {
 		super.setStrokeColor(value);
 	}

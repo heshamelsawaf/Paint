@@ -8,11 +8,7 @@ import util.Point;
 public class Polygon implements Shape {
 
 	private ArrayList<Double> polygonVertices;
-	private javafx.scene.shape.Polygon shape;
-
-	public Polygon() {
-		shape = new javafx.scene.shape.Polygon();
-	}
+	private javafx.scene.shape.Shape shape;
 
 	public Polygon(Point... vertices) {
 		polygonVertices = new ArrayList<Double>();
@@ -39,7 +35,7 @@ public class Polygon implements Shape {
 	public javafx.scene.shape.Shape getDrawableShape() {
 		Double[] pointsToDraw = new Double[polygonVertices.size()];
 		pointsToDraw = polygonVertices.toArray(pointsToDraw);
-		shape.getPoints().addAll(pointsToDraw);
+		((javafx.scene.shape.Polygon)shape).getPoints().addAll(pointsToDraw);
 		return shape;
 	}
 
@@ -71,6 +67,11 @@ public class Polygon implements Shape {
 	@Override
 	public double getStrokeWidth() {
 		return shape.getStrokeWidth();
+	}
+
+	@Override
+	public void setDrawableShape(javafx.scene.shape.Shape shape) {
+		this.shape = shape;
 	}
 
 	@Override

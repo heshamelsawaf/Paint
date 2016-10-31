@@ -7,7 +7,7 @@ public class Ellipse implements Shape {
 
 	private double radiusX, radiusY;
 	private Point center;
-	private javafx.scene.shape.Ellipse ellipse;
+	private javafx.scene.shape.Shape ellipse;
 
 	public Ellipse(Point center, double radiusX, double radiusY) {
 		ellipse = new javafx.scene.shape.Ellipse();
@@ -44,10 +44,10 @@ public class Ellipse implements Shape {
 
 	@Override
 	public javafx.scene.shape.Shape getDrawableShape() {
-		ellipse.setCenterX(center.getX());
-		ellipse.setCenterY(center.getY());
-		ellipse.setRadiusX(radiusX);
-		ellipse.setRadiusY(radiusY);
+		((javafx.scene.shape.Ellipse)ellipse).setCenterX(center.getX());
+		((javafx.scene.shape.Ellipse)ellipse).setCenterY(center.getY());
+		((javafx.scene.shape.Ellipse)ellipse).setRadiusX(radiusX);
+		((javafx.scene.shape.Ellipse)ellipse).setRadiusY(radiusY);
 		return ellipse;
 	}
 
@@ -79,6 +79,11 @@ public class Ellipse implements Shape {
 	@Override
 	public double getStrokeWidth() {
 		return ellipse.getStrokeWidth();
+	}
+
+	@Override
+	public void setDrawableShape(javafx.scene.shape.Shape shape) {
+		this.ellipse = (javafx.scene.shape.Ellipse)shape;		
 	}
 
 	@Override

@@ -13,7 +13,6 @@ public class Circle extends Ellipse {
 		super.setCenter(center);
 	}
 
-
 	public void setRadius(double radius) {
 		super.setRadiusX(radius);
 		super.setRadiusY(radius);
@@ -22,6 +21,11 @@ public class Circle extends Ellipse {
 	@Override
 	public javafx.scene.shape.Shape getDrawableShape() {
 		return super.getDrawableShape();
+	}
+
+	@Override
+	public void setDrawableShape(javafx.scene.shape.Shape shape) {
+		super.setDrawableShape(shape);
 	}
 
 	@Override

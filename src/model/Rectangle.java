@@ -5,20 +5,24 @@ import util.Point;
 
 public class Rectangle extends Polygon {
 
-	private boolean highlight;
-
+	private boolean highlight = false;
 	public Rectangle(Point topLeftPoint, Point topRightPoint,
 					 Point bottomLeftPoint, Point bottomRightPoint) {
 		super(topLeftPoint, topRightPoint, bottomLeftPoint, bottomRightPoint);
 	}
 
 	public Rectangle() {
-		super();
+		super(new Point(0,0), new Point(0,0), new Point(0,0), new Point(0,0));
 	}
-	
+
 	@Override
 	public javafx.scene.shape.Shape getDrawableShape() {
 		return super.getDrawableShape();
+	}
+
+	@Override
+	public void setDrawableShape(javafx.scene.shape.Shape shape) {
+		super.setDrawableShape(shape);
 	}
 
 	@Override

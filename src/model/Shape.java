@@ -6,6 +6,8 @@ public interface Shape {
 
 	public javafx.scene.shape.Shape getDrawableShape();
 
+	public void setDrawableShape(javafx.scene.shape.Shape shape);
+
 	public void resize();
 
 	public void move();
