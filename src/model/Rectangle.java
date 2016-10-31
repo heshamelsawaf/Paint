@@ -5,6 +5,8 @@ import util.Point;
 
 public class Rectangle extends Polygon {
 
+	private boolean highlight = false;
+
 	public Rectangle(Point topLeftPoint, Point topRightPoint,
 					 Point bottomLeftPoint, Point bottomRightPoint) {
 		super(topLeftPoint, topRightPoint, bottomLeftPoint, bottomRightPoint);
@@ -43,5 +45,16 @@ public class Rectangle extends Polygon {
 	@Override
 	public double getStrokeWidth() {
 		return super.getStrokeWidth();
+	}
+
+	public void setHighlighted(boolean highlight) {
+		this.highlight = highlight;
+	}
+
+	public boolean isHighlighted() {
+		if (this.highlight == true) {
+			return true;
+		}
+		return false;
 	}
 }
