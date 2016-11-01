@@ -26,9 +26,9 @@ public class StatusBar extends BorderPane {
     this.coordinates = new Label();
     this.drawingAreaDimensions = new Label();
     this.zoom = new Label();
-    
+
     this.buildStatusBar();
-    
+
     this.setLeft(leftHBox);
     this.setRight(rightHBox);
   }
@@ -48,6 +48,10 @@ public class StatusBar extends BorderPane {
 
 
     this.rightHBox.getChildren().addAll(this.zoom);
+  }
+
+  public void updateCoordinates(double x, double y) {
+    this.coordinates.setText("(" + x + ", " + y + ")");
   }
 
 }

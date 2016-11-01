@@ -19,7 +19,7 @@ public class DrawingArea extends Canvas {
     this.setMouseEventHandlers(new SelectEventHandler(this.paintController));
   }
 
-  private void setMouseEventHandlers(MouseEventHandler mouseEventHandler) {
+  public void setMouseEventHandlers(MouseEventHandler mouseEventHandler) {
     this.setOnMouseMoved(mouseEventHandler.getOnMouseMovedEventHandler());
     this.setOnMouseExited(mouseEventHandler.getOnMouseExitedEventHandler());
     this.setOnMousePressed(mouseEventHandler.getOnMousePressedEventHandler());

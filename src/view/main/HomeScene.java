@@ -51,6 +51,7 @@ public class HomeScene extends Scene {
 
     this.drawingAreaGroup = new Group();
     this.drawingAreaZoomGroup = new Group();
+    this.drawingAreaZoomGroup.getChildren().add(this.drawingAreaGroup);
 
     StackPane stackPane = new StackPane(this.drawingAreaZoomGroup);
     ScrollPane scrollPane = new ScrollPane();
@@ -68,6 +69,21 @@ public class HomeScene extends Scene {
 
     this.setRoot(this.borderPane);
 
+  }
+
+  public void displayBorderMessage(String message) {
+    if (this.borderMessage != null) {
+      this.hideBorderMessage();
+    }
+    this.borderMessage = new BorderMessage(this.paintController, message);
+    this.getBarsPane().getChildren().add(2, this.borderMessage);
+  }
+
+  public void hideBorderMessage() {
+    if (this.borderMessage != null) {
+      this.getBarsPane().getChildren().remove(this.borderMessage);
+      this.borderMessage = null;
+    }
   }
 
   public void showMenuBar(boolean key) {
@@ -109,72 +125,28 @@ public class HomeScene extends Scene {
     return home;
   }
 
-  public void setHome(Home home) {
-    this.home = home;
-  }
-
   public BorderPane getBorderPane() {
     return borderPane;
-  }
-
-  public void setBorderPane(BorderPane borderPane) {
-    this.borderPane = borderPane;
   }
 
   public VBox getBarsPane() {
     return barsPane;
   }
 
-  public void setBarsPane(VBox barsPane) {
-    this.barsPane = barsPane;
-  }
-
   public MenuBar getMenuBar() {
     return menuBar;
-  }
-
-  public void setMenuBar(MenuBar menuBar) {
-    this.menuBar = menuBar;
   }
 
   public ToolBar getToolBar() {
     return toolBar;
   }
 
-  public void setToolBar(ToolBar toolBar) {
-    this.toolBar = toolBar;
-  }
-
   public BorderMessage getBorderMessage() {
     return borderMessage;
   }
 
-  public void setBorderMessage(BorderMessage borderMessage) {
-    this.borderMessage = borderMessage;
-  }
-
   public DrawingArea getDrawingArea() {
     return drawingArea;
-  }
-
-  public void setDrawingArea(DrawingArea drawingArea) {
-    this.drawingArea = drawingArea;
-  }
-
-  public Group getDrawingAreaGroup() {
-    return drawingAreaGroup;
-  }
-
-  public void setDrawingAreaGroup(Group drawingAreaGroup) {
-    this.drawingAreaGroup = drawingAreaGroup;
-  }
-
-  public Group getDrawingAreaZoomGroup() {
-    return drawingAreaZoomGroup;
-  }
-
-  public void setDrawingAreaZoomGroup(Group drawingAreaZoomGroup) {
-    this.drawingAreaZoomGroup = drawingAreaZoomGroup;
   }
 
   public StatusBar getStatusBar() {

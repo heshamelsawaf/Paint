@@ -4,30 +4,23 @@ import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
-public class SelectEventHandler extends MouseEventHandler {
+public class RectangleEventHandler extends MouseEventHandler {
 
-  private MoveEventHandler moveEventHandler;
-
-  public SelectEventHandler(PaintController paintController) {
+  public RectangleEventHandler(PaintController paintController) {
     super(paintController);
+    // TODO Auto-generated constructor stub
   }
 
   @Override
   public EventHandler<MouseEvent> getOnMousePressedEventHandler() {
-    return event -> {
-
-    };
-  }
-
-  @Override
-  public EventHandler<MouseEvent> getOnMouseDraggedEventHandler() {
-    return event -> {
-
-    };
+    // TODO Auto-generated method stub
+    return null;
   }
 
   @Override
   public EventHandler<MouseEvent> getOnMouseExitedEventHandler() {
+    // TODO Auto-generated method stub
     return null;
   }
+
 }
