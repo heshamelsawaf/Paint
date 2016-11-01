@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -119,5 +121,20 @@ public class Polygon implements Shape {
 	@Override
 	public ObservableList<Transform> getTransforms() {
 		return this.shape.getTransforms();
+	}
+
+	@Override
+	public ObjectProperty<Paint> fillProperty() {
+		return this.shape.fillProperty();
+	}
+
+	@Override
+	public ObjectProperty<Paint> StrokeProperty() {
+		return this.shape.strokeProperty();
+	}
+
+	@Override
+	public DoubleProperty StrokeWidthProperty() {
+		return this.shape.strokeWidthProperty();
 	}
 }

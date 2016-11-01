@@ -1,5 +1,7 @@
 package model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -140,5 +142,20 @@ public class Line implements Shape {
 	@Override
 	public ObservableList<Transform> getTransforms() {
 		return this.line.getTransforms();
+	}
+
+	@Override
+	public ObjectProperty<Paint> fillProperty() {
+		return this.line.fillProperty();
+	}
+
+	@Override
+	public ObjectProperty<Paint> StrokeProperty() {
+		return this.line.strokeProperty();
+	}
+
+	@Override
+	public DoubleProperty StrokeWidthProperty() {
+		return this.line.strokeWidthProperty();
 	}
 }

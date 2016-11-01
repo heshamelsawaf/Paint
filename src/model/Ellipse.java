@@ -1,5 +1,7 @@
 package model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -134,5 +136,20 @@ public class Ellipse implements Shape {
 	@Override
 	public EventHandler<? super MouseEvent> getOnMouseReleased() {
 		return this.ellipse.getOnMouseReleased();
+	}
+
+	@Override
+	public ObjectProperty<Paint> fillProperty() {
+		return this.ellipse.fillProperty();
+	}
+
+	@Override
+	public ObjectProperty<Paint> StrokeProperty() {
+		return this.ellipse.strokeProperty();
+	}
+
+	@Override
+	public DoubleProperty StrokeWidthProperty() {
+		return this.ellipse.strokeWidthProperty();
 	}
 }
