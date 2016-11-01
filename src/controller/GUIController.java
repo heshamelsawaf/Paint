@@ -37,7 +37,6 @@ public class GUIController {
   public void setSelectedTool(DrawingTools drawingTool) {
     DrawingArea drawingArea = this.getHome().getHomeScene().getDrawingArea();
 
-
     MouseEventHandler mouseEventHandler = null;
 
     switch (drawingTool) {
