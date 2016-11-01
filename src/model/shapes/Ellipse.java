@@ -95,6 +95,11 @@ public class Ellipse implements Shape {
     }
 
     @Override
+	public Cursor getCursor() {
+		return this.ellipse.getCursor();
+	}
+
+    @Override
     public EventHandler<? super MouseEvent> getOnMouseMoved() {
         return this.ellipse.getOnMouseMoved();
     }
@@ -153,4 +158,22 @@ public class Ellipse implements Shape {
     public DoubleProperty StrokeWidthProperty() {
         return this.ellipse.strokeWidthProperty();
     }
+
+	@Override
+	public Shape getClone() {
+		Ellipse clone = new Ellipse();
+		clone.setCenterX(this.getCenterX());
+		clone.setCenterY(this.getCenterY());
+		clone.setFill(this.getFill());
+		clone.setRadiusX(this.getRadiusX());
+		clone.setRadiusY(this.getRadiusY());
+		clone.setStroke(this.getStroke());
+		clone.setCursor(this.getCursor());
+		clone.setStrokeWidth(this.getStrokeWidth());
+		clone.setOnMouseDragged(this.getOnMouseDragged());
+		clone.setOnMouseMoved(this.getOnMouseMoved());
+		clone.setOnMousePressed(this.getOnMousePressed());
+		clone.setOnMouseReleased(this.getOnMouseReleased());
+		return clone;
+	}
 }

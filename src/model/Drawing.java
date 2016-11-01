@@ -145,7 +145,7 @@ public class Drawing {
   
   public void rotateShape(double angle){
     GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
-    
+
     Rotate rotate = new Rotate(angle);
     guiHelper.getSelectedShape().getTransforms().add(rotate);
   }

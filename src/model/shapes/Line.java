@@ -65,6 +65,7 @@ public class Line implements Shape {
     public double getEndY() {
         return this.endY;
     }
+
     @Override
     public void setFill(Paint value) {
         this.line.setFill(value);
@@ -159,4 +160,27 @@ public class Line implements Shape {
     public DoubleProperty StrokeWidthProperty() {
         return this.line.strokeWidthProperty();
     }
+
+	@Override
+	public Shape getClone() {
+		Line clone = new Line();
+		clone.setStartX(this.getStartX());
+		clone.setStartY(this.getStartY());
+		clone.setEndX(this.getEndX());
+		clone.setEndY(this.getEndY());
+		clone.setFill(this.getFill());
+		clone.setStroke(this.getStroke());
+		clone.setCursor(this.getCursor());
+		clone.setStrokeWidth(this.getStrokeWidth());
+		clone.setOnMouseDragged(this.getOnMouseDragged());
+		clone.setOnMouseMoved(this.getOnMouseMoved());
+		clone.setOnMousePressed(this.getOnMousePressed());
+		clone.setOnMouseReleased(this.getOnMouseReleased());
+		return clone;
+	}
+
+	@Override
+	public Cursor getCursor() {
+		return this.line.getCursor();
+	}
 }

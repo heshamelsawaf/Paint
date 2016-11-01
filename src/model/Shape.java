@@ -11,6 +11,8 @@ import javafx.scene.transform.Transform;
 
 public interface Shape {
 
+	public Shape getClone();
+
 	public void setFill(Paint value);
 
 	public Paint getFill();
@@ -24,6 +26,8 @@ public interface Shape {
 	public double getStrokeWidth();
 
 	public void setCursor(Cursor value);
+
+	public Cursor getCursor();
 
 	public void setOnMouseMoved(EventHandler<? super MouseEvent> value);
 
