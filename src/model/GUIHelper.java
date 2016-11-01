@@ -125,7 +125,4 @@ public class GUIHelper {
   public double getZoomLevel() {
     return this.zoomLevel;
   }
-
-
-
 }

@@ -5,6 +5,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.transform.Transform;
@@ -52,4 +53,6 @@ public interface Shape {
 	public ObjectProperty<Paint> StrokeProperty();
 
 	public DoubleProperty StrokeWidthProperty();
+
+	public Node getNode();
 }

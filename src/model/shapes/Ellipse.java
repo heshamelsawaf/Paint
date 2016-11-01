@@ -5,6 +5,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.transform.Transform;
@@ -175,5 +176,10 @@ public class Ellipse implements Shape {
 		clone.setOnMousePressed(this.getOnMousePressed());
 		clone.setOnMouseReleased(this.getOnMouseReleased());
 		return clone;
+	}
+
+	@Override
+	public Node getNode() {
+		return (Node)ellipse;
 	}
 }
