@@ -4,8 +4,11 @@ import controller.PaintController;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import model.Drawing;
+import model.GUIHelper;
+import model.Observer;
 
-public class StatusBar extends BorderPane {
+public class StatusBar extends BorderPane implements Observer {
 
   private PaintController paintController;
 
@@ -52,6 +55,24 @@ public class StatusBar extends BorderPane {
 
   public void updateCoordinates(double x, double y) {
     this.coordinates.setText("(" + x + ", " + y + ")");
+  }
+
+  public void clear() {
+    this.coordinates.setText(null);
+    this.drawingAreaDimensions.setText(null);
+    this.zoom.setText(null);
+  }
+
+  @Override
+  public void update() {
+    Drawing drawing = this.paintController.getDrawingController().getDrawing();
+    GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
+
+    if (drawing != null) {
+      this.drawingAreaDimensions.setText(drawing.getWidth() + " x " + drawing.getHeight() + " px ");
+    }
+
+    this.zoom.setText(Double.toString(guiHelper.getZoomLevel() * 100) + "% ");
   }
 
 }

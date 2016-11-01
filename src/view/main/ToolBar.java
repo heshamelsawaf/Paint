@@ -11,9 +11,11 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
+import model.GUIHelper;
+import model.Observer;
 import util.ToolBarConstants;
 
-public class ToolBar extends javafx.scene.control.ToolBar {
+public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
   private PaintController paintController;
 
   private Button _new;
@@ -65,9 +67,9 @@ public class ToolBar extends javafx.scene.control.ToolBar {
     this.line = new ToggleButton();
     this.ellipse = new ToggleButton();
     this.circle = new ToggleButton();
-    
+
     this.BuildToolBar();
-    //this.takeControl(false);
+    // this.takeControl(false);
 
   }
 
@@ -77,7 +79,7 @@ public class ToolBar extends javafx.scene.control.ToolBar {
 
     this.fillColor.setDisable(!key);
     this.strokeColor.setDisable(!key);
-  //  this.action.setDisable(!key);
+    // this.action.setDisable(!key);
 
     this.select.setDisable(!key);
     this.polygon.setDisable(!key);
@@ -87,6 +89,10 @@ public class ToolBar extends javafx.scene.control.ToolBar {
     this.line.setDisable(!key);
     this.ellipse.setDisable(!key);
     this.circle.setDisable(!key);
+
+  }
+
+  public void shapeControl(boolean key) {
 
   }
 
@@ -101,7 +107,7 @@ public class ToolBar extends javafx.scene.control.ToolBar {
   }
 
   private void BuildFile() {
-	this._new.setTooltip(new Tooltip(ToolBarConstants.NEWFILE));
+    this._new.setTooltip(new Tooltip(ToolBarConstants.NEWFILE));
     this._new.setOnAction(event -> {
 
     });
@@ -117,7 +123,7 @@ public class ToolBar extends javafx.scene.control.ToolBar {
   }
 
   private void BuildEdit() {
-	this.undo.setTooltip(new Tooltip(ToolBarConstants.UNDO));
+    this.undo.setTooltip(new Tooltip(ToolBarConstants.UNDO));
     this.undo.setOnAction(event -> {
 
     });
@@ -125,7 +131,7 @@ public class ToolBar extends javafx.scene.control.ToolBar {
     this.redo.setOnAction(event -> {
 
     });
-   // this.getItems().addAll(this.undo, this.redo, this.action);
+    // this.getItems().addAll(this.undo, this.redo, this.action);
   }
 
   private void buildFont() {
@@ -135,7 +141,7 @@ public class ToolBar extends javafx.scene.control.ToolBar {
     this.strokeColor.setOnAction(event -> {
 
     });
-   // this.getItems().addAll(this.fillColor, this.strokeColor, this.strokeWidth);
+    // this.getItems().addAll(this.fillColor, this.strokeColor, this.strokeWidth);
   }
 
   private void buildTools() {
@@ -275,5 +281,59 @@ public class ToolBar extends javafx.scene.control.ToolBar {
 
       });
     }
+  }
+
+  @Override
+  public void update() {
+    GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
+
+
+    this.fillColor.setValue(guiHelper.getFillColor());
+    this.strokeColor.setValue(guiHelper.getStrokeColor());
+
+    switch (guiHelper.getStrokeWidth()) {
+      case NONE: {
+        this.strokeWidth.none.setSelected(true);
+        break;
+      }
+      case THIN: {
+        this.strokeWidth.thin.setSelected(true);
+        break;
+      }
+      case MEDIUM: {
+        this.strokeWidth.medium.setSelected(true);
+        break;
+      }
+      case THICK: {
+        this.strokeWidth.thick.setSelected(true);
+        break;
+      }
+      case EXTRA_THICK: {
+        this.strokeWidth.veryThick.setSelected(true);
+        break;
+      }
+    }
+
+    if (guiHelper.getSelectedDrawTool() != null) {
+      switch (guiHelper.getSelectedDrawTool()) {
+        case SELECT: {
+          this.select.setSelected(true);
+          break;
+        }
+        case RECTANGLE: {
+          this.rectangle.setSelected(true);
+          break;
+        }
+        case ELLIPSE: {
+          this.ellipse.setSelected(true);
+          break;
+        }
+        case LINE: {
+          this.line.setSelected(true);
+          break;
+        }
+      }
+    }
+
   }
 }

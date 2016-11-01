@@ -1,5 +1,8 @@
 package view.main;
 
+import java.util.Iterator;
+import java.util.List;
+
 import controller.PaintController;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Group;
@@ -9,8 +12,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
+import model.Drawing;
+import model.GUIHelper;
+import model.Observer;
+import model.Shape;
+import model.shapes.Line;
 
-public class HomeScene extends Scene {
+public class HomeScene extends Scene implements Observer {
 
   private PaintController paintController;
   private Home home;
@@ -119,7 +127,23 @@ public class HomeScene extends Scene {
     this.getMenuBar().selectView_Toolbars_StatusBar(key);
   }
 
+  public void setupDrawingArea(double width, double height) {
+    if (!this.drawingAreaGroup.getChildren().isEmpty()) {
+      this.clearDrawingArea();
+    }
+    this.drawingArea = new DrawingArea(this.paintController, width, height);
+    this.drawingAreaGroup.getChildren().add(this.drawingArea);
+  }
 
+  private void clearDrawingArea() {
+    this.drawingArea = null;
+    this.drawingAreaGroup.getChildren().clear();
+  }
+
+  public void activateControls(boolean key) {
+    this.menuBar.takeControl(key);
+    this.toolBar.takeControl(key);
+  }
 
   public Home getHome() {
     return home;
@@ -155,5 +179,41 @@ public class HomeScene extends Scene {
 
   public void setStatusBar(StatusBar statusBar) {
     this.statusBar = statusBar;
+  }
+
+  public void reset() {
+    this.clearDrawingArea();
+    this.home.setTitle(null);
+  }
+
+  @Override
+  public void update() {
+    Drawing drawing = this.paintController.getDrawingController().getDrawing();
+    GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
+
+    this.home.setTitle(drawing.getTitle());
+
+    this.drawingAreaGroup.getChildren().clear();
+    this.drawingAreaGroup.getChildren().add(this.drawingArea);
+
+    List<Shape> shapes = drawing.getShapes();
+    for (Iterator<Shape> iterator = shapes.iterator(); iterator.hasNext();) {
+      Shape shape = (Shape) iterator.next();
+      this.drawingAreaGroup.getChildren().add(shape.getNode());
+    }
+    if (guiHelper.getSelectedShape() != null) {
+      Shape shape = guiHelper.getSelectedShape();
+
+      if (!(shape instanceof Line)) {
+        shape.setFill(guiHelper.getFillColor());
+      }
+      shape.setStroke(guiHelper.getStrokeColor());
+      shape.setStrokeWidth(guiHelper.getStrokeWidth().getStrokeWidth());
+
+      this.menuBar.shapeControl(guiHelper.getSelectedShape() != null);
+      this.toolBar.shapeControl(guiHelper.getSelectedShape() != null);
+    }
+
+
   }
 }

@@ -1,9 +1,15 @@
 package view.main;
 
+import java.util.Optional;
+
 import controller.PaintController;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.stage.Stage;
+import util.HomeConstants;
+import util.Message;
 
 public class Home {
 
@@ -46,7 +52,29 @@ public class Home {
   }
 
   public HomeScene getHomeScene() {
-    return homeScene;
+    return this.homeScene;
+  }
+
+  public Stage getPrimaryStage() {
+    return this.primaryStage;
+  }
+
+  public Optional<ButtonType> alertAboutUnsavedData() {
+    return this.initAlert().showAndWait();
+  }
+
+  private Alert initAlert() {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.initOwner(this.primaryStage);
+    alert.setHeaderText(Message.UNSAVED_CHANGES_MESSAGE);
+    alert.setContentText(Message.UNSAVED_CHANGES_CONTEXT_MESSAGE);
+
+    ButtonType save = new ButtonType(HomeConstants.SAVE_BUTTON);
+    ButtonType closeWithoutSaving = new ButtonType(HomeConstants.CLOSE_WITHOUT_SAVING_BUTTON);
+    ButtonType dismiss = new ButtonType(HomeConstants.DISMISS_BUTTON);
+
+    alert.getButtonTypes().setAll(save, closeWithoutSaving, dismiss);
+    return alert;
   }
 
 }

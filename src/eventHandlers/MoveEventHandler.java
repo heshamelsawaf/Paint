@@ -3,6 +3,8 @@ package eventHandlers;
 import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import model.GUIHelper;
+import model.Shape;
 import model.shapes.Rectangle;
 
 public class MoveEventHandler extends MouseEventHandler {
@@ -39,6 +41,18 @@ public class MoveEventHandler extends MouseEventHandler {
   @Override
   public EventHandler<MouseEvent> getOnMouseExitedEventHandler() {
     return null;
+  }
+
+  public EventHandler<MouseEvent> getMousePressedOnHighlightedEventHandler() {
+    return event -> {
+      this.setDelta(false);
+      if (event.isPrimaryButtonDown()) {
+        GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
+        if(!(event.getSource() instanceof Rectangle)){
+          
+        }
+      }
+    };
   }
 
 }
