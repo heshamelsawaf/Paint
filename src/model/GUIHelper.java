@@ -26,7 +26,7 @@ public class GUIHelper {
   private Color strokeColor;
   private StrokeWidth strokeWidth;
 
-  private Shape selectedObject;
+  private Shape selectedShape;
   private FocusOutline focusOutline;
 
   public GUIHelper(PaintController paintController) {
@@ -66,13 +66,13 @@ public class GUIHelper {
     this.file = file;
   }
 
-  public Shape getSelectedObject() {
-    return this.selectedObject;
+  public Shape getSelectedShape() {
+    return this.selectedShape;
   }
 
-  public void setSelectedObject(Shape selectedObject) {
-    this.selectedObject = selectedObject;
-    this.focusOutline = new FocusOutline(this.paintController, selectedObject);
+  public void setSelectedShape(Shape selectedShape) {
+    this.selectedShape = selectedShape;
+    this.focusOutline = new FocusOutline(this.paintController, selectedShape);
     this.notifyObservers();
   }
 

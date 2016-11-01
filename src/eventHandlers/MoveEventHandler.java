@@ -3,7 +3,7 @@ package eventHandlers;
 import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import model.Rectangle;
+import model.shapes.Rectangle;
 
 public class MoveEventHandler extends MouseEventHandler {
 

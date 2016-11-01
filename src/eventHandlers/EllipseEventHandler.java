@@ -4,8 +4,8 @@ import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
-import model.Ellipse;
 import model.GUIHelper;
+import model.shapes.Ellipse;
 
 public class EllipseEventHandler extends MouseEventHandler {
 
@@ -25,7 +25,7 @@ public class EllipseEventHandler extends MouseEventHandler {
       if (event.isPrimaryButtonDown()) {
         GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
 
-        guiHelper.setSelectedObject(null);
+        guiHelper.setSelectedShape(null);
         this.selectedX = event.getX();
         this.selectedY = event.getY();
 
@@ -97,7 +97,7 @@ public class EllipseEventHandler extends MouseEventHandler {
   @Override
   public EventHandler<MouseEvent> getOnMouseReleasedEventHandler() {
     return event -> {
-      this.paintController.getGUIController().getGuiHelper().setSelectedObject(this.ellipse);
+      this.paintController.getGUIController().getGuiHelper().setSelectedShape(this.ellipse);
       this.ellipse = null;
     };
   }
