@@ -9,12 +9,15 @@ import javafx.scene.transform.Transform;
 
 public class Ellipse implements Shape {
 
-	private javafx.scene.shape.Ellipse ellipse = new javafx.scene.shape.Ellipse();
+	private javafx.scene.shape.Ellipse ellipse;
 	private double centerX, centerY, radiusX, radiusY;
 	
-	public Ellipse() {}
+	public Ellipse() {
+		this.ellipse = new javafx.scene.shape.Ellipse();
+	}
 
 	public Ellipse(double centerX, double centerY, double radiusX, double radiusY) {
+		this.ellipse = new javafx.scene.shape.Ellipse();
 		this.centerX = centerX;
 		this.centerY = centerY;
 		this.radiusX = radiusX;
@@ -37,7 +40,7 @@ public class Ellipse implements Shape {
 		return this.centerY;
 	}
 	
-	public void radiusX(double radiusX) {
+	public void setRadiusX(double radiusX) {
 		this.radiusX = radiusX;
 	}
 

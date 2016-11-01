@@ -10,10 +10,12 @@ import util.Point;
 
 public class Line implements Shape {
 
-	private javafx.scene.shape.Line line = new javafx.scene.shape.Line();
+	private javafx.scene.shape.Line line;
 	private double startX, startY, endX, endY;
 
-	public Line() {}
+	public Line() {
+		this.line = new javafx.scene.shape.Line();
+	}
 
 	public Line(Point pt1, Point pt2) {
 		this.startX = pt1.getX();
