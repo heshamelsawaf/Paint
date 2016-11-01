@@ -1,41 +1,63 @@
 package model;
 
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
-import util.Point;
+import javafx.scene.transform.Transform;
 
 public class Circle extends Ellipse {
 
-	public Circle(Point center, double radius) {
-		super(center, radius, radius);
+	public Circle() {}
+
+	public Circle(double centerX, double centerY, double radius) {
+		super(centerX, centerY, radius, radius);
 	}
 
-	public void setCenter(Point center) {
-		super.setCenter(center);
+	public void setCenterX(double centerX) {
+		super.setCenterX(centerX);
+	}
+
+	public double getCenterX() {
+		return super.getCenterX();
+	}
+
+	public void setCenterY(double centerY) {
+		super.setCenterY(centerY);
+	}
+
+	public double getCenterY() {
+		return super.getCenterY();
 	}
 
 	public void setRadius(double radius) {
-		super.setRadiusX(radius);
-		super.setRadiusY(radius);
+		super.setCenterX(radius);
+		super.setCenterY(radius);
+	}
+
+	public double getRadius() {
+		return super.getCenterX();
 	}
 
 	@Override
-	public javafx.scene.shape.Shape getDrawableShape() {
-		return super.getDrawableShape();
+	public void setFill(Paint value) {
+		super.setFill(value);;
 	}
 
 	@Override
-	public void setDrawableShape(javafx.scene.shape.Shape shape) {
-		super.setDrawableShape(shape);
+	public Paint getFill() {
+		return super.getFill();
 	}
 
 	@Override
-	public void setStrokeColor(Paint value) {
-		super.setStrokeColor(value);
+	public void setStroke(Paint value) {
+		super.setStroke(value);
 	}
 
 	@Override
-	public void setFillColor(Paint value) {
-		super.setFillColor(value);
+	public Paint getStroke() {
+		return super.getStroke();
 	}
 
 	@Override
@@ -44,17 +66,57 @@ public class Circle extends Ellipse {
 	}
 
 	@Override
-	public Paint getStrokeColor() {
-		return super.getStrokeColor();
-	}
-
-	@Override
-	public Paint getFillColor() {
-		return super.getFillColor();
-	}
-
-	@Override
 	public double getStrokeWidth() {
 		return super.getStrokeWidth();
+	}
+
+	@Override
+	public void setCursor(Cursor value) {
+		super.setCursor(value);
+	}
+
+	@Override
+	public EventHandler<? super MouseEvent> getOnMouseMoved() {
+		return super.getOnMouseMoved();
+	}
+
+	@Override
+	public void setOnMouseMoved(EventHandler<? super MouseEvent> value) {
+		super.setOnMouseMoved(value);
+	}
+
+	@Override
+	public void setOnMousePressed(EventHandler<? super MouseEvent> value) {
+		super.setOnMousePressed(value);
+	}
+
+	@Override
+	public void setOnMouseDragged(EventHandler<? super MouseEvent> value) {
+		super.setOnMouseDragged(value);
+	}
+
+	@Override
+	public void setOnMouseReleased(EventHandler<? super MouseEvent> value) {
+		super.setOnMouseReleased(value);
+	}
+
+	@Override
+	public ObservableList<Transform> getTransforms() {
+		return super.getTransforms();
+	}
+
+	@Override
+	public EventHandler<? super MouseEvent> getOnMousePressed() {
+		return super.getOnMousePressed();
+	}
+
+	@Override
+	public EventHandler<? super MouseEvent> getOnMouseDragged() {
+		return super.getOnMouseDragged();
+	}
+
+	@Override
+	public EventHandler<? super MouseEvent> getOnMouseReleased() {
+		return super.getOnMouseReleased();
 	}
 }

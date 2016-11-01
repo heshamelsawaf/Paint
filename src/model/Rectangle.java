@@ -6,7 +6,7 @@ import util.Point;
 public class Rectangle extends Polygon {
 
   private boolean highlight = false;
-  private javafx.scene.shape.Rectangle drwableRetangle;
+  private javafx.scene.shape.Rectangle drawableRectangle;
 
   public Rectangle(Point topLeftPoint, Point topRightPoint, Point bottomLeftPoint,
       Point bottomRightPoint) {
@@ -19,15 +19,17 @@ public class Rectangle extends Polygon {
 
   @Override
   public javafx.scene.shape.Shape getDrawableShape() {
-    if (drwableRetangle == null)
-      return new javafx.scene.shape.Rectangle();
-    else
-      return this.drwableRetangle;
+	  if (this.drawableRectangle == null) {
+		  drawableRectangle = new javafx.scene.shape.Rectangle(); 
+		  return drawableRectangle;
+	  } else {
+		  return this.drawableRectangle;
+	  }
   }
 
   @Override
   public void setDrawableShape(javafx.scene.shape.Shape shape) {
-    super.setDrawableShape(shape);
+    this.drawableRetangle = (javafx.scene.shape.Rectangle)shape;
   }
 
   @Override

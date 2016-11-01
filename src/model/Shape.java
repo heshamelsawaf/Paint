@@ -1,28 +1,43 @@
 package model;
 
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
+import javafx.scene.transform.Transform;
 
 public interface Shape {
 
-	public javafx.scene.shape.Shape getDrawableShape();
+	public void setFill(Paint value);
 
-	public void setDrawableShape(javafx.scene.shape.Shape shape);
+	public Paint getFill();
 
-	public void resize();
-
-	public void move();
-
-	public void delete();
-
-	public void setStrokeColor(Paint value);
-
-	public void setFillColor(Paint value);
+	public void setStroke(Paint value);
+	
+	public Paint getStroke();
 
 	public void setStrokeWidth(double value);
 
-	public Paint getStrokeColor();
-
-	public Paint getFillColor();
-
 	public double getStrokeWidth();
+
+	public void setCursor(Cursor value);
+
+	public void setOnMouseMoved(EventHandler<? super MouseEvent> value);
+
+	public EventHandler<? super MouseEvent> getOnMouseMoved();
+
+	public void setOnMousePressed(EventHandler<? super MouseEvent> value);
+
+	public EventHandler<? super MouseEvent> getOnMousePressed();
+
+	public void setOnMouseDragged(EventHandler<? super MouseEvent> value);
+
+	public EventHandler<? super MouseEvent> getOnMouseDragged();
+
+	public void setOnMouseReleased(EventHandler<? super MouseEvent> value);
+
+	public EventHandler<? super MouseEvent> getOnMouseReleased();
+
+	public ObservableList<Transform> getTransforms();
 }

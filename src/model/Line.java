@@ -1,46 +1,142 @@
 package model;
 
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
+import javafx.scene.transform.Transform;
 import util.Point;
 
-public class Line extends Polygon {
+public class Line implements Shape {
+
+	private javafx.scene.shape.Line line = new javafx.scene.shape.Line();
+	private double startX, startY, endX, endY;
+
+	public Line() {}
 
 	public Line(Point pt1, Point pt2) {
-		super(pt1, pt2);
+		this.startX = pt1.getX();
+		this.startY = pt1.getY();
+		this.endX = pt2.getX();
+		this.endY = pt2.getY();
+	}
+
+	public Line(double startX, double startY, double endX, double endY) {
+		this.startX = startX;
+		this.startY = startY;
+		this.endX = endX;
+		this.endY = endY;
+	}
+
+	public void setStartX(double startX) {
+		this.startX = startX;
+	}
+
+	public double getStartX() {
+		return this.startX;
+	}
+	
+	public void setStartY(double startY) {
+		this.startY = startY;
+	}
+
+	public double getStartY() {
+		return this.startY;
+	}
+	
+	public void setEndX(double endX) {
+		this.endX = endX;
+	}
+
+	public double getEndX() {
+		return this.endX;
+	}
+	
+	public void setEndY(double endY) {
+		this.endY = endY;
+	}
+
+	public double getEndY() {
+		return this.endY;
+	}
+	@Override
+	public void setFill(Paint value) {
+		this.line.setFill(value);
 	}
 
 	@Override
-	public javafx.scene.shape.Shape getDrawableShape() {
-		return super.getDrawableShape();
+	public Paint getFill() {
+		return this.line.getFill();
 	}
 
 	@Override
-	public void setDrawableShape(javafx.scene.shape.Shape shape) {
-		super.setDrawableShape(shape);
+	public void setStroke(Paint value) {
+		this.line.setStroke(value);
 	}
 
 	@Override
-	public void setStrokeColor(Paint value) {
-		super.setStrokeColor(value);
+	public Paint getStroke() {
+		return this.line.getStroke();
 	}
 
 	@Override
 	public void setStrokeWidth(double value) {
-		super.setStrokeWidth(value);
-	}
-
-	@Override
-	public Paint getStrokeColor() {
-		return super.getStrokeColor();
-	}
-
-	@Override
-	public Paint getFillColor() {
-		return super.getFillColor();
+		this.line.setStrokeWidth(value);
 	}
 
 	@Override
 	public double getStrokeWidth() {
-		return super.getStrokeWidth();
+		return this.line.getStrokeWidth();
+	}
+
+	@Override
+	public void setCursor(Cursor value) {
+		this.line.setCursor(value);
+	}
+
+	@Override
+	public void setOnMouseMoved(EventHandler<? super MouseEvent> value) {
+		this.line.setOnMouseMoved(value);
+	}
+
+	@Override
+	public EventHandler<? super MouseEvent> getOnMouseMoved() {
+		return this.line.getOnMouseMoved();
+	}
+
+	@Override
+	public void setOnMousePressed(EventHandler<? super MouseEvent> value) {
+		this.line.setOnMousePressed(value);
+	}
+
+	@Override
+	public EventHandler<? super MouseEvent> getOnMousePressed() {
+		return this.line.getOnMousePressed();
+	}
+
+	@Override
+	public void setOnMouseDragged(EventHandler<? super MouseEvent> value) {
+		this.line.setOnMouseDragged(value);;
+	}
+
+	@Override
+	public EventHandler<? super MouseEvent> getOnMouseDragged() {
+		return this.line.getOnMouseDragged();
+	}
+
+	@Override
+	public void setOnMouseReleased(EventHandler<? super MouseEvent> value) {
+		this.line.setOnMouseReleased(value);
+	}
+
+	@Override
+	public EventHandler<? super MouseEvent> getOnMouseReleased() {
+		return this.line.getOnMouseReleased();
+	}
+
+	@Override
+	public ObservableList<Transform> getTransforms() {
+		return this.line.getTransforms();
 	}
 }

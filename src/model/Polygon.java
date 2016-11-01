@@ -32,14 +32,6 @@ public class Polygon implements Shape {
 	}
 
 	@Override
-	public javafx.scene.shape.Shape getDrawableShape() {
-		Double[] pointsToDraw = new Double[polygonVertices.size()];
-		pointsToDraw = polygonVertices.toArray(pointsToDraw);
-		((javafx.scene.shape.Polygon)shape).getPoints().addAll(pointsToDraw);
-		return shape;
-	}
-
-	@Override
 	public void setStrokeColor(Paint value) {
 		shape.setStroke(value);
 	}
@@ -67,11 +59,6 @@ public class Polygon implements Shape {
 	@Override
 	public double getStrokeWidth() {
 		return shape.getStrokeWidth();
-	}
-
-	@Override
-	public void setDrawableShape(javafx.scene.shape.Shape shape) {
-		this.shape = shape;
 	}
 
 	@Override
