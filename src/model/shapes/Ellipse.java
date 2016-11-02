@@ -14,7 +14,6 @@ import model.Shape;
 public class Ellipse implements Shape {
 
   private javafx.scene.shape.Ellipse ellipse;
-  private double centerX, centerY, radiusX, radiusY;
 
   public Ellipse() {
     this.ellipse = new javafx.scene.shape.Ellipse();
@@ -22,42 +21,42 @@ public class Ellipse implements Shape {
 
   public Ellipse(double centerX, double centerY, double radiusX, double radiusY) {
     this.ellipse = new javafx.scene.shape.Ellipse();
-    this.centerX = centerX;
-    this.centerY = centerY;
-    this.radiusX = radiusX;
-    this.radiusY = radiusY;
+    this.ellipse.setCenterX(centerX);
+    this.ellipse.setCenterY(centerY);
+    this.ellipse.setRadiusX(radiusX);
+    this.ellipse.setRadiusY(radiusY);
   }
 
   public void setCenterX(double centerX) {
-    this.centerX = centerX;
+    this.ellipse.setCenterX(centerX);
   }
 
   public double getCenterX() {
-    return this.centerX;
+    return this.ellipse.getCenterX();
   }
 
   public void setCenterY(double centerY) {
-    this.centerY = centerY;
+    this.ellipse.setCenterY(centerY);;
   }
 
   public double getCenterY() {
-    return this.centerY;
+    return this.ellipse.getCenterY();
   }
 
   public void setRadiusX(double radiusX) {
-    this.radiusX = radiusX;
+    this.ellipse.setRadiusX(radiusX);
   }
 
   public double getRadiusX() {
-    return this.radiusX;
+    return this.ellipse.getRadiusX();
   }
 
   public void setRadiusY(double radiusY) {
-    this.radiusY = radiusY;
+    this.ellipse.setRadiusY(radiusY);
   }
 
   public double getRadiusY() {
-    return this.radiusY;
+    return this.ellipse.getRadiusY();
   }
 
   @Override

@@ -15,56 +15,55 @@ import util.Point;
 public class Line implements Shape {
 
   private javafx.scene.shape.Line line;
-  private double startX, startY, endX, endY;
-
+  
   public Line() {
     this.line = new javafx.scene.shape.Line();
   }
 
   public Line(Point pt1, Point pt2) {
-    this.startX = pt1.getX();
-    this.startY = pt1.getY();
-    this.endX = pt2.getX();
-    this.endY = pt2.getY();
+    this.line.setStartX(pt1.getX());
+    this.line.setStartY(pt1.getY());
+    this.line.setEndX(pt2.getX());
+    this.line.setEndY(pt2.getY());
   }
 
   public Line(double startX, double startY, double endX, double endY) {
-    this.startX = startX;
-    this.startY = startY;
-    this.endX = endX;
-    this.endY = endY;
+	  this.line.setStartX(startX);
+	  this.line.setStartY(startY);
+	  this.line.setEndX(endX);
+	  this.line.setEndY(endY);
   }
 
   public void setStartX(double startX) {
-    this.startX = startX;
+    this.line.setStartX(startX);
   }
 
   public double getStartX() {
-    return this.startX;
+    return this.line.getStartX();
   }
 
   public void setStartY(double startY) {
-    this.startY = startY;
+    this.line.setStartY(startY);
   }
 
   public double getStartY() {
-    return this.startY;
+    return this.line.getStartY();
   }
 
   public void setEndX(double endX) {
-    this.endX = endX;
+    this.line.setEndX(endX);
   }
 
   public double getEndX() {
-    return this.endX;
+    return this.line.getEndX();
   }
 
   public void setEndY(double endY) {
-    this.endY = endY;
+    this.line.setEndY(endY);
   }
 
   public double getEndY() {
-    return this.endY;
+    return this.line.getEndY();
   }
 
   @Override

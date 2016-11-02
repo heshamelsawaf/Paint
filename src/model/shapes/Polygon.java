@@ -1,8 +1,5 @@
 package model.shapes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
@@ -17,37 +14,38 @@ import util.Point;
 
 public class Polygon implements Shape {
 
-  private List<Double> polygonVertices;
-  private javafx.scene.shape.Shape shape;
+  private javafx.scene.shape.Polygon shape;
 
   public Polygon() {
     this.shape = new javafx.scene.shape.Polygon();
   }
 
   public Polygon(Point... vertices) {
-    this.polygonVertices = new ArrayList<Double>();
     this.shape = new javafx.scene.shape.Polygon();
     for (Point point : vertices) {
-      polygonVertices.add(point.getX());
-      polygonVertices.add(point.getY());
+      this.shape.getPoints().add(point.getX());
+      this.shape.getPoints().add(point.getY());  
     }
   }
 
   public Polygon(double... vertices) {
-    this.polygonVertices = new ArrayList<Double>();
     this.shape = new javafx.scene.shape.Polygon();
     for (double vertex : vertices) {
-      this.polygonVertices.add(vertex);
+      this.shape.getPoints().add(vertex);
     }
   }
 
+  public ObservableList<Double> getStrokeDashArray() {
+		return this.shape.getStrokeDashArray();
+  }
+  
   public void addPoint(double x, double y) {
-    this.polygonVertices.add(x);
-    this.polygonVertices.add(y);
+    this.shape.getPoints().add(x);
+    this.shape.getPoints().add(y);
   }
 
   public void addCoordinate(double coordinate) {
-    this.polygonVertices.add(coordinate);
+    this.shape.getPoints().add(coordinate);
   }
 
   @Override
@@ -148,8 +146,8 @@ public class Polygon implements Shape {
   @Override
   public Shape getClone() {
     Polygon clone = new Polygon();
-    for (double coordinate : this.polygonVertices) {
-      clone.addCoordinate(coordinate);
+    for (double coordinate : this.shape.getPoints()) {
+    	clone.addCoordinate(coordinate);
     }
     clone.setFill(this.getFill());
     clone.setStroke(this.getStroke());
