@@ -171,7 +171,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.rectangle.setGraphic(new ImageView(
         new Image(ClassLoader.getSystemResourceAsStream("assets/icons/rectangle.png"))));
     this.rectangle.setOnAction(event -> {
-
+      this.paintController.getGUIController().setSelectedTool(DrawingTools.RECTANGLE);
     });
     this.square.setToggleGroup(this.group);
     this.square.setTooltip(new Tooltip(ToolBarConstants.SQUARE));
