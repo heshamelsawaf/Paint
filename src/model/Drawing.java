@@ -7,7 +7,7 @@ import java.util.List;
 import controller.PaintController;
 import javafx.scene.transform.Rotate;
 
-public class Drawing {
+public class Drawing implements Cloneable {
 
   private PaintController paintController;
 
@@ -97,6 +97,10 @@ public class Drawing {
     return this.shapes;
   }
 
+  public List<Observer> getObservers() {
+	  return this.observers;
+  }
+
   public void removeShape(Shape shape) {
     int index = this.shapes.indexOf(shape);
     this.shapes.set(index, null);
@@ -148,5 +152,20 @@ public class Drawing {
 
     Rotate rotate = new Rotate(angle);
     guiHelper.getSelectedShape().getTransforms().add(rotate);
+  }
+ 
+  @Override
+  public Drawing clone() throws CloneNotSupportedException {
+	 Drawing clone = new Drawing(this.paintController);
+	 clone.setTitle(this.getTitle());
+	 clone.setDimensions(this.getWidth(), this.getHeight());
+	 clone.setSaved(this.isSaved());
+	 for (Shape shape : this.shapes) {
+		 clone.addShape(shape.getClone());
+	 }
+	 //for (Observer observer : this.observers) {
+		 //clone.registerObserver(observer);
+	 //}
+	 return clone;
   }
 }

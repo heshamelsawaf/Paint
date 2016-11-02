@@ -58,6 +58,22 @@ public class Ellipse implements Shape {
   public double getRadiusY() {
     return this.ellipse.getRadiusY();
   }
+  
+  public DoubleProperty centerXProperty() {
+	  return this.ellipse.centerXProperty();
+  }
+  
+  public DoubleProperty centerYProperty() {
+	  return this.ellipse.centerYProperty();
+  }
+
+  public DoubleProperty radiusXProperty() {
+	  return this.ellipse.radiusXProperty();
+  }
+
+  public DoubleProperty radiusYProperty() {
+	  return this.ellipse.radiusYProperty();
+  }
 
   @Override
   public void setFill(Paint value) {
