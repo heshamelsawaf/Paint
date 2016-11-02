@@ -53,6 +53,14 @@ public interface Shape {
   public ObjectProperty<Paint> StrokeProperty();
 
   public DoubleProperty StrokeWidthProperty();
+  
+  public DoubleProperty scaleXProperty();
+  
+  public DoubleProperty scaleYProperty();
+  
+  public DoubleProperty translateXProperty();
+  
+  public DoubleProperty translateYProperty();
 
   public Node getNode();
 }

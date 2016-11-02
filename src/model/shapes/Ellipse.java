@@ -182,4 +182,24 @@ public class Ellipse implements Shape {
   public Node getNode() {
     return this.ellipse;
   }
+
+  @Override
+  public DoubleProperty scaleXProperty() {
+    return this.ellipse.scaleXProperty();
+  }
+
+  @Override
+  public DoubleProperty scaleYProperty() {
+    return this.ellipse.scaleYProperty();
+  }
+
+  @Override
+  public DoubleProperty translateXProperty() {
+    return this.ellipse.translateXProperty();
+  }
+
+  @Override
+  public DoubleProperty translateYProperty() {
+    return this.ellipse.translateYProperty();
+  }
 }

@@ -72,7 +72,7 @@ public class GUIHelper {
 
   public void setSelectedShape(Shape selectedShape) {
     this.selectedShape = selectedShape;
-    this.focusOutline = new FocusOutline(this.paintController, selectedShape);
+  //  this.focusOutline = new FocusOutline(this.paintController, selectedShape);
     this.notifyObservers();
   }
 

@@ -24,7 +24,7 @@ public class Polygon implements Shape {
     this.shape = new javafx.scene.shape.Polygon();
     for (Point point : vertices) {
       this.shape.getPoints().add(point.getX());
-      this.shape.getPoints().add(point.getY());  
+      this.shape.getPoints().add(point.getY());
     }
   }
 
@@ -36,12 +36,16 @@ public class Polygon implements Shape {
   }
 
   public ObservableList<Double> getStrokeDashArray() {
-		return this.shape.getStrokeDashArray();
+    return this.shape.getStrokeDashArray();
   }
-  
+
   public void addPoint(double x, double y) {
     this.shape.getPoints().add(x);
     this.shape.getPoints().add(y);
+  }
+
+  public ObservableList<Double> getPoints() {
+    return this.shape.getPoints();
   }
 
   public void addCoordinate(double coordinate) {
@@ -147,7 +151,7 @@ public class Polygon implements Shape {
   public Shape getClone() {
     Polygon clone = new Polygon();
     for (double coordinate : this.shape.getPoints()) {
-    	clone.addCoordinate(coordinate);
+      clone.addCoordinate(coordinate);
     }
     clone.setFill(this.getFill());
     clone.setStroke(this.getStroke());
@@ -169,5 +173,25 @@ public class Polygon implements Shape {
   @Override
   public Node getNode() {
     return this.shape;
+  }
+
+  @Override
+  public DoubleProperty scaleXProperty() {
+    return this.shape.scaleXProperty();
+  }
+
+  @Override
+  public DoubleProperty scaleYProperty() {
+    return this.shape.scaleYProperty();
+  }
+
+  @Override
+  public DoubleProperty translateXProperty() {
+    return this.shape.translateXProperty();
+  }
+
+  @Override
+  public DoubleProperty translateYProperty() {
+    return this.shape.translateYProperty();
   }
 }

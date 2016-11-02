@@ -4,11 +4,11 @@ import javafx.scene.paint.Color;
 
 public final class HomeConstants {
 
-  public static final int RESIZE_ANCHOR_WIDTH = 8;
-  public static final int RESIZE_ANCHOR_HEIGHT = 8;
-  public static final int RESIZE_ANCHOR_STROKEWIDTH = 2;
-  public static final int ROTATE_ANCHOR_RADIUS_X = 8;
-  public static final int ROTATE_ANCHOR_RADIUS_Y = 8;
+  public static final double RESIZE_ANCHOR_WIDTH = 8;
+  public static final double RESIZE_ANCHOR_HEIGHT = 8;
+  public static final double RESIZE_ANCHOR_STROKEWIDTH = 2;
+  public static final double ROTATE_ANCHOR_RADIUS_X = 8;
+  public static final double ROTATE_ANCHOR_RADIUS_Y = 8;
   public static final double NEW_PROJECT_VBOX_PADDING_TOP = 10;
   public static final double NEW_PROJECT_VBOX_PADDING_RIGHT = 10;
   public static final double NEW_PROJECT_VBOX_PADDING_BOTTOM = 10;
@@ -23,7 +23,8 @@ public final class HomeConstants {
   public static final double DRAWING_AREA_MAX_WIDTH = 10000;
   public static final double DRAWING_AREA_MAX_HEIGHT = 10000;
   public static final double ZOOM_LEVEL = 1.0;
-  public static final Color FOCUS_OUTLINE_COLOR = Color.HONEYDEW;
+  public static final double FOCUS_OUTLINE_WIDTH = 2.0;
+  public static final Color FOCUS_OUTLINE_COLOR = Color.RED;
   public static final String SAVE_BUTTON = "Save";
   public static final String CLOSE_WITHOUT_SAVING_BUTTON = "Close without saving";
   public static final String DISMISS_BUTTON = "Close without saving";

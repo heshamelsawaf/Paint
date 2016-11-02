@@ -15,7 +15,7 @@ import util.Point;
 public class Line implements Shape {
 
   private javafx.scene.shape.Line line;
-  
+
   public Line() {
     this.line = new javafx.scene.shape.Line();
   }
@@ -28,10 +28,10 @@ public class Line implements Shape {
   }
 
   public Line(double startX, double startY, double endX, double endY) {
-	  this.line.setStartX(startX);
-	  this.line.setStartY(startY);
-	  this.line.setEndX(endX);
-	  this.line.setEndY(endY);
+    this.line.setStartX(startX);
+    this.line.setStartY(startY);
+    this.line.setEndX(endX);
+    this.line.setEndY(endY);
   }
 
   public void setStartX(double startX) {
@@ -188,5 +188,25 @@ public class Line implements Shape {
   @Override
   public Node getNode() {
     return this.line;
+  }
+
+  @Override
+  public DoubleProperty scaleXProperty() {
+    return this.line.scaleXProperty();
+  }
+
+  @Override
+  public DoubleProperty scaleYProperty() {
+    return this.line.scaleYProperty();
+  }
+
+  @Override
+  public DoubleProperty translateXProperty() {
+    return this.line.translateXProperty();
+  }
+
+  @Override
+  public DoubleProperty translateYProperty() {
+    return this.line.translateYProperty();
   }
 }
