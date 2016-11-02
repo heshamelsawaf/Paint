@@ -22,7 +22,7 @@ public class DrawingController {
   public Drawing createDrawing(String title, double width, double height) {
     this.drawing = new Drawing(this.paintController);
     this.setDrawingTitle(title);
-
+    this.setupDrawingArea(width, height);
 
     return this.drawing;
   }
@@ -60,26 +60,28 @@ public class DrawingController {
 
   public boolean closeDrawing() {
     boolean closeIt = true;
-    boolean shouldBeClosed = false;
-    if (this.drawing.isSaved()) {
-      shouldBeClosed = true;
-    } else {
-      String choice =
-          this.paintController.getGUIController().getHome().alertAboutUnsavedData().get().getText();
-      if (choice.equals(HomeConstants.SAVE_BUTTON)
-          || choice.equals(HomeConstants.CLOSE_WITHOUT_SAVING_BUTTON)) {
+    if (this.drawing != null) {
+      boolean shouldBeClosed = false;
+      if (this.drawing.isSaved()) {
         shouldBeClosed = true;
       } else {
-        closeIt = false;
+        String choice = this.paintController.getGUIController().getHome().alertAboutUnsavedData()
+            .get().getText();
+        if (choice.equals(HomeConstants.SAVE_BUTTON)
+            || choice.equals(HomeConstants.CLOSE_WITHOUT_SAVING_BUTTON)) {
+          shouldBeClosed = true;
+        } else {
+          closeIt = false;
+        }
       }
-    }
-    if (shouldBeClosed) {
-      this.guiHelper.setSelectedShape(null);
-      this.drawing = null;
-      this.homeScene.reset();
-      this.homeScene.getStatusBar().clear();
-      this.homeScene.hideBorderMessage();
-      this.homeScene.activateControls(false);
+      if (shouldBeClosed) {
+        this.guiHelper.setSelectedShape(null);
+        this.drawing = null;
+        this.homeScene.reset();
+        this.homeScene.getStatusBar().clear();
+        this.homeScene.hideBorderMessage();
+        this.homeScene.activateControls(false);
+      }
     }
     return closeIt;
   }

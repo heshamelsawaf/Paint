@@ -12,47 +12,47 @@ import javafx.scene.transform.Transform;
 
 public interface Shape {
 
-	public Shape getClone();
+  public Shape getClone();
 
-	public void setFill(Paint value);
+  public void setFill(Paint value);
 
-	public Paint getFill();
+  public Paint getFill();
 
-	public void setStroke(Paint value);
-	
-	public Paint getStroke();
+  public void setStroke(Paint value);
 
-	public void setStrokeWidth(double value);
+  public Paint getStroke();
 
-	public double getStrokeWidth();
+  public void setStrokeWidth(double value);
 
-	public void setCursor(Cursor value);
+  public double getStrokeWidth();
 
-	public Cursor getCursor();
+  public void setCursor(Cursor value);
 
-	public void setOnMouseMoved(EventHandler<? super MouseEvent> value);
+  public Cursor getCursor();
 
-	public EventHandler<? super MouseEvent> getOnMouseMoved();
+  public void setOnMouseMoved(EventHandler<? super MouseEvent> value);
 
-	public void setOnMousePressed(EventHandler<? super MouseEvent> value);
+  public EventHandler<? super MouseEvent> getOnMouseMoved();
 
-	public EventHandler<? super MouseEvent> getOnMousePressed();
+  public void setOnMousePressed(EventHandler<? super MouseEvent> value);
 
-	public void setOnMouseDragged(EventHandler<? super MouseEvent> value);
+  public EventHandler<? super MouseEvent> getOnMousePressed();
 
-	public EventHandler<? super MouseEvent> getOnMouseDragged();
+  public void setOnMouseDragged(EventHandler<? super MouseEvent> value);
 
-	public void setOnMouseReleased(EventHandler<? super MouseEvent> value);
+  public EventHandler<? super MouseEvent> getOnMouseDragged();
 
-	public EventHandler<? super MouseEvent> getOnMouseReleased();
+  public void setOnMouseReleased(EventHandler<? super MouseEvent> value);
 
-	public ObservableList<Transform> getTransforms();
+  public EventHandler<? super MouseEvent> getOnMouseReleased();
 
-	public ObjectProperty<Paint> fillProperty();
+  public ObservableList<Transform> getTransforms();
 
-	public ObjectProperty<Paint> StrokeProperty();
+  public ObjectProperty<Paint> fillProperty();
 
-	public DoubleProperty StrokeWidthProperty();
+  public ObjectProperty<Paint> StrokeProperty();
 
-	public Node getNode();
+  public DoubleProperty StrokeWidthProperty();
+
+  public Node getNode();
 }

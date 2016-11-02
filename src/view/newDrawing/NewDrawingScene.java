@@ -122,6 +122,7 @@ public class NewDrawingScene extends Scene {
       GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
       this.registerObservers(newDrawing, guiHelper);
       this.paintController.getGUIController().setSelectedTool(DrawingTools.SELECT);
+      this.dismiss();
     } catch (InputMismatchException e) {
       e.printStackTrace();
       Alert alert = new Alert(Alert.AlertType.ERROR);

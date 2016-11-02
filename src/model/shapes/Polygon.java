@@ -47,9 +47,9 @@ public class Polygon implements Shape {
   }
 
   public void addCoordinate(double coordinate) {
-	  this.polygonVertices.add(coordinate);
+    this.polygonVertices.add(coordinate);
   }
- 
+
   @Override
   public void setFill(Paint value) {
     this.shape.setFill(value);
@@ -147,28 +147,28 @@ public class Polygon implements Shape {
 
   @Override
   public Shape getClone() {
-	Polygon clone = new Polygon();
-	for (double coordinate : this.polygonVertices) {
-		clone.addCoordinate(coordinate);
-	}
-	clone.setFill(this.getFill());
-	clone.setStroke(this.getStroke());
-	clone.setCursor(this.getCursor());
-	clone.setStrokeWidth(this.getStrokeWidth());
-	clone.setOnMouseDragged(this.getOnMouseDragged());
-	clone.setOnMouseMoved(this.getOnMouseMoved());
-	clone.setOnMousePressed(this.getOnMousePressed());
-	clone.setOnMouseReleased(this.getOnMouseReleased());
-	return clone;
+    Polygon clone = new Polygon();
+    for (double coordinate : this.polygonVertices) {
+      clone.addCoordinate(coordinate);
+    }
+    clone.setFill(this.getFill());
+    clone.setStroke(this.getStroke());
+    clone.setCursor(this.getCursor());
+    clone.setStrokeWidth(this.getStrokeWidth());
+    clone.setOnMouseDragged(this.getOnMouseDragged());
+    clone.setOnMouseMoved(this.getOnMouseMoved());
+    clone.setOnMousePressed(this.getOnMousePressed());
+    clone.setOnMouseReleased(this.getOnMouseReleased());
+    return clone;
   }
 
   @Override
   public Cursor getCursor() {
-	return this.shape.getCursor();
+    return this.shape.getCursor();
   }
 
   @Override
   public Node getNode() {
-	return (Node)shape;
+    return this.shape;
   }
 }

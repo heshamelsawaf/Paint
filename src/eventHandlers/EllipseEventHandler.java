@@ -4,6 +4,7 @@ import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
 import model.GUIHelper;
 import model.shapes.Ellipse;
 
@@ -44,7 +45,7 @@ public class EllipseEventHandler extends MouseEventHandler {
         this.ellipse.setOnMouseDragged(this.getOnMouseDraggedEventHandler());
         this.ellipse.setOnMouseReleased(this.getOnMouseReleasedEventHandler());
 
-
+        this.paintController.getDrawingController().addShape(this.ellipse);
       }
     };
   }

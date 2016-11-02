@@ -11,9 +11,11 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
+import javafx.stage.Stage;
 import model.GUIHelper;
 import model.Observer;
 import util.ToolBarConstants;
+import view.DrawingTools;
 
 public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
   private PaintController paintController;
@@ -51,11 +53,11 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
 
     this.undo = new Button();
     this.redo = new Button();
-    // this.action = new Action(text);
+    this.action = new Action(ToolBarConstants.ACTION_ON_SHAPE);
 
     this.fillColor = new ColorPicker();
     this.strokeColor = new ColorPicker();
-    // this.strokeWidth = new StrokeWidth(text);
+    this.strokeWidth = new StrokeWidth(ToolBarConstants.STROKE_WIDTH);
 
     this.group = new ToggleGroup();
     this.select = new ToggleButton();
@@ -69,7 +71,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.circle = new ToggleButton();
 
     this.BuildToolBar();
-    // this.takeControl(false);
+    this.takeControl(false);
 
   }
 
@@ -79,7 +81,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
 
     this.fillColor.setDisable(!key);
     this.strokeColor.setDisable(!key);
-    // this.action.setDisable(!key);
+    this.action.setDisable(!key);
 
     this.select.setDisable(!key);
     this.polygon.setDisable(!key);
@@ -109,7 +111,10 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
   private void BuildFile() {
     this._new.setTooltip(new Tooltip(ToolBarConstants.NEWFILE));
     this._new.setOnAction(event -> {
-
+      if (this.paintController.getDrawingController().closeDrawing()) {
+        this.paintController.getGUIController()
+            .openNewDrawingDialog((Stage) this.getScene().getWindow());
+      }
     });
     this.open.setTooltip(new Tooltip(ToolBarConstants.OPENFILE));
     this.open.setOnAction(event -> {
@@ -131,7 +136,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.redo.setOnAction(event -> {
 
     });
-    // this.getItems().addAll(this.undo, this.redo, this.action);
+    this.getItems().addAll(this.undo, this.redo, this.action);
   }
 
   private void buildFont() {
@@ -141,7 +146,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.strokeColor.setOnAction(event -> {
 
     });
-    // this.getItems().addAll(this.fillColor, this.strokeColor, this.strokeWidth);
+    this.getItems().addAll(this.fillColor, this.strokeColor, this.strokeWidth);
   }
 
   private void buildTools() {
@@ -178,7 +183,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.ellipse.setToggleGroup(this.group);
     this.ellipse.setTooltip(new Tooltip(ToolBarConstants.ELLIPSE));
     this.ellipse.setOnAction(event -> {
-
+      this.paintController.getGUIController().setSelectedTool(DrawingTools.ELLIPSE);
     });
     this.circle.setToggleGroup(this.group);
     this.circle.setTooltip(new Tooltip(ToolBarConstants.CIRCLE));

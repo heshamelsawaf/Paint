@@ -12,6 +12,7 @@ import util.Message;
 import view.DrawingTools;
 import view.main.DrawingArea;
 import view.main.Home;
+import view.newDrawing.NewDrawingStage;
 
 public class GUIController {
 
@@ -32,6 +33,12 @@ public class GUIController {
 
   public void closeHome() {
     this.home.close();
+  }
+
+  public void openNewDrawingDialog(Stage parentStage) {
+    NewDrawingStage newDrawingStage = new NewDrawingStage(this.paintController, parentStage);
+    newDrawingStage.show();
+    newDrawingStage.requestFocus();
   }
 
   public void setSelectedTool(DrawingTools drawingTool) {

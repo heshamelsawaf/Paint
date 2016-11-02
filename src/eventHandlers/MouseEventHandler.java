@@ -14,7 +14,7 @@ public abstract class MouseEventHandler {
 
   public MouseEventHandler(PaintController paintController) {
     this.paintController = paintController;
-
+    this.homeScene = this.paintController.getGUIController().getHome().getHomeScene();
   }
 
   public EventHandler<MouseEvent> getOnMouseMovedEventHandler() {

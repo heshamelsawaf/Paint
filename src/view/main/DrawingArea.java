@@ -16,6 +16,7 @@ public class DrawingArea extends Canvas {
     this.paintController = paintController;
 
     this.getGraphicsContext2D().setFill(Color.WHITE);
+    this.getGraphicsContext2D().fillRect(0, 0, width, height);
     this.setMouseEventHandlers(new SelectEventHandler(this.paintController));
   }
 

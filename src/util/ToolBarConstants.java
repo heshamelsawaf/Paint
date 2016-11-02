@@ -9,6 +9,8 @@ public final class ToolBarConstants {
 	public static final String UNDO = "Undo (Ctrl+Z)";
 	public static final String REDO = "Redo (Ctrl+Y)";
 
+	public static final String ACTION_ON_SHAPE = "Perform";
+	public static final String STROKE_WIDTH = "Stroke width";
 	public static final String SELECT = "Select a shape to move";
 	public static final String POLYGON  = "Draw a Polygon";
 	public static final String ELLIPSE  = "Draw an Ellipse";

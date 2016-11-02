@@ -14,179 +14,179 @@ import util.Point;
 
 public class Line implements Shape {
 
-    private javafx.scene.shape.Line line;
-    private double startX, startY, endX, endY;
+  private javafx.scene.shape.Line line;
+  private double startX, startY, endX, endY;
 
-    public Line() {
-        this.line = new javafx.scene.shape.Line();
-    }
+  public Line() {
+    this.line = new javafx.scene.shape.Line();
+  }
 
-    public Line(Point pt1, Point pt2) {
-        this.startX = pt1.getX();
-        this.startY = pt1.getY();
-        this.endX = pt2.getX();
-        this.endY = pt2.getY();
-    }
+  public Line(Point pt1, Point pt2) {
+    this.startX = pt1.getX();
+    this.startY = pt1.getY();
+    this.endX = pt2.getX();
+    this.endY = pt2.getY();
+  }
 
-    public Line(double startX, double startY, double endX, double endY) {
-        this.startX = startX;
-        this.startY = startY;
-        this.endX = endX;
-        this.endY = endY;
-    }
+  public Line(double startX, double startY, double endX, double endY) {
+    this.startX = startX;
+    this.startY = startY;
+    this.endX = endX;
+    this.endY = endY;
+  }
 
-    public void setStartX(double startX) {
-        this.startX = startX;
-    }
+  public void setStartX(double startX) {
+    this.startX = startX;
+  }
 
-    public double getStartX() {
-        return this.startX;
-    }
-    
-    public void setStartY(double startY) {
-        this.startY = startY;
-    }
+  public double getStartX() {
+    return this.startX;
+  }
 
-    public double getStartY() {
-        return this.startY;
-    }
-    
-    public void setEndX(double endX) {
-        this.endX = endX;
-    }
+  public void setStartY(double startY) {
+    this.startY = startY;
+  }
 
-    public double getEndX() {
-        return this.endX;
-    }
-    
-    public void setEndY(double endY) {
-        this.endY = endY;
-    }
+  public double getStartY() {
+    return this.startY;
+  }
 
-    public double getEndY() {
-        return this.endY;
-    }
+  public void setEndX(double endX) {
+    this.endX = endX;
+  }
 
-    @Override
-    public void setFill(Paint value) {
-        this.line.setFill(value);
-    }
+  public double getEndX() {
+    return this.endX;
+  }
 
-    @Override
-    public Paint getFill() {
-        return this.line.getFill();
-    }
+  public void setEndY(double endY) {
+    this.endY = endY;
+  }
 
-    @Override
-    public void setStroke(Paint value) {
-        this.line.setStroke(value);
-    }
+  public double getEndY() {
+    return this.endY;
+  }
 
-    @Override
-    public Paint getStroke() {
-        return this.line.getStroke();
-    }
+  @Override
+  public void setFill(Paint value) {
+    this.line.setFill(value);
+  }
 
-    @Override
-    public void setStrokeWidth(double value) {
-        this.line.setStrokeWidth(value);
-    }
+  @Override
+  public Paint getFill() {
+    return this.line.getFill();
+  }
 
-    @Override
-    public double getStrokeWidth() {
-        return this.line.getStrokeWidth();
-    }
+  @Override
+  public void setStroke(Paint value) {
+    this.line.setStroke(value);
+  }
 
-    @Override
-    public void setCursor(Cursor value) {
-        this.line.setCursor(value);
-    }
+  @Override
+  public Paint getStroke() {
+    return this.line.getStroke();
+  }
 
-    @Override
-    public void setOnMouseMoved(EventHandler<? super MouseEvent> value) {
-        this.line.setOnMouseMoved(value);
-    }
+  @Override
+  public void setStrokeWidth(double value) {
+    this.line.setStrokeWidth(value);
+  }
 
-    @Override
-    public EventHandler<? super MouseEvent> getOnMouseMoved() {
-        return this.line.getOnMouseMoved();
-    }
+  @Override
+  public double getStrokeWidth() {
+    return this.line.getStrokeWidth();
+  }
 
-    @Override
-    public void setOnMousePressed(EventHandler<? super MouseEvent> value) {
-        this.line.setOnMousePressed(value);
-    }
+  @Override
+  public void setCursor(Cursor value) {
+    this.line.setCursor(value);
+  }
 
-    @Override
-    public EventHandler<? super MouseEvent> getOnMousePressed() {
-        return this.line.getOnMousePressed();
-    }
+  @Override
+  public void setOnMouseMoved(EventHandler<? super MouseEvent> value) {
+    this.line.setOnMouseMoved(value);
+  }
 
-    @Override
-    public void setOnMouseDragged(EventHandler<? super MouseEvent> value) {
-        this.line.setOnMouseDragged(value);;
-    }
+  @Override
+  public EventHandler<? super MouseEvent> getOnMouseMoved() {
+    return this.line.getOnMouseMoved();
+  }
 
-    @Override
-    public EventHandler<? super MouseEvent> getOnMouseDragged() {
-        return this.line.getOnMouseDragged();
-    }
+  @Override
+  public void setOnMousePressed(EventHandler<? super MouseEvent> value) {
+    this.line.setOnMousePressed(value);
+  }
 
-    @Override
-    public void setOnMouseReleased(EventHandler<? super MouseEvent> value) {
-        this.line.setOnMouseReleased(value);
-    }
+  @Override
+  public EventHandler<? super MouseEvent> getOnMousePressed() {
+    return this.line.getOnMousePressed();
+  }
 
-    @Override
-    public EventHandler<? super MouseEvent> getOnMouseReleased() {
-        return this.line.getOnMouseReleased();
-    }
+  @Override
+  public void setOnMouseDragged(EventHandler<? super MouseEvent> value) {
+    this.line.setOnMouseDragged(value);;
+  }
 
-    @Override
-    public ObservableList<Transform> getTransforms() {
-        return this.line.getTransforms();
-    }
+  @Override
+  public EventHandler<? super MouseEvent> getOnMouseDragged() {
+    return this.line.getOnMouseDragged();
+  }
 
-    @Override
-    public ObjectProperty<Paint> fillProperty() {
-        return this.line.fillProperty();
-    }
+  @Override
+  public void setOnMouseReleased(EventHandler<? super MouseEvent> value) {
+    this.line.setOnMouseReleased(value);
+  }
 
-    @Override
-    public ObjectProperty<Paint> StrokeProperty() {
-        return this.line.strokeProperty();
-    }
+  @Override
+  public EventHandler<? super MouseEvent> getOnMouseReleased() {
+    return this.line.getOnMouseReleased();
+  }
 
-    @Override
-    public DoubleProperty StrokeWidthProperty() {
-        return this.line.strokeWidthProperty();
-    }
+  @Override
+  public ObservableList<Transform> getTransforms() {
+    return this.line.getTransforms();
+  }
 
-	@Override
-	public Shape getClone() {
-		Line clone = new Line();
-		clone.setStartX(this.getStartX());
-		clone.setStartY(this.getStartY());
-		clone.setEndX(this.getEndX());
-		clone.setEndY(this.getEndY());
-		clone.setFill(this.getFill());
-		clone.setStroke(this.getStroke());
-		clone.setCursor(this.getCursor());
-		clone.setStrokeWidth(this.getStrokeWidth());
-		clone.setOnMouseDragged(this.getOnMouseDragged());
-		clone.setOnMouseMoved(this.getOnMouseMoved());
-		clone.setOnMousePressed(this.getOnMousePressed());
-		clone.setOnMouseReleased(this.getOnMouseReleased());
-		return clone;
-	}
+  @Override
+  public ObjectProperty<Paint> fillProperty() {
+    return this.line.fillProperty();
+  }
 
-	@Override
-	public Cursor getCursor() {
-		return this.line.getCursor();
-	}
+  @Override
+  public ObjectProperty<Paint> StrokeProperty() {
+    return this.line.strokeProperty();
+  }
 
-	@Override
-	public Node getNode() {
-		return (Node)line;
-	}
+  @Override
+  public DoubleProperty StrokeWidthProperty() {
+    return this.line.strokeWidthProperty();
+  }
+
+  @Override
+  public Shape getClone() {
+    Line clone = new Line();
+    clone.setStartX(this.getStartX());
+    clone.setStartY(this.getStartY());
+    clone.setEndX(this.getEndX());
+    clone.setEndY(this.getEndY());
+    clone.setFill(this.getFill());
+    clone.setStroke(this.getStroke());
+    clone.setCursor(this.getCursor());
+    clone.setStrokeWidth(this.getStrokeWidth());
+    clone.setOnMouseDragged(this.getOnMouseDragged());
+    clone.setOnMouseMoved(this.getOnMouseMoved());
+    clone.setOnMousePressed(this.getOnMousePressed());
+    clone.setOnMouseReleased(this.getOnMouseReleased());
+    return clone;
+  }
+
+  @Override
+  public Cursor getCursor() {
+    return this.line.getCursor();
+  }
+
+  @Override
+  public Node getNode() {
+    return this.line;
+  }
 }
