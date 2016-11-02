@@ -27,7 +27,7 @@ public class Home {
     this.homeScene = new HomeScene(this.paintController, this);
     this.primaryStage.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.F11));
     this.primaryStage.setOnCloseRequest(event -> {
-      // this.paintController.exit();
+         this.paintController.exit();
       event.consume();
     });
     this.primaryStage.setScene(this.homeScene);

@@ -203,7 +203,7 @@ public class HomeScene extends Scene implements Observer {
     for (Iterator<Shape> iterator = shapes.iterator(); iterator.hasNext();) {
       Shape shape = (Shape) iterator.next();
       // f = new FocusOutline(paintController, shape);
-      // this.drawingAreaGroup.getChildren().add(shape.getNode());
+      this.drawingAreaGroup.getChildren().add(shape.getNode());
       // this.drawingAreaGroup.getChildren().add(f.getHighlightedRectangle().getNode());
       // this.drawingAreaGroup.getChildren().add(f.getResizeAnchors().get(0).getNode());
       // this.drawingAreaGroup.getChildren().add(f.getResizeAnchors().get(1).getNode());

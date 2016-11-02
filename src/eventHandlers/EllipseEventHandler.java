@@ -1,4 +1,4 @@
-package eventHandlers;
+	package eventHandlers;
 
 import controller.PaintController;
 import javafx.event.EventHandler;
