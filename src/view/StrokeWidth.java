@@ -10,7 +10,7 @@ public enum StrokeWidth {
     this.strokeWidth = strokeWidth;
   }
 
-  public int getStrokeWidth() {
+  public int getStrokeWidthAsInt() {
     return strokeWidth;
   }
 

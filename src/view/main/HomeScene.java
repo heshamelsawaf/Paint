@@ -220,7 +220,7 @@ public class HomeScene extends Scene implements Observer {
         shape.setFill(guiHelper.getFillColor());
       }
       shape.setStroke(guiHelper.getStrokeColor());
-      shape.setStrokeWidth(guiHelper.getStrokeWidth().getStrokeWidth());
+      shape.setStrokeWidth(guiHelper.getStrokeWidth().getStrokeWidthAsInt());
 
       this.menuBar.shapeControl(guiHelper.getSelectedShape() != null);
       this.toolBar.shapeControl(guiHelper.getSelectedShape() != null);

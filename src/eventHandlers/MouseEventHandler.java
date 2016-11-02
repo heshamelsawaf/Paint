@@ -3,18 +3,22 @@ package eventHandlers;
 import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import model.Drawing;
+import view.main.DrawingArea;
 import view.main.HomeScene;
 
 public abstract class MouseEventHandler {
 
   protected PaintController paintController;
   protected HomeScene homeScene;
-  //
+  protected Drawing drawing;
+
   private boolean delta;
 
   public MouseEventHandler(PaintController paintController) {
     this.paintController = paintController;
     this.homeScene = this.paintController.getGUIController().getHome().getHomeScene();
+    this.drawing = this.paintController.getDrawingController().getDrawing();
   }
 
   public EventHandler<MouseEvent> getOnMouseMovedEventHandler() {
@@ -30,13 +34,13 @@ public abstract class MouseEventHandler {
   }
 
   public EventHandler<MouseEvent> getOnMouseReleasedEventHandler() {
-    EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-      @Override
-      public void handle(MouseEvent event) {
-
+    return event -> {
+      if (!(event.getSource() instanceof DrawingArea)) {
+        if (isDelta()) {
+          // Create History Point
+        }
       }
     };
-    return eventHandler;
   }
 
 

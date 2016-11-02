@@ -36,7 +36,6 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
 
   private ToggleGroup group;
   private ToggleButton select;
-  private ToggleButton polygon;
   private ToggleButton rectangle;
   private ToggleButton square;
   private ToggleButton triangle;
@@ -64,7 +63,6 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.group = new ToggleGroup();
     this.select = new ToggleButton();
     this.select.setSelected(true);
-    this.polygon = new ToggleButton();
     this.rectangle = new ToggleButton();
     this.square = new ToggleButton();
     this.triangle = new ToggleButton();
@@ -86,7 +84,6 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.action.setDisable(!key);
 
     this.select.setDisable(!key);
-    this.polygon.setDisable(!key);
     this.rectangle.setDisable(!key);
     this.square.setDisable(!key);
     this.triangle.setDisable(!key);
@@ -112,8 +109,8 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
 
   private void BuildFile() {
     this._new.setTooltip(new Tooltip(ToolBarConstants.NEWFILE));
-    this._new.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/new.png"))));
+    this._new.setGraphic(
+        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/new.png"))));
     this._new.setOnAction(event -> {
       if (this.paintController.getDrawingController().closeDrawing()) {
         this.paintController.getGUIController()
@@ -121,14 +118,14 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
       }
     });
     this.open.setTooltip(new Tooltip(ToolBarConstants.OPENFILE));
-    this.open.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/open.png"))));
+    this.open.setGraphic(
+        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/open.png"))));
     this.open.setOnAction(event -> {
 
     });
     this.save.setTooltip(new Tooltip(ToolBarConstants.SAVEFILE));
-    this.save.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/save.png"))));
+    this.save.setGraphic(
+        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/save.png"))));
     this.save.setOnAction(event -> {
 
     });
@@ -137,14 +134,14 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
 
   private void BuildEdit() {
     this.undo.setTooltip(new Tooltip(ToolBarConstants.UNDO));
-    this.undo.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/undo.png"))));
+    this.undo.setGraphic(
+        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/undo.png"))));
     this.undo.setOnAction(event -> {
 
     });
     this.redo.setTooltip(new Tooltip(ToolBarConstants.REDO));
-    this.redo.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/redo.png"))));
+    this.redo.setGraphic(
+        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/redo.png"))));
     this.redo.setOnAction(event -> {
 
     });
@@ -164,62 +161,55 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
   private void buildTools() {
     this.select.setToggleGroup(this.group);
     this.select.setTooltip(new Tooltip(ToolBarConstants.SELECT));
-    this.select.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/select.png"))));
+    this.select.setGraphic(
+        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/select.png"))));
     this.select.setOnAction(event -> {
-
-    });
-    this.polygon.setToggleGroup(this.group);
-    this.polygon.setTooltip(new Tooltip(ToolBarConstants.POLYGON));
-    this.polygon.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/polygon.png"))));
-    this.polygon.setOnAction(event -> {
 
     });
     this.rectangle.setToggleGroup(this.group);
     this.rectangle.setTooltip(new Tooltip(ToolBarConstants.RECTANGLE));
-    this.rectangle.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/rectangle.png"))));
+    this.rectangle.setGraphic(new ImageView(
+        new Image(ClassLoader.getSystemResourceAsStream("assets/icons/rectangle.png"))));
     this.rectangle.setOnAction(event -> {
 
     });
     this.square.setToggleGroup(this.group);
     this.square.setTooltip(new Tooltip(ToolBarConstants.SQUARE));
-    this.square.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/square.png"))));
+    this.square.setGraphic(
+        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/square.png"))));
     this.square.setOnAction(event -> {
 
     });
     this.triangle.setToggleGroup(this.group);
     this.triangle.setTooltip(new Tooltip(ToolBarConstants.TRIANGLE));
-    this.triangle.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/triangle.png"))));
+    this.triangle.setGraphic(new ImageView(
+        new Image(ClassLoader.getSystemResourceAsStream("assets/icons/triangle.png"))));
     this.triangle.setOnAction(event -> {
 
     });
     this.line.setToggleGroup(this.group);
     this.line.setTooltip(new Tooltip(ToolBarConstants.LINE));
-    this.line.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/line.png"))));
+    this.line.setGraphic(
+        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/line.png"))));
     this.line.setOnAction(event -> {
-
+      this.paintController.getGUIController().setSelectedTool(DrawingTools.LINE);
     });
     this.ellipse.setToggleGroup(this.group);
     this.ellipse.setTooltip(new Tooltip(ToolBarConstants.ELLIPSE));
-    this.ellipse.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/ellipse.png"))));
+    this.ellipse.setGraphic(new ImageView(
+        new Image(ClassLoader.getSystemResourceAsStream("assets/icons/ellipse.png"))));
     this.ellipse.setOnAction(event -> {
       this.paintController.getGUIController().setSelectedTool(DrawingTools.ELLIPSE);
     });
     this.circle.setToggleGroup(this.group);
     this.circle.setTooltip(new Tooltip(ToolBarConstants.CIRCLE));
-    this.circle.setGraphic(new ImageView(new Image(ClassLoader.
-    		getSystemResourceAsStream("assets/icons/circle.png"))));
+    this.circle.setGraphic(
+        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/circle.png"))));
     this.circle.setOnAction(event -> {
 
     });
-    this.getItems().addAll(this.select, this.polygon, this.rectangle, this.square, this.triangle,
-        this.line, this.ellipse, this.circle);
+    this.getItems().addAll(this.select, this.rectangle, this.square, this.triangle, this.line,
+        this.ellipse, this.circle);
   }
 
   private class Action extends MenuButton {

@@ -4,7 +4,6 @@ import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Paint;
 import model.GUIHelper;
 import model.shapes.Ellipse;
 
@@ -12,8 +11,8 @@ public class EllipseEventHandler extends MouseEventHandler {
 
   private Ellipse ellipse;
 
-  private double selectedX;
-  private double selectedY;
+  private double masterX;
+  private double masterY;
 
 
   public EllipseEventHandler(PaintController paintController) {
@@ -27,18 +26,18 @@ public class EllipseEventHandler extends MouseEventHandler {
         GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
 
         guiHelper.setSelectedShape(null);
-        this.selectedX = event.getX();
-        this.selectedY = event.getY();
+        this.masterX = event.getX();
+        this.masterY = event.getY();
 
         this.ellipse = new Ellipse();
         this.ellipse.setFill(guiHelper.getFillColor());
         this.ellipse.setStroke(guiHelper.getStrokeColor());
-        this.ellipse.setStrokeWidth(guiHelper.getStrokeWidth().getStrokeWidth());
+        this.ellipse.setStrokeWidth(guiHelper.getStrokeWidth().getStrokeWidthAsInt());
 
         this.ellipse.setRadiusX(1);
         this.ellipse.setRadiusY(1);
-        this.ellipse.setCenterX(this.selectedX);
-        this.ellipse.setCenterY(this.selectedY);
+        this.ellipse.setCenterX(this.masterX);
+        this.ellipse.setCenterY(this.masterY);
         this.ellipse.setCursor(Cursor.CROSSHAIR);
         this.ellipse.setOnMouseMoved(this.getOnMouseMovedEventHandler());
         this.ellipse.setOnMousePressed(this.getOnMousePressedEventHandler());
@@ -65,23 +64,23 @@ public class EllipseEventHandler extends MouseEventHandler {
       double tempY = event.getY();
 
       if (event.isPrimaryButtonDown()) {
-        double radiusX = Math.abs(tempX - this.selectedX) / 2;
-        double radiusY = Math.abs(tempY - this.selectedY) / 2;
+        double radiusX = Math.abs(tempX - this.masterX) / 2;
+        double radiusY = Math.abs(tempY - this.masterY) / 2;
 
         if (event.isShiftDown()) {
           radiusX = Math.min(radiusX, radiusY);
           radiusY = Math.min(radiusX, radiusY);
         }
 
-        if (tempX < this.selectedX) {
-          centerX = this.selectedX - radiusX;
+        if (tempX < this.masterX) {
+          centerX = this.masterX - radiusX;
         } else {
-          centerX = this.selectedX + radiusX;
+          centerX = this.masterX + radiusX;
         }
-        if (tempY < this.selectedY) {
-          centerY = this.selectedY - radiusY;
+        if (tempY < this.masterY) {
+          centerY = this.masterY - radiusY;
         } else {
-          centerY = this.selectedY + radiusY;
+          centerY = this.masterY + radiusY;
         }
         this.ellipse.setRadiusX(radiusX);
         this.ellipse.setRadiusY(radiusY);
