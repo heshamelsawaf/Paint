@@ -1,5 +1,6 @@
 	package eventHandlers;
 
+import controller.HistoryController;
 import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -94,6 +95,8 @@ public class CircleEventHandler extends MouseEventHandler {
   public EventHandler<MouseEvent> getOnMouseReleasedEventHandler() {
     return event -> {
       this.paintController.getGUIController().getGuiHelper().setSelectedShape(this.circle);
+      HistoryController.getInstance(this.paintController).createHistoryEntry();
+
       this.circle = null;
     };
   }

@@ -1,5 +1,6 @@
 package eventHandlers;
 
+import controller.HistoryController;
 import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -37,7 +38,7 @@ public abstract class MouseEventHandler {
     return event -> {
       if (!(event.getSource() instanceof DrawingArea)) {
         if (isDelta()) {
-          // Create History Point
+          HistoryController.getInstance(this.paintController).createHistoryEntry();
         }
       }
     };

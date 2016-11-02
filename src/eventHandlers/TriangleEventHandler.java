@@ -1,5 +1,6 @@
 package eventHandlers;
 
+import controller.HistoryController;
 import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -91,7 +92,7 @@ public class TriangleEventHandler extends MouseEventHandler {
     return event -> {
       this.paintController.getGUIController().getGuiHelper().setSelectedShape(this.triangle);
 
-      // Create History Point
+      HistoryController.getInstance(this.paintController).createHistoryEntry();
 
       this.triangle = null;
     };

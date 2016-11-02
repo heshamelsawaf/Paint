@@ -1,5 +1,6 @@
 package view.main;
 
+import controller.HistoryController;
 import controller.PaintController;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
@@ -137,13 +138,13 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.undo.setGraphic(
         new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/undo.png"))));
     this.undo.setOnAction(event -> {
-
+      HistoryController.getInstance(paintController).undo();
     });
     this.redo.setTooltip(new Tooltip(ToolBarConstants.REDO));
     this.redo.setGraphic(
         new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/redo.png"))));
     this.redo.setOnAction(event -> {
-
+      HistoryController.getInstance(paintController).redo();
     });
     this.getItems().addAll(this.undo, this.redo, this.action);
   }
@@ -310,6 +311,8 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
   public void update() {
     GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
 
+    this.undo.setDisable(!HistoryController.getInstance(this.paintController).canUndo());
+    this.redo.setDisable(!HistoryController.getInstance(this.paintController).canRedo());
 
     this.fillColor.setValue(guiHelper.getFillColor());
     this.strokeColor.setValue(guiHelper.getStrokeColor());

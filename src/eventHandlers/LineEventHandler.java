@@ -1,5 +1,6 @@
 package eventHandlers;
 
+import controller.HistoryController;
 import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -87,7 +88,7 @@ public class LineEventHandler extends MouseEventHandler {
     return event -> {
       this.paintController.getGUIController().getGuiHelper().setSelectedShape(this.line);
 
-      // Create History Point
+      HistoryController.getInstance(this.paintController).createHistoryEntry();
 
       this.line = null;
     };

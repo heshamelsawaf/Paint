@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import controller.HistoryController;
 import controller.PaintController;
 import javafx.scene.transform.Rotate;
 import view.focusOutline.FocusOutline;
@@ -85,13 +86,13 @@ public class Drawing implements Cloneable {
 
   public void addListenersToShape(Shape shape) {
     shape.fillProperty().addListener((observableValue, oldValue, newValue) -> {
-
+      HistoryController.getInstance(this.paintController).createHistoryEntry();
     });
     shape.StrokeProperty().addListener((observableValue, oldValue, newValue) -> {
-
+      HistoryController.getInstance(this.paintController).createHistoryEntry();
     });
     shape.StrokeWidthProperty().addListener((observableValue, oldValue, newValue) -> {
-
+      HistoryController.getInstance(this.paintController).createHistoryEntry();
     });
   }
 
@@ -167,17 +168,15 @@ public class Drawing implements Cloneable {
   }
 
   @Override
-  public Drawing clone() throws CloneNotSupportedException {
+  public Drawing clone() {
     Drawing clone = new Drawing(this.paintController);
     clone.setTitle(this.getTitle());
     clone.setDimensions(this.getWidth(), this.getHeight());
     clone.setSaved(this.isSaved());
-    for (Shape shape : this.shapes) {
+    for (Shape shape : this.getShapes()) {
       clone.addShape(shape.getClone());
     }
-    // for (Observer observer : this.observers) {
-    // clone.registerObserver(observer);
-    // }
+    this.observers.forEach(clone::registerObserver);
     return clone;
   }
 }

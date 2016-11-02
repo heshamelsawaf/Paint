@@ -23,7 +23,8 @@ public class DrawingController {
     this.drawing = new Drawing(this.paintController);
     this.setDrawingTitle(title);
     this.setupDrawingArea(width, height);
-    // here goes setDrawing
+    HistoryController.getInstance(this.paintController).setDrawing(this.drawing);
+    HistoryController.getInstance(this.paintController).createHistoryEntry();
     return this.drawing;
   }
 
@@ -51,10 +52,12 @@ public class DrawingController {
 
   public void removeShape(Shape shape) {
     this.drawing.removeShape(shape);
+    HistoryController.getInstance(this.paintController).createHistoryEntry();
   }
 
   public void clearAllShapes(Shape shape) {
     this.drawing.clearAllShapes();
+    HistoryController.getInstance(this.paintController).createHistoryEntry();
     this.guiHelper.setSelectedShape(null);
   }
 
@@ -77,6 +80,7 @@ public class DrawingController {
       if (shouldBeClosed) {
         this.guiHelper.setSelectedShape(null);
         this.drawing = null;
+        HistoryController.getInstance(this.paintController).resetHistory();
         this.homeScene.reset();
         this.homeScene.getStatusBar().clear();
         this.homeScene.hideBorderMessage();
