@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import eventHandlers.CircleEventHandler;
 import eventHandlers.EllipseEventHandler;
 import eventHandlers.LineEventHandler;
 import eventHandlers.MouseEventHandler;
@@ -73,6 +74,9 @@ public class GUIController {
       case SQUARE:
     	mouseEventHandler = new SquareEventHandler(this.paintController);
     	drawingArea.setCursor(Cursor.CROSSHAIR);
+    	for (Shape shape : shapes) {
+            shape.setCursor(Cursor.CROSSHAIR);
+        }
     	break;
       case ELLIPSE:
         this.getHome().getHomeScene().displayBorderMessage(Message.PERFECT_CIRCLE);
@@ -82,6 +86,13 @@ public class GUIController {
           shape.setCursor(Cursor.CROSSHAIR);
         }
         break;
+      case CIRCLE:
+    	mouseEventHandler = new CircleEventHandler(this.paintController);
+      	drawingArea.setCursor(Cursor.CROSSHAIR);
+      	for (Shape shape : shapes) {
+              shape.setCursor(Cursor.CROSSHAIR);
+        }
+      	break;
       case LINE:
         this.getHome().getHomeScene().displayBorderMessage(Message.PERFECT_LINE);
         mouseEventHandler = new LineEventHandler(this.paintController);

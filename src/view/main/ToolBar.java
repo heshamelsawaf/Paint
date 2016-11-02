@@ -206,7 +206,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.circle.setGraphic(
         new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/circle.png"))));
     this.circle.setOnAction(event -> {
-
+    	this.paintController.getGUIController().setSelectedTool(DrawingTools.CIRCLE);
     });
     this.getItems().addAll(this.select, this.rectangle, this.square, this.triangle, this.line,
         this.ellipse, this.circle);
@@ -353,6 +353,10 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
         }
         case ELLIPSE: {
           this.ellipse.setSelected(true);
+          break;
+        }
+        case CIRCLE: {
+          this.circle.setSelected(true);
           break;
         }
         case LINE: {
