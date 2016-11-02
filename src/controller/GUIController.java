@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import eventHandlers.EllipseEventHandler;
 import eventHandlers.LineEventHandler;
 import eventHandlers.MouseEventHandler;
@@ -7,7 +9,9 @@ import eventHandlers.RectangleEventHandler;
 import eventHandlers.SelectEventHandler;
 import javafx.scene.Cursor;
 import javafx.stage.Stage;
+import model.Drawing;
 import model.GUIHelper;
+import model.Shape;
 import util.Message;
 import view.DrawingTools;
 import view.main.DrawingArea;
@@ -43,33 +47,56 @@ public class GUIController {
 
   public void setSelectedTool(DrawingTools drawingTool) {
     DrawingArea drawingArea = this.getHome().getHomeScene().getDrawingArea();
+    Drawing drawing = this.paintController.getDrawingController().getDrawing();
+    List<Shape> shapes = drawing.getShapes();
 
     MouseEventHandler mouseEventHandler = null;
 
     switch (drawingTool) {
       case SELECT:
+        this.getHome().getHomeScene().hideBorderMessage();
         mouseEventHandler = new SelectEventHandler(this.paintController);
         drawingArea.setCursor(Cursor.DEFAULT);
+        for (Shape shape : shapes) {
+          shape.setCursor(Cursor.MOVE);
+        }
         break;
       case RECTANGLE:
         this.getHome().getHomeScene().displayBorderMessage(Message.PERFECT_SQUARE);
         mouseEventHandler = new RectangleEventHandler(this.paintController);
         drawingArea.setCursor(Cursor.CROSSHAIR);
+        for (Shape shape : shapes) {
+          shape.setCursor(Cursor.CROSSHAIR);
+        }
         break;
       case ELLIPSE:
         this.getHome().getHomeScene().displayBorderMessage(Message.PERFECT_CIRCLE);
         mouseEventHandler = new EllipseEventHandler(this.paintController);
         drawingArea.setCursor(Cursor.CROSSHAIR);
+        for (Shape shape : shapes) {
+          shape.setCursor(Cursor.CROSSHAIR);
+        }
         break;
       case LINE:
         this.getHome().getHomeScene().displayBorderMessage(Message.PERFECT_LINE);
         mouseEventHandler = new LineEventHandler(this.paintController);
         drawingArea.setCursor(Cursor.CROSSHAIR);
+        for (Shape shape : shapes) {
+          shape.setCursor(Cursor.CROSSHAIR);
+        }
         break;
       default:
         break;
     }
     drawingArea.setMouseEventHandlers(mouseEventHandler);
+    for (Shape shape : shapes) {
+      shape.setOnMouseMoved(mouseEventHandler.getOnMouseMovedEventHandler());
+      shape.setOnMousePressed(mouseEventHandler.getOnMousePressedEventHandler());
+      shape.setOnMouseDragged(mouseEventHandler.getOnMouseDraggedEventHandler());
+      shape.setOnMouseReleased(mouseEventHandler.getOnMouseReleasedEventHandler());
+
+    }
+
     this.guiHelper.setSelectedDrawTool(drawingTool);
   }
 

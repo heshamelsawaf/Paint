@@ -5,8 +5,6 @@ import java.util.List;
 
 import controller.PaintController;
 import eventHandlers.SelectEventHandler;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import model.Shape;

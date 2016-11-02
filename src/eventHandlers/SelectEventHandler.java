@@ -1,14 +1,17 @@
 package eventHandlers;
 
+import java.util.List;
+
 import controller.PaintController;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import model.GUIHelper;
-import model.Shape;
-import model.shapes.Line;
 import view.StrokeWidth;
 import view.main.DrawingArea;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
+
 
 public class SelectEventHandler extends MouseEventHandler {
 
@@ -33,7 +36,13 @@ public class SelectEventHandler extends MouseEventHandler {
           }
           guiHelper.setStrokeColor((Color) shape.getStroke());
           guiHelper.setStrokeWidth(StrokeWidth.fromInteger((int) shape.getStrokeWidth()));
-          guiHelper.setSelectedShape(shape);
+          List<model.Shape> shapes = this.drawing.getShapes();
+          for (model.Shape originalShape : shapes) {
+            if (shape.equals(originalShape.getNode())) {
+              guiHelper.setSelectedShape(originalShape);
+              break;
+            }
+          }
           this.moveEventHandler.getOnMousePressedEventHandler().handle(event);
         }
       }
