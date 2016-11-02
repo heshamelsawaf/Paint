@@ -119,37 +119,53 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
     private void buildFileMenu() {
 
       this.newFile.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+      this.newFile.setGraphic(
+    	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/new.png"))));
       this.newFile.setOnAction(event -> {
 
       });
       this.openFile.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
+      this.openFile.setGraphic(
+    	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/open.png"))));
       this.openFile.setOnAction(event -> {
 
       });
       this.save.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
+      this.save.setGraphic(
+    	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/save.png"))));
       this.save.setOnAction(event -> {
 
       });
       this.saveAs.setAccelerator(
           new KeyCodeCombination(KeyCode.S, KeyCombination.ALT_DOWN, KeyCombination.CONTROL_DOWN));
+      this.saveAs.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/save.png"))));
       this.saveAs.setOnAction(event -> {
 
       });
       this.exportFile
           .setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN));
+      this.exportFile.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/export.png"))));
       this.exportFile.setOnAction(event -> {
 
       });
       this.importFile
           .setAccelerator(new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN));
+      this.importFile.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/import.png"))));
       this.importFile.setOnAction(event -> {
 
       });
       this.close.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
+      this.close.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/close.png"))));
       this.close.setOnAction(event -> {
 
       });
       this.exit.setAccelerator(new KeyCodeCombination(KeyCode.F4, KeyCombination.ALT_DOWN));
+      this.exit.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/exit.png"))));
       this.exit.setOnAction(event -> {
 
       });
@@ -220,22 +236,32 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
 
     private void buildFileMenu() {
       this.undo.setAccelerator(new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN));
+      this.undo.setGraphic(
+    	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/undo.png"))));
       this.undo.setOnAction(event -> {
 
       });
       this.redo.setAccelerator(new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN));
+      this.redo.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/redo.png"))));
       this.redo.setOnAction(event -> {
 
       });
       this.cut.setAccelerator(new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN));
+      this.cut.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/cut.png"))));
       this.cut.setOnAction(event -> {
 
       });
       this.copy.setAccelerator(new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN));
+      this.copy.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/copy.png"))));
       this.copy.setOnAction(event -> {
 
       });
       this.paste.setAccelerator(new KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_DOWN));
+      this.paste.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/paste.png"))));
       this.paste.setOnAction(event -> {
 
       });
@@ -501,34 +527,50 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
 
       });
       this.select.setToggleGroup(this.group);
+      this.select.setGraphic(
+    	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/select.png"))));
       this.polygon.setOnAction(event -> {
 
       });
       this.polygon.setToggleGroup(this.group);
+      this.polygon.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/polygon.png"))));
       this.rectangle.setOnAction(event -> {
 
       });
       this.rectangle.setToggleGroup(this.group);
+      this.rectangle.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/rectangle.png"))));
       this.square.setOnAction(event -> {
 
       });
       this.square.setToggleGroup(this.group);
+      this.square.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/square.png"))));
       this.triangle.setOnAction(event -> {
 
       });
       this.triangle.setToggleGroup(this.group);
+      this.triangle.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/triangle.png"))));
       this.line.setOnAction(event -> {
 
       });
       this.line.setToggleGroup(this.group);
+      this.line.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/line.png"))));
       this.ellipse.setOnAction(event -> {
 
       });
       this.ellipse.setToggleGroup(this.group);
+      this.ellipse.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/ellipse.png"))));
       this.circle.setOnAction(event -> {
 
       });
       this.circle.setToggleGroup(this.group);
+      this.circle.setGraphic(
+  	        new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/circle.png"))));
     }
 
     public CustomMenuItem getFillColor() {

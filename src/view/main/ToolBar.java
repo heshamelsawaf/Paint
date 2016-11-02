@@ -178,7 +178,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.square.setGraphic(
         new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/square.png"))));
     this.square.setOnAction(event -> {
-
+    	this.paintController.getGUIController().setSelectedTool(DrawingTools.SQUARE);
     });
     this.triangle.setToggleGroup(this.group);
     this.triangle.setTooltip(new Tooltip(ToolBarConstants.TRIANGLE));
@@ -345,6 +345,10 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
         }
         case RECTANGLE: {
           this.rectangle.setSelected(true);
+          break;
+        }
+        case SQUARE: {
+          this.square.setSelected(true);
           break;
         }
         case ELLIPSE: {

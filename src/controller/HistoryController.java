@@ -8,16 +8,16 @@ public class HistoryController {
 	private static HistoryController instance;
 	private Stack<Drawing> undoStack;
 	private Stack<Drawing> redoStack;
-	private static PaintController paintController;
+	private PaintController paintController;
 	private Drawing drawing;
 
 	public HistoryController(PaintController paintCtrl) {
 		this.undoStack = new Stack<>();
 		this.redoStack = new Stack<>();
-		paintController = paintCtrl;
+		this.paintController = paintCtrl;
 	}
 
-	static HistoryController getInstance() {
+	static HistoryController getInstance(PaintController paintController) {
 		if (instance == null) {
 			instance = new HistoryController(paintController);
 		}
@@ -41,26 +41,44 @@ public class HistoryController {
 		this.redoStack.clear();
 	}
 
-	public void createHistoryEntry(Drawing drawing) {
+	public void createHistoryEntry() {
 		try {
-			this.undoStack.push(drawing.clone());
+			this.drawing = this.paintController.getDrawingController().getDrawing().clone();
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
+		this.undoStack.push(this.drawing);
 		this.redoStack.clear();
+		this.paintController.getGUIController().getGuiHelper().notifyObservers();
 	}
 
-	public Drawing redo() {
-		if (this.canRedo()) {
-			
-		}
-		return drawing;
-	}
-
-	public Drawing undo() {
+	public void undo() {
 		if (this.canUndo()) {
-			
+			this.paintController.getGUIController().getGuiHelper().setSelectedDrawTool(null);
+			this.redoStack.push(this.undoStack.pop());
+			try {
+				this.drawing = undoStack.peek().clone();
+			} catch (CloneNotSupportedException e) {
+				e.printStackTrace();
+			}
+			this.paintController.getDrawingController().setDrawing(this.drawing);
+			this.paintController.getGUIController().getGuiHelper().notifyObservers();
 		}
-		return drawing;
+	}
+
+	public void redo() {
+		if (this.canRedo()) {
+			this.undoStack.push(this.redoStack.pop());
+			try {
+				this.drawing = undoStack.peek().clone();
+			} catch (CloneNotSupportedException e) {
+				e.printStackTrace();
+			}
+			this.paintController.getDrawingController().setDrawing(this.drawing);
+			this.paintController.getGUIController().setSelectedTool(this.paintController.
+					getGUIController().getGuiHelper().getSelectedDrawTool());
+			this.undoStack.push(this.drawing);
+			this.paintController.getGUIController().getGuiHelper().notifyObservers();
+		}
 	}
 }
