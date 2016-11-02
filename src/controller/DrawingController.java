@@ -23,7 +23,7 @@ public class DrawingController {
     this.drawing = new Drawing(this.paintController);
     this.setDrawingTitle(title);
     this.setupDrawingArea(width, height);
-
+    // here goes setDrawing
     return this.drawing;
   }
 

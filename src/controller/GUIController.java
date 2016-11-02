@@ -7,6 +7,7 @@ import eventHandlers.LineEventHandler;
 import eventHandlers.MouseEventHandler;
 import eventHandlers.RectangleEventHandler;
 import eventHandlers.SelectEventHandler;
+import eventHandlers.SquareEventHandler;
 import javafx.scene.Cursor;
 import javafx.stage.Stage;
 import model.Drawing;
@@ -69,6 +70,10 @@ public class GUIController {
           shape.setCursor(Cursor.CROSSHAIR);
         }
         break;
+      case SQUARE:
+    	mouseEventHandler = new SquareEventHandler(this.paintController);
+    	drawingArea.setCursor(Cursor.CROSSHAIR);
+    	break;
       case ELLIPSE:
         this.getHome().getHomeScene().displayBorderMessage(Message.PERFECT_CIRCLE);
         mouseEventHandler = new EllipseEventHandler(this.paintController);
