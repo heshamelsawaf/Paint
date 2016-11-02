@@ -6,21 +6,34 @@ import javafx.scene.input.MouseEvent;
 
 public class RotateEventHandler extends MouseEventHandler {
 
+  private double pivot;
+
   public RotateEventHandler(PaintController paintController) {
     super(paintController);
-    // TODO Auto-generated constructor stub
   }
 
   @Override
   public EventHandler<MouseEvent> getOnMousePressedEventHandler() {
-    // TODO Auto-generated method stub
-    return null;
+    return event -> {
+      this.setDelta(false);
+
+      this.pivot = event.getX();
+    };
   }
 
   @Override
   public EventHandler<MouseEvent> getOnMouseExitedEventHandler() {
-    // TODO Auto-generated method stub
     return null;
+  }
+
+  @Override
+  public EventHandler<MouseEvent> getOnMouseDraggedEventHandler() {
+    return event -> {
+      super.getOnMouseDraggedEventHandler().handle(event);
+
+      this.drawing.rotateShape(event.getX() - pivot);
+      this.setDelta(true);
+    };
   }
 
 }

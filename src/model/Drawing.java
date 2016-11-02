@@ -6,6 +6,8 @@ import java.util.List;
 
 import controller.PaintController;
 import javafx.scene.transform.Rotate;
+import view.focusOutline.FocusOutline;
+import view.focusOutline.ResizeAnchor;
 
 public class Drawing implements Cloneable {
 
@@ -98,7 +100,7 @@ public class Drawing implements Cloneable {
   }
 
   public List<Observer> getObservers() {
-	  return this.observers;
+    return this.observers;
   }
 
   public void removeShape(Shape shape) {
@@ -146,26 +148,36 @@ public class Drawing implements Cloneable {
       this.notifyObservers();
     }
   }
-  
-  public void rotateShape(double angle){
+
+  public void rotateShape(double angle) {
     GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
+    FocusOutline focusOutline = guiHelper.getFocusOutline();
 
     Rotate rotate = new Rotate(angle);
+    rotate.setPivotX(focusOutline.getRotateAnchor().getCenterX());
+    rotate.setPivotY(focusOutline.getRotateAnchor().getCenterY());
+
+    focusOutline.getHighlightedRectangle().getTransforms().add(rotate);
+    focusOutline.getRotateAnchor().getTransforms().add(rotate);
     guiHelper.getSelectedShape().getTransforms().add(rotate);
+
+    for (ResizeAnchor resizeAnchor : focusOutline.getResizeAnchors()) {
+      resizeAnchor.getTransforms().add(rotate);
+    }
   }
- 
+
   @Override
   public Drawing clone() throws CloneNotSupportedException {
-	 Drawing clone = new Drawing(this.paintController);
-	 clone.setTitle(this.getTitle());
-	 clone.setDimensions(this.getWidth(), this.getHeight());
-	 clone.setSaved(this.isSaved());
-	 for (Shape shape : this.shapes) {
-		 clone.addShape(shape.getClone());
-	 }
-	 //for (Observer observer : this.observers) {
-		 //clone.registerObserver(observer);
-	 //}
-	 return clone;
+    Drawing clone = new Drawing(this.paintController);
+    clone.setTitle(this.getTitle());
+    clone.setDimensions(this.getWidth(), this.getHeight());
+    clone.setSaved(this.isSaved());
+    for (Shape shape : this.shapes) {
+      clone.addShape(shape.getClone());
+    }
+    // for (Observer observer : this.observers) {
+    // clone.registerObserver(observer);
+    // }
+    return clone;
   }
 }

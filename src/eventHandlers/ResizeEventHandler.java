@@ -29,7 +29,7 @@ public class ResizeEventHandler extends MouseEventHandler {
       this.setDelta(false);
 
       this.mouseMasterX = event.getX();
-      this.mouseMasterX = event.getY();
+      this.mouseMasterY = event.getY();
 
       this.highlightedRectangle = this.paintController.getGUIController().getGuiHelper()
           .getFocusOutline().getHighlightedRectangle();
