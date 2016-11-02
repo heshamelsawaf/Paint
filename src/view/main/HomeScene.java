@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import model.Drawing;
 import model.GUIHelper;
@@ -199,23 +200,21 @@ public class HomeScene extends Scene implements Observer {
     this.drawingAreaGroup.getChildren().add(this.drawingArea);
 
     List<Shape> shapes = drawing.getShapes();
-    // FocusOutline f;
     for (Iterator<Shape> iterator = shapes.iterator(); iterator.hasNext();) {
       Shape shape = (Shape) iterator.next();
-      // f = new FocusOutline(paintController, shape);
-      this.drawingAreaGroup.getChildren().add(shape.getNode());
-      // this.drawingAreaGroup.getChildren().add(f.getHighlightedRectangle().getNode());
-      // this.drawingAreaGroup.getChildren().add(f.getResizeAnchors().get(0).getNode());
-      // this.drawingAreaGroup.getChildren().add(f.getResizeAnchors().get(1).getNode());
-      // this.drawingAreaGroup.getChildren().add(f.getResizeAnchors().get(2).getNode());
-      // this.drawingAreaGroup.getChildren().add(f.getResizeAnchors().get(3).getNode());
-      // this.drawingAreaGroup.getChildren().add(f.getResizeAnchors().get(4).getNode());
-      // this.drawingAreaGroup.getChildren().add(f.getResizeAnchors().get(5).getNode());
-      // this.drawingAreaGroup.getChildren().add(f.getResizeAnchors().get(6).getNode());
-      // this.drawingAreaGroup.getChildren().add(f.getResizeAnchors().get(7).getNode());
+      this.drawingAreaGroup.getChildren().addAll(shape.getNode());
     }
     if (guiHelper.getSelectedShape() != null) {
       Shape shape = guiHelper.getSelectedShape();
+
+      FocusOutline focusOutline = guiHelper.getFocusOutline();
+      Rectangle highlightedRectangle = focusOutline.getHighlightedRectangle();
+
+      this.drawingAreaGroup.getChildren().add(highlightedRectangle);
+      for (view.focusOutline.ResizeAnchor resizeAnchor : focusOutline.getResizeAnchors()) {
+        this.drawingAreaGroup.getChildren().add(resizeAnchor);
+      }
+      this.drawingAreaGroup.getChildren().add(focusOutline.getRotateAnchor());
 
       if (!(shape instanceof Line)) {
         shape.setFill(guiHelper.getFillColor());

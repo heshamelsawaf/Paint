@@ -1,8 +1,10 @@
 package view.focusOutline;
 
 import controller.PaintController;
+import eventHandlers.MouseEventHandler;
+import eventHandlers.RotateEventHandler;
 import javafx.scene.shape.Ellipse;
-import model.shapes.Rectangle;
+import javafx.scene.shape.Rectangle;
 import util.HomeConstants;
 
 public class RotateAnchor extends Ellipse {
@@ -27,10 +29,14 @@ public class RotateAnchor extends Ellipse {
   }
 
   private void mode(Rectangle rectangle) {
-    double width = Math.abs(rectangle.getPoints().get(0) - rectangle.getPoints().get(6));
-    double height = Math.abs(rectangle.getPoints().get(1) - rectangle.getPoints().get(3));
-    this.centerXProperty().bind(rectangle.translateXProperty().add(width / 2));
-    this.centerYProperty().bind(rectangle.translateYProperty().add(height / 2));
+    MouseEventHandler rotateEventHandler = new RotateEventHandler(this.paintController);
+    this.setOnMousePressed(rotateEventHandler.getOnMousePressedEventHandler());
+    this.setOnMouseDragged(rotateEventHandler.getOnMouseDraggedEventHandler());
+    this.setOnMouseReleased(rotateEventHandler.getOnMouseReleasedEventHandler());
+
+    this.centerXProperty().bind(rectangle.xProperty().add(rectangle.widthProperty().divide(2)));
+    this.centerYProperty().bind(rectangle.yProperty().add(rectangle.heightProperty().divide(2)));
+
     this.getTransforms().addAll(rectangle.getTransforms());
   }
 

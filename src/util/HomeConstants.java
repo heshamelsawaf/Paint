@@ -4,8 +4,8 @@ import javafx.scene.paint.Color;
 
 public final class HomeConstants {
 
-  public static final double RESIZE_ANCHOR_WIDTH = 8;
-  public static final double RESIZE_ANCHOR_HEIGHT = 8;
+  public static final double RESIZE_ANCHOR_WIDTH = 8.0;
+  public static final double RESIZE_ANCHOR_HEIGHT = 8.0;
   public static final double RESIZE_ANCHOR_STROKEWIDTH = 2;
   public static final double ROTATE_ANCHOR_RADIUS_X = 8;
   public static final double ROTATE_ANCHOR_RADIUS_Y = 8;

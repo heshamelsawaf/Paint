@@ -14,7 +14,7 @@ import util.Point;
 
 public class Polygon implements Shape {
 
-  private javafx.scene.shape.Polygon shape;
+  protected javafx.scene.shape.Polygon shape;
 
   public Polygon() {
     this.shape = new javafx.scene.shape.Polygon();

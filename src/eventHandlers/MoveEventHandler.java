@@ -1,16 +1,15 @@
 package eventHandlers;
 
 import controller.PaintController;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import model.GUIHelper;
-import model.Shape;
-import model.shapes.Rectangle;
+import view.focusOutline.FocusOutline;
 
 public class MoveEventHandler extends MouseEventHandler {
-
-  private double selectedX;
-  private double selectedY;
 
   private double deltaX;
   private double deltaY;
@@ -25,14 +24,14 @@ public class MoveEventHandler extends MouseEventHandler {
       this.setDelta(false);
 
       if (event.isPrimaryButtonDown()) {
-        // GUIState guiState = mainController.getGUIController().getGuiState();
+        GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
 
         if (!(event.getSource() instanceof Rectangle)
-            || !((Rectangle) event.getSource()).isHighlighted()) {
-          // FocusOutline focusOutline = guiState.getFocusOutline();
-          // Rectangle focusRectangle = focusOutline.getFocusRectangle();
+            || !((Rectangle) event.getSource()).getFill().equals(Color.TRANSPARENT)) {
+          FocusOutline focusOutline = guiHelper.getFocusOutline();
+          Rectangle highlightedRectangle = focusOutline.getHighlightedRectangle();
 
-          // focusRectangle.fireEvent(event);
+          highlightedRectangle.fireEvent(event);
         }
       }
     };
@@ -47,10 +46,32 @@ public class MoveEventHandler extends MouseEventHandler {
     return event -> {
       this.setDelta(false);
       if (event.isPrimaryButtonDown()) {
-        GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
-        if(!(event.getSource() instanceof Rectangle)){
-          
+        Rectangle rectangle = (Rectangle) event.getSource();
+        this.deltaX = event.getX() - rectangle.getX();
+        this.deltaY = event.getY() - rectangle.getY();
+      }
+    };
+  }
+
+  @Override
+  public EventHandler<MouseEvent> getOnMouseDraggedEventHandler() {
+    return event -> {
+      super.getOnMouseDraggedEventHandler().handle(event);
+      if (event.isPrimaryButtonDown()) {
+        if (!(event.getSource() instanceof Rectangle)
+            || !((Rectangle) event.getSource()).getFill().equals(Color.TRANSPARENT)) {
+          GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
+
+          FocusOutline focusOutline = guiHelper.getFocusOutline();
+          Rectangle highlightedRectangle = focusOutline.getHighlightedRectangle();
+
+          highlightedRectangle.fireEvent(event);
+          return;
         }
+        Rectangle rectangle = (Rectangle) event.getSource();
+        rectangle.setX(event.getX() - deltaX);
+        rectangle.setY(event.getY() - deltaY);
+        this.setDelta(true);
       }
     };
   }
