@@ -176,6 +176,7 @@ public class Line implements Shape {
     clone.setOnMouseMoved(this.getOnMouseMoved());
     clone.setOnMousePressed(this.getOnMousePressed());
     clone.setOnMouseReleased(this.getOnMouseReleased());
+    clone.getTransforms().addAll(this.getTransforms());
     return clone;
   }
 
