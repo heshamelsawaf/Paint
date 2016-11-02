@@ -50,20 +50,24 @@ public class FocusOutline {
       this.highlightedRectangle.setY(polygon.getPoints().get(1));
       this.highlightedRectangle.setWidth(width);
       this.highlightedRectangle.setHeight(height);
-      polygon.scaleXProperty().bind(this.highlightedRectangle.scaleXProperty());
-      polygon.scaleYProperty().bind(this.highlightedRectangle.scaleYProperty());
+      polygon.scaleXProperty().bind(this.highlightedRectangle.widthProperty().divide(width));
+      polygon.scaleYProperty().bind(this.highlightedRectangle.heightProperty().divide(height));
 
-      polygon.translateXProperty().bind(this.highlightedRectangle.translateXProperty());
-      polygon.translateYProperty().bind(this.highlightedRectangle.translateYProperty());
+      polygon.translateXProperty()
+          .bind(this.highlightedRectangle.xProperty());
+      polygon.translateYProperty()
+          .bind(this.highlightedRectangle.yProperty());
     } else if (this.selectedShape instanceof Ellipse) {
       Ellipse circle = (Ellipse) this.selectedShape;
       this.highlightedRectangle.setX(circle.getCenterX() - circle.getRadiusX());
       this.highlightedRectangle.setY(circle.getCenterY() - circle.getRadiusY());
       this.highlightedRectangle.setWidth(2 * circle.getRadiusX());
       this.highlightedRectangle.setHeight(2 * circle.getRadiusY());
-      
-      circle.centerXProperty().bind(this.highlightedRectangle.xProperty().add(circle.radiusXProperty()));
-      circle.centerYProperty().bind(this.highlightedRectangle.yProperty().add(circle.radiusYProperty()));
+
+      circle.centerXProperty()
+          .bind(this.highlightedRectangle.xProperty().add(circle.radiusXProperty()));
+      circle.centerYProperty()
+          .bind(this.highlightedRectangle.yProperty().add(circle.radiusYProperty()));
 
       circle.radiusXProperty().bind(this.highlightedRectangle.widthProperty().divide(2));
       circle.radiusYProperty().bind(this.highlightedRectangle.heightProperty().divide(2));
