@@ -34,8 +34,8 @@ public class TriangleEventHandler extends MouseEventHandler {
         this.triangle.setStroke(guiHelper.getStrokeColor());
         this.triangle.setStrokeWidth(guiHelper.getStrokeWidth().getStrokeWidthAsInt());
 
-        this.triangle.getPoints().addAll(this.masterX, this.masterY, this.masterX,
-            this.masterY + 1, this.masterX + 1, this.masterY + 1, this.masterX + 1, this.masterY);
+        this.triangle.getPoints().addAll(this.masterX + 0.5, this.masterY, this.masterX + 1,
+        		this.masterY + 1, this.masterX, this.masterY + 1);
         this.triangle.setCursor(Cursor.CROSSHAIR);
         this.triangle.setOnMouseMoved(this.getOnMouseMovedEventHandler());
         this.triangle.setOnMousePressed(this.getOnMousePressedEventHandler());
