@@ -1,5 +1,7 @@
 package model;
 
+import org.dom4j.Element;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
@@ -63,4 +65,8 @@ public interface Shape {
   public DoubleProperty translateYProperty();
 
   public Node getNode();
+  
+  public Element getXMLShape();
+  
+  public Shape getShapeFromXML(Element element);
 }

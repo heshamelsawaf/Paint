@@ -16,5 +16,9 @@ public final class Message {
   public static final String UNSAVED_CHANGES_MESSAGE = "UNSAVED CHANGES!";
   public static final String UNSAVED_CHANGES_CONTEXT_MESSAGE = "Save changes before closing?";
 
+  public static final String FILECHOOSER_TITLE = "Select file to save into";
+  public static final String FILECHOOSER_SAVE_ERROR =
+      "An error occurred while trying to save the document: ";
+
   private Message() {}
 }

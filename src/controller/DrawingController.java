@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import model.Drawing;
 import model.GUIHelper;
 import model.Shape;
@@ -150,5 +153,15 @@ public class DrawingController {
 
   public void setInFrontOfAll(Shape shape) {
     this.drawing.setInFrontOfAll(shape);
+  }
+
+  public void saveDrawingAsXML(File file) throws IOException {
+    XMLController xmlController = this.paintController.getXMLController();
+    xmlController.createXMLDrawing();
+    xmlController.addDimensionsToXML(this.drawing.getWidth(), this.drawing.getHeight());
+    xmlController.addDrawingTitleToXML(this.drawing.getTitle());
+    xmlController.addShapesToXML(this.drawing.getShapes());
+    xmlController.outputXMLToFile(file);
+    this.drawing.setSaved(true);
   }
 }

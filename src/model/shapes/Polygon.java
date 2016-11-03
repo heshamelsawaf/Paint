@@ -1,5 +1,7 @@
 package model.shapes;
 
+import org.dom4j.Element;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
@@ -193,5 +195,15 @@ public class Polygon implements Shape {
   @Override
   public DoubleProperty translateYProperty() {
     return this.shape.translateYProperty();
+  }
+
+  @Override
+  public Element getXMLShape() {
+    return null;
+  }
+
+  @Override
+  public Shape getShapeFromXML(Element element) {
+    return null;
   }
 }

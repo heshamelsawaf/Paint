@@ -1,5 +1,8 @@
 package model.shapes;
 
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
@@ -7,9 +10,12 @@ import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.transform.Transform;
 import model.Shape;
+import util.ConvertColor;
+import util.ConvertShape;
 import util.Point;
 
 public class Line implements Shape {
@@ -208,5 +214,41 @@ public class Line implements Shape {
   @Override
   public DoubleProperty translateYProperty() {
     return this.line.translateYProperty();
+  }
+
+  @Override
+  public Element getXMLShape() {
+    Element shape = DocumentHelper.createElement("line");
+    shape.addAttribute("x1", String.valueOf(this.getStartX()));
+    shape.addAttribute("y1", String.valueOf(this.getStartY()));
+    shape.addAttribute("x2", String.valueOf(this.getEndX()));
+    shape.addAttribute("y2", String.valueOf(this.getEndY()));
+
+    shape.addAttribute("stroke-color", ConvertColor.toHex((Color) this.getStroke()));
+    shape.addAttribute("stroke-width", String.valueOf(this.getStrokeWidth()));
+
+    String transforms = ConvertShape.transformsToString(this.line);
+
+    if (!transforms.isEmpty()) {
+      shape.addAttribute("transform", transforms);
+    }
+
+    return shape;
+  }
+
+  @Override
+  public Shape getShapeFromXML(Element element) {
+    Line line = new Line();
+    line.setStartX(Double.parseDouble(element.attributeValue("x1")));
+    line.setStartY(Double.parseDouble(element.attributeValue("y1")));
+    line.setEndX(Double.parseDouble(element.attributeValue("x2")));
+    line.setEndY(Double.parseDouble(element.attributeValue("y2")));
+    line.setStroke(Color.web(element.attributeValue("stroke-color")));
+    line.setStrokeWidth(Double.parseDouble(element.attributeValue("stroke-width")));
+    String transforms = element.attributeValue("transform");
+    if (transforms != null) {
+      line.getTransforms().addAll(ConvertShape.transformsFromString(transforms));
+    }
+    return line;
   }
 }

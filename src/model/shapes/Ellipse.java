@@ -1,5 +1,10 @@
 package model.shapes;
 
+import java.util.List;
+
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
@@ -7,9 +12,12 @@ import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.transform.Transform;
 import model.Shape;
+import util.ConvertColor;
+import util.ConvertShape;
 
 public class Ellipse implements Shape {
 
@@ -58,21 +66,21 @@ public class Ellipse implements Shape {
   public double getRadiusY() {
     return this.ellipse.getRadiusY();
   }
-  
+
   public DoubleProperty centerXProperty() {
-	  return this.ellipse.centerXProperty();
+    return this.ellipse.centerXProperty();
   }
-  
+
   public DoubleProperty centerYProperty() {
-	  return this.ellipse.centerYProperty();
+    return this.ellipse.centerYProperty();
   }
 
   public DoubleProperty radiusXProperty() {
-	  return this.ellipse.radiusXProperty();
+    return this.ellipse.radiusXProperty();
   }
 
   public DoubleProperty radiusYProperty() {
-	  return this.ellipse.radiusYProperty();
+    return this.ellipse.radiusYProperty();
   }
 
   @Override
@@ -217,5 +225,39 @@ public class Ellipse implements Shape {
   @Override
   public DoubleProperty translateYProperty() {
     return this.ellipse.translateYProperty();
+  }
+
+  @Override
+  public Element getXMLShape() {
+    Element shape = DocumentHelper.createElement("ellipse");
+    shape.addAttribute("center-x", String.valueOf(this.ellipse.getCenterX()));
+    shape.addAttribute("center-y", String.valueOf(this.ellipse.getCenterY()));
+    shape.addAttribute("radius-x", String.valueOf(this.ellipse.getRadiusX()));
+    shape.addAttribute("radius-y", String.valueOf(this.ellipse.getRadiusY()));
+    shape.addAttribute("fill-color", ConvertColor.toHex((Color) this.ellipse.getFill()));
+    shape.addAttribute("stroke-color", ConvertColor.toHex((Color) this.ellipse.getStroke()));
+    shape.addAttribute("stroke-width", String.valueOf(this.ellipse.getStrokeWidth()));
+    String transforms = ConvertShape.transformsToString(this.ellipse);
+    if (!transforms.isEmpty()) {
+      shape.addAttribute("transform", transforms);
+    }
+    return shape;
+  }
+
+  @Override
+  public Shape getShapeFromXML(Element element) {
+    Ellipse ellipse = new Ellipse();
+    ellipse.setCenterX(Double.parseDouble(element.attributeValue("center-x")));
+    ellipse.setCenterY(Double.parseDouble(element.attributeValue("center-y")));
+    ellipse.setRadiusX(Double.parseDouble(element.attributeValue("radius-x")));
+    ellipse.setRadiusY(Double.parseDouble(element.attributeValue("radius-y")));
+    ellipse.setFill(Color.web(element.attributeValue("fill-color")));
+    ellipse.setStroke(Color.web(element.attributeValue("stroke-color")));
+    ellipse.setStrokeWidth(Double.parseDouble(element.attributeValue("stroke-width")));
+    String transforms = element.attributeValue("transform");
+    if (transforms != null) {
+      ellipse.getTransforms().addAll(ConvertShape.transformsFromString(transforms));
+    }
+    return ellipse;
   }
 }

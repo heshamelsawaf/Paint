@@ -124,13 +124,16 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.open.setGraphic(
         new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/open.png"))));
     this.open.setOnAction(event -> {
-
+      if (this.paintController.getDrawingController().closeDrawing()) {
+        // this.paintController.getGUIController().
+      }
     });
     this.save.setTooltip(new Tooltip(ToolBarConstants.SAVEFILE));
     this.save.setGraphic(
         new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/save.png"))));
     this.save.setOnAction(event -> {
-
+      this.paintController.getGUIController()
+          .saveDrawing(this.paintController.getGUIController().getHome().getPrimaryStage());
     });
     this.getItems().addAll(this._new, this.open, this.save);
   }
