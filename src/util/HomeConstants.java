@@ -24,10 +24,12 @@ public final class HomeConstants {
   public static final double DRAWING_AREA_MAX_HEIGHT = 10000;
   public static final double ZOOM_LEVEL = 1.0;
   public static final double FOCUS_OUTLINE_WIDTH = 2.0;
+  public static final double DUPLICATED_SHAPE_OFFSET_X = 10.0;
+  public static final double DUPLICATED_SHAPE_OFFSET_Y = 10.0;
   public static final Color FOCUS_OUTLINE_COLOR = Color.RED;
   public static final String SAVE_BUTTON = "Save";
   public static final String CLOSE_WITHOUT_SAVING_BUTTON = "Close without saving";
-  public static final String DISMISS_BUTTON = "Close without saving";
+  public static final String DISMISS_BUTTON = "Cancel";
 
 
 
