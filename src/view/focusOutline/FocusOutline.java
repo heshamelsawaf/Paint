@@ -55,11 +55,11 @@ public class FocusOutline {
       this.highlightedRectangle.setY(polygon.getPoints().get(1));
       this.highlightedRectangle.setWidth(width);
       this.highlightedRectangle.setHeight(height);
-      polygon.scaleXProperty().bind(this.highlightedRectangle.widthProperty().divide(width));
-      polygon.scaleYProperty().bind(this.highlightedRectangle.heightProperty().divide(height));
+//      polygon.scaleXProperty().bind(this.highlightedRectangle.widthProperty().divide(width));
+//      polygon.scaleYProperty().bind(this.highlightedRectangle.heightProperty().divide(height));
 
-      polygon.translateXProperty().bind(this.highlightedRectangle.translateXProperty());
-      polygon.translateYProperty().bind(this.highlightedRectangle.translateYProperty());
+//      polygon.translateXProperty().bind(this.highlightedRectangle.translateXProperty());
+//      polygon.translateYProperty().bind(this.highlightedRectangle.translateYProperty());
     } else if (this.selectedShape instanceof Ellipse) {
       Ellipse circle = (Ellipse) this.selectedShape;
       this.highlightedRectangle.setX(circle.getCenterX() - circle.getRadiusX());

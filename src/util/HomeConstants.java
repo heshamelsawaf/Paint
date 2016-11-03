@@ -55,6 +55,11 @@ public final class HomeConstants {
   public static final String HELP_MESSAGE_2 =
       "The North Remembers";
 
+  public static final double BORDER_MESSAGE_PADDING_TOP = 5;
+  public static final double BORDER_MESSAGE_PADDING_RIGHT = 5;
+  public static final double BORDER_MESSAGE_PADDING_BOTTOM = 5;
+  public static final double BORDER_MESSAGE_PADDING_LEFT = 5;
+  public static final String BORDER_MESSAGE_TOOLTIP = "Close";
 
 
   private HomeConstants() {}

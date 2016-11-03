@@ -1,4 +1,4 @@
-	package eventHandlers;
+package eventHandlers;
 
 import controller.HistoryController;
 import controller.PaintController;

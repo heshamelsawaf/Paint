@@ -56,7 +56,7 @@ public class DrawingController {
     HistoryController.getInstance(this.paintController).createHistoryEntry();
   }
 
-  public void clearAllShapes(Shape shape) {
+  public void clearAllShapes() {
     this.drawing.clearAllShapes();
     HistoryController.getInstance(this.paintController).createHistoryEntry();
     this.guiHelper.setSelectedShape(null);

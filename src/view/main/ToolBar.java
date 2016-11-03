@@ -334,7 +334,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
         this.strokeWidth.thick.setSelected(true);
         break;
       }
-      case EXTRA_THICK: {
+      case VERY_THICK: {
         this.strokeWidth.veryThick.setSelected(true);
         break;
       }

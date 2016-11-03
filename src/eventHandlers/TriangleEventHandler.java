@@ -34,8 +34,8 @@ public class TriangleEventHandler extends MouseEventHandler {
         this.triangle.setStroke(guiHelper.getStrokeColor());
         this.triangle.setStrokeWidth(guiHelper.getStrokeWidth().getStrokeWidthAsInt());
 
-        this.triangle.getPoints().addAll(this.masterX + 0.5, this.masterY, this.masterX + 1,
-        		this.masterY + 1, this.masterX, this.masterY + 1);
+        this.triangle.getPoints().addAll(this.masterX + 0.5, this.masterY, this.masterX,
+            this.masterY + 1, this.masterX + 1, this.masterY + 1);
         this.triangle.setCursor(Cursor.CROSSHAIR);
         this.triangle.setOnMouseMoved(this.getOnMouseMovedEventHandler());
         this.triangle.setOnMousePressed(this.getOnMousePressedEventHandler());
@@ -62,33 +62,28 @@ public class TriangleEventHandler extends MouseEventHandler {
       double tempY = event.getY();
 
       if (event.isPrimaryButtonDown()) {
-    	  double topX = this.masterX;
-          double topY = this.masterY;
+        double topX = this.masterX;
+        double topY = this.masterY;
 
-          double width = Math.abs(tempX - this.masterX);
-          double height = Math.abs(tempY - this.masterY);
+        double width = Math.abs(tempX - this.masterX);
+        double height = Math.abs(tempY - this.masterY);
 
-          if (event.isShiftDown()) {
-        	  width = Math.min(width, height);
-              height = Math.min(width, height);
-          }
+        if (event.isShiftDown()) {
+          width = Math.min(width, height);
+          height = Math.min(width, height);
+        }
 
-          if (event.isShiftDown()) {
-            width = Math.min(width, height);
-            height = Math.min(width, height);
-          }
+        if (tempX < this.masterX) {
+          topX = this.masterX - width;
+        }
 
-          if (tempX < this.masterX) {
-            topX = this.masterX - width;
-          }
+        if (tempY < this.masterY) {
+          topY = this.masterY - height;
+        }
 
-          if (tempY < this.masterY) {
-            topY = this.masterY - height;
-          }
-
-          this.triangle.getPoints().clear();
-          this.triangle.getPoints().addAll(topX + width / 2.0, topY, topX + width, topY + height,
-        		  topX, topY + height);
+        this.triangle.getPoints().clear();
+        this.triangle.getPoints().addAll(topX + width / 2.0, topY, topX + width, topY + height,
+            topX, topY + height);
       }
 
       this.homeScene.getStatusBar().updateCoordinates(tempX, tempY);

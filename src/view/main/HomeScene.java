@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import controller.PaintController;
+import eventHandlers.KeystrokeEventHandler;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -52,11 +53,9 @@ public class HomeScene extends Scene implements Observer {
 
     this.menuBar = new MenuBar(this.paintController);
     this.toolBar = new ToolBar(this.paintController);
-    this.statusBar = new StatusBar(this.paintController);
 
     this.showMenuBar(true);
     this.showToolBar(true);
-    this.showStatusBar(true);
 
     this.borderPane.setTop(this.barsPane);
 
@@ -69,6 +68,25 @@ public class HomeScene extends Scene implements Observer {
     scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     scrollPane.setContent(stackPane);
+//     scrollPane.setOnMouseMoved(event -> {
+//     if (this.drawingArea != null) {
+//     try {
+//     this.drawingArea.fireEvent(event);
+//     } catch (StackOverflowError e) {
+//     e.printStackTrace();
+//     }
+//     }
+//     });
+//     scrollPane.setOnMouseDragged(event -> {
+//     if (this.drawingArea != null) {
+//     try {
+//     this.drawingArea.fireEvent(event);
+//     } catch (StackOverflowError e) {
+//     e.printStackTrace();
+//     }
+//     }
+//     });
+
 
     stackPane.minWidthProperty().bind(Bindings.createDoubleBinding(
         () -> scrollPane.getViewportBounds().getWidth(), scrollPane.viewportBoundsProperty()));
@@ -76,7 +94,12 @@ public class HomeScene extends Scene implements Observer {
         () -> scrollPane.getViewportBounds().getHeight(), scrollPane.viewportBoundsProperty()));
 
     this.borderPane.setCenter(scrollPane);
+    this.statusBar = new StatusBar(this.paintController);
 
+    this.showStatusBar(true);
+
+    KeystrokeEventHandler keyEventHandler = new KeystrokeEventHandler(paintController);
+    this.setOnKeyPressed(keyEventHandler.getOnKeyPressedEventHandler());
 
     this.setRoot(this.borderPane);
 
@@ -149,35 +172,35 @@ public class HomeScene extends Scene implements Observer {
   }
 
   public Home getHome() {
-    return home;
+    return this.home;
   }
 
   public BorderPane getBorderPane() {
-    return borderPane;
+    return this.borderPane;
   }
 
   public VBox getBarsPane() {
-    return barsPane;
+    return this.barsPane;
   }
 
   public MenuBar getMenuBar() {
-    return menuBar;
+    return this.menuBar;
   }
 
   public ToolBar getToolBar() {
-    return toolBar;
+    return this.toolBar;
   }
 
   public BorderMessage getBorderMessage() {
-    return borderMessage;
+    return this.borderMessage;
   }
 
   public DrawingArea getDrawingArea() {
-    return drawingArea;
+    return this.drawingArea;
   }
 
   public StatusBar getStatusBar() {
-    return statusBar;
+    return this.statusBar;
   }
 
   public void setStatusBar(StatusBar statusBar) {
@@ -189,6 +212,11 @@ public class HomeScene extends Scene implements Observer {
     this.home.setTitle(null);
   }
 
+  private void updateZoom(double level) {
+    this.drawingAreaGroup.setScaleX(level);
+    this.drawingAreaGroup.setScaleY(level);
+  }
+
   @Override
   public void update() {
     Drawing drawing = this.paintController.getDrawingController().getDrawing();
@@ -196,36 +224,39 @@ public class HomeScene extends Scene implements Observer {
 
     this.home.setTitle(drawing.getTitle());
 
-    this.drawingAreaGroup.getChildren().clear();
-    this.drawingAreaGroup.getChildren().add(this.drawingArea);
+    if (this.drawingArea != null) {
+      this.drawingAreaGroup.getChildren().clear();
+      this.drawingAreaGroup.getChildren().add(this.drawingArea);
 
-    List<Shape> shapes = drawing.getShapes();
-    for (Iterator<Shape> iterator = shapes.iterator(); iterator.hasNext();) {
-      Shape shape = (Shape) iterator.next();
-      this.drawingAreaGroup.getChildren().addAll(shape.getNode());
-    }
-    if (guiHelper.getSelectedShape() != null) {
-      Shape shape = guiHelper.getSelectedShape();
-
-      FocusOutline focusOutline = guiHelper.getFocusOutline();
-      Rectangle highlightedRectangle = focusOutline.getHighlightedRectangle();
-
-      this.drawingAreaGroup.getChildren().add(highlightedRectangle);
-      for (view.focusOutline.ResizeAnchor resizeAnchor : focusOutline.getResizeAnchors()) {
-        this.drawingAreaGroup.getChildren().add(resizeAnchor);
+      List<Shape> shapes = drawing.getShapes();
+      for (Iterator<Shape> iterator = shapes.iterator(); iterator.hasNext();) {
+        Shape shape = (Shape) iterator.next();
+        this.drawingAreaGroup.getChildren().add(shape.getNode());
       }
-      this.drawingAreaGroup.getChildren().add(focusOutline.getRotateAnchor());
+      if (guiHelper.getSelectedShape() != null) {
+        Shape shape = guiHelper.getSelectedShape();
 
-      if (!(shape instanceof Line)) {
-        shape.setFill(guiHelper.getFillColor());
+        FocusOutline focusOutline = guiHelper.getFocusOutline();
+        Rectangle highlightedRectangle = focusOutline.getHighlightedRectangle();
+
+        this.drawingAreaGroup.getChildren().add(highlightedRectangle);
+        for (view.focusOutline.ResizeAnchor resizeAnchor : focusOutline.getResizeAnchors()) {
+          this.drawingAreaGroup.getChildren().add(resizeAnchor);
+        }
+        this.drawingAreaGroup.getChildren().add(focusOutline.getRotateAnchor());
+
+        if (!(shape instanceof Line)) {
+          shape.setFill(guiHelper.getFillColor());
+        }
+        shape.setStroke(guiHelper.getStrokeColor());
+        shape.setStrokeWidth(guiHelper.getStrokeWidth().getStrokeWidthAsInt());
+
+        this.updateZoom(guiHelper.getZoomLevel());
+        
+        this.menuBar.shapeControl(guiHelper.getSelectedShape() != null);
+        this.toolBar.shapeControl(guiHelper.getSelectedShape() != null);
       }
-      shape.setStroke(guiHelper.getStrokeColor());
-      shape.setStrokeWidth(guiHelper.getStrokeWidth().getStrokeWidthAsInt());
 
-      this.menuBar.shapeControl(guiHelper.getSelectedShape() != null);
-      this.toolBar.shapeControl(guiHelper.getSelectedShape() != null);
     }
-
-
   }
 }

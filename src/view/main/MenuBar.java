@@ -15,9 +15,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.stage.Stage;
 import model.GUIHelper;
 import model.Observer;
 import util.MenuBarConstants;
+import view.DrawingTools;
+import view.StrokeWidths;;
 
 public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
   private PaintController paintController;
@@ -62,7 +65,6 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
     this.tool.getStrokeColorPicker().setDisable(!key);
     this.tool.getStrokeWidth().setDisable(!key);
     this.tool.getSelect().setDisable(!key);
-    this.tool.getPolygon().setDisable(!key);
     this.tool.getRectangle().setDisable(!key);
     this.tool.getSquare().setDisable(!key);
     this.tool.getTriangle().setDisable(!key);
@@ -73,7 +75,10 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
   }
 
   public void shapeControl(boolean key) {
-
+    this.action.delete.setDisable(!key);
+    this.action.duplicate.setDisable(!key);
+    this.action.rotateClockwise.setDisable(!key);
+    this.action.rotateCounterclockwise.setDisable(!key);
   }
 
   public void selectView_Toolbars_MenuBar(boolean key) {
@@ -123,7 +128,10 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
       this.newFile.setGraphic(
           new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/new.png"))));
       this.newFile.setOnAction(event -> {
-
+        if (paintController.getDrawingController().closeDrawing()) {
+          paintController.getGUIController()
+              .openNewDrawingDialog(paintController.getGUIController().getHome().getPrimaryStage());
+        }
       });
       this.openFile.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
       this.openFile.setGraphic(
@@ -162,55 +170,36 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
       this.close.setGraphic(new ImageView(
           new Image(ClassLoader.getSystemResourceAsStream("assets/icons/close.png"))));
       this.close.setOnAction(event -> {
-
+        paintController.getDrawingController().closeDrawing();
       });
       this.exit.setAccelerator(new KeyCodeCombination(KeyCode.F4, KeyCombination.ALT_DOWN));
       this.exit.setGraphic(
           new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/exit.png"))));
       this.exit.setOnAction(event -> {
-
+        paintController.exit();
       });
     }
 
 
-    public MenuItem getNewFile() {
-      return newFile;
-    }
-
-
-    public MenuItem getOpenFile() {
-      return openFile;
-    }
-
-
     public MenuItem getSave() {
-      return save;
+      return this.save;
     }
 
 
     public MenuItem getSaveAs() {
-      return saveAs;
+      return this.saveAs;
     }
 
 
     public MenuItem getExportFile() {
-      return exportFile;
-    }
-
-
-    public MenuItem getImportFile() {
-      return importFile;
+      return this.exportFile;
     }
 
 
     public MenuItem getClose() {
-      return close;
+      return this.close;
     }
 
-
-    public MenuItem getExit() {
-      return exit;
-    }
   }
 
   private class Edit extends Menu {
@@ -269,28 +258,8 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
       this.clear.setAccelerator(
           new KeyCodeCombination(KeyCode.C, KeyCombination.ALT_DOWN, KeyCombination.CONTROL_DOWN));
       this.clear.setOnAction(event -> {
-
+        paintController.getDrawingController().clearAllShapes();
       });
-    }
-
-    public MenuItem getUndo() {
-      return undo;
-    }
-
-    public MenuItem getRedo() {
-      return redo;
-    }
-
-    public MenuItem getCut() {
-      return cut;
-    }
-
-    public MenuItem getCopy() {
-      return copy;
-    }
-
-    public MenuItem getPaste() {
-      return paste;
     }
 
     public MenuItem getClear() {
@@ -302,14 +271,14 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
 
     private Toolbars toolbars;
     private Zoom zoom;
-    private MenuItem fullScreen;
+    private CheckMenuItem fullScreen;
 
     public View(String text) {
       super();
       this.setText(text);
       this.toolbars = new Toolbars(MenuBarConstants.VIEW_TOOLBARS);
       this.zoom = new Zoom(MenuBarConstants.VIEW_ZOOM);
-      this.fullScreen = new MenuItem(MenuBarConstants.VIEW_FULLSCREEN);
+      this.fullScreen = new CheckMenuItem(MenuBarConstants.VIEW_FULLSCREEN);
       this.buildViewMenu();
       this.getItems().addAll(this.toolbars, this.zoom, new SeparatorMenuItem(), this.fullScreen);
     }
@@ -317,20 +286,13 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
     private void buildViewMenu() {
       this.fullScreen.setAccelerator(new KeyCodeCombination(KeyCode.F11, KeyCombination.ALT_ANY));
       this.fullScreen.setOnAction(event -> {
-
+        paintController.getGUIController().getHome().setTofullScreen(this.fullScreen.isSelected());
       });
     }
 
-    public Toolbars getToolbars() {
-      return toolbars;
-    }
 
     public Zoom getZoom() {
       return zoom;
-    }
-
-    public MenuItem getFullScreen() {
-      return fullScreen;
     }
 
     private class Toolbars extends Menu {
@@ -348,18 +310,6 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
         this.toolBar = new CheckMenuItem(MenuBarConstants.VIEW_TOOLBARS_TOOLSBAR);
         this.toolBar.setSelected(true);
         this.getItems().addAll(this.menuBar, this.statusBar, this.toolBar);
-      }
-
-      public CheckMenuItem getMenuBar() {
-        return menuBar;
-      }
-
-      public CheckMenuItem getStatusBar() {
-        return statusBar;
-      }
-
-      public CheckMenuItem getToolBar() {
-        return toolBar;
       }
     }
 
@@ -382,30 +332,20 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
         this.zoomIn
             .setAccelerator(new KeyCodeCombination(KeyCode.PLUS, KeyCombination.CONTROL_DOWN));
         this.zoomIn.setOnAction(event -> {
-
+          paintController.getGUIController().getGuiHelper().setZoomLevel(
+              paintController.getGUIController().getGuiHelper().getZoomLevel() + 0.25);
         });
         this.zoomOut
             .setAccelerator(new KeyCodeCombination(KeyCode.MINUS, KeyCombination.CONTROL_DOWN));
         this.zoomOut.setOnAction(event -> {
-
+          paintController.getGUIController().getGuiHelper().setZoomLevel(
+              paintController.getGUIController().getGuiHelper().getZoomLevel() - 0.25);
         });
         this.reset
             .setAccelerator(new KeyCodeCombination(KeyCode.DIGIT0, KeyCombination.CONTROL_DOWN));
         this.reset.setOnAction(event -> {
-
+          paintController.getGUIController().getGuiHelper().setZoomLevel(1.0);
         });
-      }
-
-      public MenuItem getZoomIn() {
-        return zoomIn;
-      }
-
-      public MenuItem getZoomOut() {
-        return zoomOut;
-      }
-
-      public MenuItem getReset() {
-        return reset;
       }
     }
   }
@@ -420,9 +360,13 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
       super();
       this.setText(text);
       this.duplicate = new MenuItem(MenuBarConstants.ACTION_DUPLICATE);
+      this.duplicate.setDisable(true);
       this.delete = new MenuItem(MenuBarConstants.ACTION_DELETE);
+      this.delete.setDisable(true);
       this.rotateClockwise = new MenuItem(MenuBarConstants.ACTION_ROTATECLOCKWIESE);
+      this.rotateClockwise.setDisable(true);
       this.rotateCounterclockwise = new MenuItem(MenuBarConstants.ACTION_ROTATECOUNTERCLOCKWIESE);
+      this.rotateCounterclockwise.setDisable(true);
       this.buildActionsMenu();
       this.getItems().addAll(this.duplicate, this.delete, new SeparatorMenuItem(),
           this.rotateClockwise, this.rotateCounterclockwise);
@@ -432,38 +376,25 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
       this.duplicate.setAccelerator(
           new KeyCodeCombination(KeyCode.D, KeyCombination.ALT_DOWN, KeyCombination.CONTROL_DOWN));
       this.duplicate.setOnAction(event -> {
-
+        paintController.getDrawingController()
+            .duplicateShape(paintController.getGUIController().getGuiHelper().getSelectedShape());
       });
       this.delete.setAccelerator(new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN));
       this.delete.setOnAction(event -> {
-
+        paintController.getDrawingController()
+            .removeShape(paintController.getGUIController().getGuiHelper().getSelectedShape());
+        paintController.getGUIController().getGuiHelper().setSelectedShape(null);
       });
       this.rotateClockwise.setAccelerator(new KeyCodeCombination(KeyCode.PLUS,
           KeyCombination.SHIFT_DOWN, KeyCombination.CONTROL_DOWN));
       this.rotateClockwise.setOnAction(event -> {
-
+        paintController.getDrawingController().getDrawing().rotateShape(90, true);
       });
       this.rotateCounterclockwise.setAccelerator(new KeyCodeCombination(KeyCode.MINUS,
           KeyCombination.SHIFT_DOWN, KeyCombination.CONTROL_DOWN));
       this.rotateCounterclockwise.setOnAction(event -> {
-
+        paintController.getDrawingController().getDrawing().rotateShape(-90, true);
       });
-    }
-
-    public MenuItem getDuplicate() {
-      return duplicate;
-    }
-
-    public MenuItem getDelete() {
-      return delete;
-    }
-
-    public MenuItem getRotateClockwise() {
-      return rotateClockwise;
-    }
-
-    public MenuItem getRotateCounterclockwise() {
-      return rotateCounterclockwise;
     }
   }
 
@@ -480,7 +411,6 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
     private ToggleGroup group;
 
     private RadioMenuItem select;
-    private RadioMenuItem polygon;
     private RadioMenuItem rectangle;
     private RadioMenuItem square;
     private RadioMenuItem triangle;
@@ -503,7 +433,6 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
       this.group = new ToggleGroup();
       this.select = new RadioMenuItem(MenuBarConstants.TOOL_SELECT);
       this.select.setSelected(true);
-      this.polygon = new RadioMenuItem(MenuBarConstants.TOOL_POLYGON);
       this.rectangle = new RadioMenuItem(MenuBarConstants.TOOL_RECTANGLE);
       this.square = new RadioMenuItem(MenuBarConstants.TOOL_SQUARE);
       this.triangle = new RadioMenuItem(MenuBarConstants.TOOL_TRIANGLE);
@@ -512,62 +441,63 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
       this.circle = new RadioMenuItem(MenuBarConstants.TOOL_CIRCLE);
       this.buildToolsMenu();
       this.getItems().addAll(this.fillColor, this.strokeColor, this.strokeWidth,
-          new SeparatorMenuItem(), this.select, this.polygon, this.rectangle, this.square,
-          this.triangle, this.line, this.ellipse, this.circle);
+          new SeparatorMenuItem(), this.select, this.rectangle, this.square, this.triangle,
+          this.line, this.ellipse, this.circle);
     }
 
     private void buildToolsMenu() {
+      this.fillColorPicker.setDisable(true);
       this.fillColorPicker.setOnAction(event -> {
-
+        paintController.getGUIController().getGuiHelper()
+            .setFillColor(this.fillColorPicker.getValue());
       });
+      this.fillColor.setHideOnClick(false);
+      this.fillColor.setDisable(true);
+      this.strokeColorPicker.setDisable(true);
       this.strokeColorPicker.setOnAction(event -> {
-
+        paintController.getGUIController().getGuiHelper()
+            .setStrokeColor(strokeColorPicker.getValue());
       });
-
+      this.strokeColor.setHideOnClick(false);
+      this.strokeColor.setDisable(true);
       this.select.setOnAction(event -> {
-
+        paintController.getGUIController().setSelectedTool(DrawingTools.SELECT);
       });
       this.select.setToggleGroup(this.group);
       this.select.setGraphic(new ImageView(
           new Image(ClassLoader.getSystemResourceAsStream("assets/icons/select.png"))));
-      this.polygon.setOnAction(event -> {
-
-      });
-      this.polygon.setToggleGroup(this.group);
-      this.polygon.setGraphic(new ImageView(
-          new Image(ClassLoader.getSystemResourceAsStream("assets/icons/polygon.png"))));
       this.rectangle.setOnAction(event -> {
-
+        paintController.getGUIController().setSelectedTool(DrawingTools.RECTANGLE);
       });
       this.rectangle.setToggleGroup(this.group);
       this.rectangle.setGraphic(new ImageView(
           new Image(ClassLoader.getSystemResourceAsStream("assets/icons/rectangle.png"))));
       this.square.setOnAction(event -> {
-
+        paintController.getGUIController().setSelectedTool(DrawingTools.SQUARE);
       });
       this.square.setToggleGroup(this.group);
       this.square.setGraphic(new ImageView(
           new Image(ClassLoader.getSystemResourceAsStream("assets/icons/square.png"))));
       this.triangle.setOnAction(event -> {
-
+        paintController.getGUIController().setSelectedTool(DrawingTools.TRIANGLE);
       });
       this.triangle.setToggleGroup(this.group);
       this.triangle.setGraphic(new ImageView(
           new Image(ClassLoader.getSystemResourceAsStream("assets/icons/triangle.png"))));
       this.line.setOnAction(event -> {
-
+        paintController.getGUIController().setSelectedTool(DrawingTools.LINE);
       });
       this.line.setToggleGroup(this.group);
       this.line.setGraphic(
           new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/line.png"))));
       this.ellipse.setOnAction(event -> {
-
+        paintController.getGUIController().setSelectedTool(DrawingTools.ELLIPSE);
       });
       this.ellipse.setToggleGroup(this.group);
       this.ellipse.setGraphic(new ImageView(
           new Image(ClassLoader.getSystemResourceAsStream("assets/icons/ellipse.png"))));
       this.circle.setOnAction(event -> {
-
+        paintController.getGUIController().setSelectedTool(DrawingTools.CIRCLE);
       });
       this.circle.setToggleGroup(this.group);
       this.circle.setGraphic(new ImageView(
@@ -588,10 +518,6 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
 
     public RadioMenuItem getSelect() {
       return select;
-    }
-
-    public RadioMenuItem getPolygon() {
-      return polygon;
     }
 
     public RadioMenuItem getRectangle() {
@@ -638,57 +564,37 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
       public StrokeWidth(String text) {
         super();
         this.setText(text);
-        this.none = new RadioMenuItem();
-        this.thin = new RadioMenuItem();
-        this.medium = new RadioMenuItem();
+        this.none = new RadioMenuItem(MenuBarConstants.TOOL_STROKEWIDTH_NONE);
+        this.thin = new RadioMenuItem(MenuBarConstants.TOOL_STROKEWIDTH_THIN);
+        this.medium = new RadioMenuItem(MenuBarConstants.TOOL_STROKEWIDTH_MEDIUM);
         this.medium.setSelected(true);
-        this.thick = new RadioMenuItem();
-        this.veryThick = new RadioMenuItem();
+        this.thick = new RadioMenuItem(MenuBarConstants.TOOL_STROKEWIDTH_THICK);
+        this.veryThick = new RadioMenuItem(MenuBarConstants.TOOL_STROKEWIDTH_VERYTHICK);
         this.buildStrokeWidthMenu();
         this.getItems().addAll(this.none, this.thin, this.medium, this.thick, this.veryThick);
       }
 
       private void buildStrokeWidthMenu() {
         this.none.setOnAction(event -> {
-
+          paintController.getGUIController().getGuiHelper().setStrokeWidth(StrokeWidths.NONE);
         });
         this.none.setToggleGroup(this.group);
         this.thin.setOnAction(event -> {
-
+          paintController.getGUIController().getGuiHelper().setStrokeWidth(StrokeWidths.THIN);
         });
         this.thin.setToggleGroup(this.group);
         this.medium.setOnAction(event -> {
-
+          paintController.getGUIController().getGuiHelper().setStrokeWidth(StrokeWidths.MEDIUM);
         });
         this.medium.setToggleGroup(this.group);
         this.thick.setOnAction(event -> {
-
+          paintController.getGUIController().getGuiHelper().setStrokeWidth(StrokeWidths.THICK);
         });
         this.thick.setToggleGroup(this.group);
         this.veryThick.setOnAction(event -> {
-
+          paintController.getGUIController().getGuiHelper().setStrokeWidth(StrokeWidths.VERY_THICK);
         });
         this.veryThick.setToggleGroup(this.group);
-      }
-
-      public RadioMenuItem getNone() {
-        return none;
-      }
-
-      public RadioMenuItem getThin() {
-        return thin;
-      }
-
-      public RadioMenuItem getMedium() {
-        return medium;
-      }
-
-      public RadioMenuItem getThick() {
-        return thick;
-      }
-
-      public RadioMenuItem getVeryThick() {
-        return veryThick;
       }
     }
   }
@@ -706,12 +612,9 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
 
     private void buildHelpMenu() {
       this.about.setOnAction(event -> {
-
+        paintController.getGUIController()
+            .openHelpDialog((Stage) MenuBar.this.getScene().getWindow());
       });
-    }
-
-    public MenuItem getAbout() {
-      return about;
     }
   }
 
@@ -722,6 +625,24 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
     this.edit.redo.setDisable(!HistoryController.getInstance(this.paintController).canRedo());
     this.tool.fillColorPicker.setValue(guiHelper.getFillColor());
     this.tool.strokeColorPicker.setValue(guiHelper.getStrokeColor());
+
+    switch (guiHelper.getStrokeWidth()) {
+      case NONE:
+        this.tool.strokeWidth.none.setSelected(true);
+        break;
+      case THIN:
+        this.tool.strokeWidth.thin.setSelected(true);
+        break;
+      case MEDIUM:
+        this.tool.strokeWidth.medium.setSelected(true);
+        break;
+      case THICK:
+        this.tool.strokeWidth.thick.setSelected(true);
+        break;
+      case VERY_THICK:
+        this.tool.strokeWidth.veryThick.setSelected(true);
+        break;
+    }
 
     if (guiHelper.getSelectedDrawTool() != null) {
       switch (guiHelper.getSelectedDrawTool()) {
@@ -739,6 +660,18 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
         }
         case LINE: {
           this.tool.line.setSelected(true);
+          break;
+        }
+        case CIRCLE: {
+          this.tool.circle.setSelected(true);
+          break;
+        }
+        case TRIANGLE: {
+          this.tool.triangle.setSelected(true);
+          break;
+        }
+        case SQUARE: {
+          this.tool.square.setSelected(true);
           break;
         }
       }

@@ -48,6 +48,11 @@ public final class MenuBarConstants {
   public static final String TOOL_LINE = "_Line";
   public static final String TOOL_ELLIPSE = "_Ellipse";
   public static final String TOOL_CIRCLE = "_Circle";
+  public static final String TOOL_STROKEWIDTH_NONE = "None (0px)";
+  public static final String TOOL_STROKEWIDTH_THIN = "Thin (1px)";
+  public static final String TOOL_STROKEWIDTH_MEDIUM = "Medium (3px)";
+  public static final String TOOL_STROKEWIDTH_THICK = "Thick (5px)";
+  public static final String TOOL_STROKEWIDTH_VERYTHICK = "Very thick (8px)";
 
   public static final String HELP = "_Help";
   public static final String HELP_ABOUTPAINT = "_About Paint";

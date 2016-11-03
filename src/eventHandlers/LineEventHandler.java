@@ -87,9 +87,7 @@ public class LineEventHandler extends MouseEventHandler {
   public EventHandler<MouseEvent> getOnMouseReleasedEventHandler() {
     return event -> {
       this.paintController.getGUIController().getGuiHelper().setSelectedShape(this.line);
-
       HistoryController.getInstance(this.paintController).createHistoryEntry();
-
       this.line = null;
     };
   }

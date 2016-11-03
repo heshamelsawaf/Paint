@@ -8,7 +8,7 @@ import controller.PaintController;
 import javafx.scene.paint.Color;
 import util.HomeConstants;
 import view.DrawingTools;
-import view.StrokeWidth;
+import view.StrokeWidths;
 import view.focusOutline.FocusOutline;
 
 public class GUIHelper {
@@ -24,7 +24,7 @@ public class GUIHelper {
 
   private Color fillColor;
   private Color strokeColor;
-  private StrokeWidth strokeWidth;
+  private StrokeWidths strokeWidth;
 
   private Shape selectedShape;
   private FocusOutline focusOutline;
@@ -37,9 +37,9 @@ public class GUIHelper {
     this.zoomLevel = HomeConstants.ZOOM_LEVEL;
     this.lastUsedDirectory = new File(System.getProperty("user.home"));
 
-    this.fillColor = Color.WHITE;
+    this.fillColor = Color.TRANSPARENT;
     this.strokeColor = Color.BLACK;
-    this.strokeWidth = StrokeWidth.MEDIUM;
+    this.strokeWidth = StrokeWidths.MEDIUM;
   }
 
   public void registerObserver(Observer observer) {
@@ -94,11 +94,11 @@ public class GUIHelper {
     this.notifyObservers();
   }
 
-  public StrokeWidth getStrokeWidth() {
+  public StrokeWidths getStrokeWidth() {
     return strokeWidth;
   }
 
-  public void setStrokeWidth(StrokeWidth strokeWidth) {
+  public void setStrokeWidth(StrokeWidths strokeWidth) {
     this.strokeWidth = strokeWidth;
     this.notifyObservers();
   }
@@ -117,8 +117,7 @@ public class GUIHelper {
   }
 
   public void setZoomLevel(double zoomLevel) {
-    zoomLevel = Math.max(Math.min(zoomLevel, 5), 0.1);
-    this.zoomLevel = zoomLevel;
+    this.zoomLevel = Math.max(Math.min(zoomLevel, 5), 0.1);
     this.notifyObservers();
   }
 

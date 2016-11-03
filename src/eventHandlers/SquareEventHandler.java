@@ -92,9 +92,7 @@ public class SquareEventHandler extends MouseEventHandler {
   public EventHandler<MouseEvent> getOnMouseReleasedEventHandler() {
     return event -> {
       this.paintController.getGUIController().getGuiHelper().setSelectedShape(this.square);
-
       HistoryController.getInstance(this.paintController).createHistoryEntry();
-
       this.square = null;
     };
   }
