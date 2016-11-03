@@ -19,6 +19,7 @@ import model.GUIHelper;
 import model.Observer;
 import util.ToolBarConstants;
 import view.DrawingTools;
+import view.StrokeWidths;
 
 public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
   private PaintController paintController;
@@ -83,6 +84,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.fillColor.setDisable(!key);
     this.strokeColor.setDisable(!key);
     this.action.setDisable(!key);
+    this.strokeWidth.setDisable(!key);
 
     this.select.setDisable(!key);
     this.rectangle.setDisable(!key);
@@ -95,7 +97,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
   }
 
   public void shapeControl(boolean key) {
-
+    this.action.setDisable(!key);
   }
 
   private void BuildToolBar() {
@@ -134,12 +136,14 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
   }
 
   private void BuildEdit() {
+    this.undo.setDisable(true);
     this.undo.setTooltip(new Tooltip(ToolBarConstants.UNDO));
     this.undo.setGraphic(
         new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/undo.png"))));
     this.undo.setOnAction(event -> {
       HistoryController.getInstance(paintController).undo();
     });
+    this.redo.setDisable(true);
     this.redo.setTooltip(new Tooltip(ToolBarConstants.REDO));
     this.redo.setGraphic(
         new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/redo.png"))));
@@ -150,11 +154,15 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
   }
 
   private void buildFont() {
+    this.fillColor.setTooltip(new Tooltip(ToolBarConstants.FILL_COLOR));
+    this.fillColor.setMaxHeight(Double.MAX_VALUE);
     this.fillColor.setOnAction(event -> {
-
+      paintController.getGUIController().getGuiHelper().setFillColor(this.fillColor.getValue());
     });
+    this.strokeColor.setTooltip(new Tooltip(ToolBarConstants.STROKE_COLOR));
+    this.strokeColor.setMaxHeight(Double.MAX_VALUE);
     this.strokeColor.setOnAction(event -> {
-
+      paintController.getGUIController().getGuiHelper().setStrokeColor(this.strokeColor.getValue());
     });
     this.getItems().addAll(this.fillColor, this.strokeColor, this.strokeWidth);
   }
@@ -179,14 +187,14 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.square.setGraphic(
         new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/square.png"))));
     this.square.setOnAction(event -> {
-    	this.paintController.getGUIController().setSelectedTool(DrawingTools.SQUARE);
+      this.paintController.getGUIController().setSelectedTool(DrawingTools.SQUARE);
     });
     this.triangle.setToggleGroup(this.group);
     this.triangle.setTooltip(new Tooltip(ToolBarConstants.TRIANGLE));
     this.triangle.setGraphic(new ImageView(
         new Image(ClassLoader.getSystemResourceAsStream("assets/icons/triangle.png"))));
     this.triangle.setOnAction(event -> {
-    	this.paintController.getGUIController().setSelectedTool(DrawingTools.TRIANGLE);
+      this.paintController.getGUIController().setSelectedTool(DrawingTools.TRIANGLE);
     });
     this.line.setToggleGroup(this.group);
     this.line.setTooltip(new Tooltip(ToolBarConstants.LINE));
@@ -207,7 +215,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     this.circle.setGraphic(
         new ImageView(new Image(ClassLoader.getSystemResourceAsStream("assets/icons/circle.png"))));
     this.circle.setOnAction(event -> {
-    	this.paintController.getGUIController().setSelectedTool(DrawingTools.CIRCLE);
+      this.paintController.getGUIController().setSelectedTool(DrawingTools.CIRCLE);
     });
     this.getItems().addAll(this.select, this.rectangle, this.square, this.triangle, this.line,
         this.ellipse, this.circle);
@@ -225,6 +233,7 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     public Action(String text) {
       super();
       this.setText(text);
+      this.setDisable(true);
       this.setBehind = new MenuItem();
       this.setBehindAll = new MenuItem();
       this.setInFront = new MenuItem();
@@ -238,22 +247,26 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
 
     private void buildActionMenuButton() {
       this.setBehind.setOnAction(event -> {
-
+        paintController.getDrawingController()
+            .setBehind(paintController.getGUIController().getGuiHelper().getSelectedShape());
       });
       this.setBehindAll.setOnAction(event -> {
-
+        paintController.getDrawingController()
+            .setBehindAll(paintController.getGUIController().getGuiHelper().getSelectedShape());
       });
       this.setInFront.setOnAction(event -> {
-
+        paintController.getDrawingController()
+            .setInFront(paintController.getGUIController().getGuiHelper().getSelectedShape());
       });
       this.SetInFrontAll.setOnAction(event -> {
-
+        paintController.getDrawingController()
+            .setInFrontOfAll(paintController.getGUIController().getGuiHelper().getSelectedShape());
       });
       this.rotateClockwise.setOnAction(event -> {
-
+        paintController.getDrawingController().getDrawing().rotateShape(90, true);
       });
       this.rotateCounterclockwise.setOnAction(event -> {
-
+        paintController.getDrawingController().getDrawing().rotateShape(-90, true);
       });
     }
   }
@@ -271,14 +284,14 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     public StrokeWidth(String text) {
       super();
       this.setText(text);
+      this.setDisable(true);
       this.group = new ToggleGroup();
-
-      this.none = new RadioMenuItem();
-      this.thin = new RadioMenuItem();
-      this.medium = new RadioMenuItem();
+      this.none = new RadioMenuItem(ToolBarConstants.STROKEWIDTH_NONE);
+      this.thin = new RadioMenuItem(ToolBarConstants.STROKEWIDTH_THIN);
+      this.medium = new RadioMenuItem(ToolBarConstants.STROKEWIDTH_MEDIUM);
       this.medium.setSelected(true);
-      this.thick = new RadioMenuItem();
-      this.veryThick = new RadioMenuItem();
+      this.thick = new RadioMenuItem(ToolBarConstants.STROKEWIDTH_THICK);
+      this.veryThick = new RadioMenuItem(ToolBarConstants.STROKEWIDTH_VERYTHICK);
       this.buildStrokeWidthMenuButton();
       this.getItems().addAll(this.none, this.thin, this.medium, this.thick, this.veryThick);
     }
@@ -286,23 +299,23 @@ public class ToolBar extends javafx.scene.control.ToolBar implements Observer {
     private void buildStrokeWidthMenuButton() {
       this.none.setToggleGroup(this.group);
       this.none.setOnAction(event -> {
-
+        paintController.getGUIController().getGuiHelper().setStrokeWidth(StrokeWidths.NONE);
       });
       this.thin.setToggleGroup(this.group);
       this.thin.setOnAction(event -> {
-
+        paintController.getGUIController().getGuiHelper().setStrokeWidth(StrokeWidths.THIN);
       });
       this.medium.setToggleGroup(this.group);
       this.medium.setOnAction(event -> {
-
+        paintController.getGUIController().getGuiHelper().setStrokeWidth(StrokeWidths.MEDIUM);
       });
       this.thick.setToggleGroup(this.group);
       this.thick.setOnAction(event -> {
-
+        paintController.getGUIController().getGuiHelper().setStrokeWidth(StrokeWidths.THICK);
       });
       this.veryThick.setToggleGroup(this.group);
       this.veryThick.setOnAction(event -> {
-
+        paintController.getGUIController().getGuiHelper().setStrokeWidth(StrokeWidths.VERY_THICK);
       });
     }
   }

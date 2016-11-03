@@ -61,6 +61,7 @@ public final class HomeConstants {
   public static final double BORDER_MESSAGE_PADDING_LEFT = 5;
   public static final String BORDER_MESSAGE_TOOLTIP = "Close";
 
+  public static final String APP_TITLE = "Not paint";
 
   private HomeConstants() {}
 }

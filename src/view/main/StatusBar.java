@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import model.Drawing;
 import model.GUIHelper;
 import model.Observer;
+import util.StatusBarConstants;
 
 public class StatusBar extends BorderPane implements Observer {
 
@@ -42,13 +43,14 @@ public class StatusBar extends BorderPane implements Observer {
   }
 
   private void buildLeftBox() {
-
-
+    this.coordinates.setMinWidth(StatusBarConstants.COORDINATES_LABEL_MIN_WIDTH);
+    this.drawingAreaDimensions
+        .setMinWidth(StatusBarConstants.DRAWING_AREA_DIMENSIONS_LABEL_MIN_WIDTH);
     this.leftHBox.getChildren().addAll(this.coordinates, this.drawingAreaDimensions);
   }
 
   private void buildRightBox() {
-
+    this.zoom.setMinWidth(StatusBarConstants.ZOOM_LABEL_MIN_WIDTH);
 
     this.rightHBox.getChildren().addAll(this.zoom);
   }

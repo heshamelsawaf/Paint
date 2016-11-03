@@ -45,9 +45,9 @@ public class Home {
 
   public void setTitle(String title) {
     if (title != null) {
-
+      this.primaryStage.setTitle(title + " - " + HomeConstants.APP_TITLE);
     } else {
-
+      this.primaryStage.setTitle(HomeConstants.APP_TITLE);
     }
   }
 
