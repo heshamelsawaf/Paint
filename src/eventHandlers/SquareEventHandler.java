@@ -70,7 +70,7 @@ public class SquareEventHandler extends MouseEventHandler {
         double height = Math.abs(tempY - this.masterY);
         width = Math.min(width, height);
         height = Math.min(width, height);
-
+        
         if (tempX < this.masterX) {
           topX = this.masterX - width;
         }

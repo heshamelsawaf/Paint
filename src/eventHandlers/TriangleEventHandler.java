@@ -62,25 +62,33 @@ public class TriangleEventHandler extends MouseEventHandler {
       double tempY = event.getY();
 
       if (event.isPrimaryButtonDown()) {
-        double topX = this.masterX;
-        double topY = this.masterY;
+    	  double topX = this.masterX;
+          double topY = this.masterY;
 
-        double width = Math.abs(tempX - this.masterX);
-        double height = Math.abs(tempY - this.masterY);
-        width = Math.min(width, height);
-        height = Math.min(width, height);
+          double width = Math.abs(tempX - this.masterX);
+          double height = Math.abs(tempY - this.masterY);
 
-        if (tempX < this.masterX) {
-          topX = this.masterX - width;
-        }
+          if (event.isShiftDown()) {
+        	  width = Math.min(width, height);
+              height = Math.min(width, height);
+          }
 
-        if (tempY < this.masterY) {
-          topY = this.masterY - height;
-        }
+          if (event.isShiftDown()) {
+            width = Math.min(width, height);
+            height = Math.min(width, height);
+          }
 
-        //this.square.getPoints().clear();
-        //this.square.getPoints().addAll(topX, topY, topX, topY + height, topX + width,
-          //  topY + height, topX + width, topY);
+          if (tempX < this.masterX) {
+            topX = this.masterX - width;
+          }
+
+          if (tempY < this.masterY) {
+            topY = this.masterY - height;
+          }
+
+          this.triangle.getPoints().clear();
+          this.triangle.getPoints().addAll(topX + width / 2.0, topY, topX + width, topY + height,
+        		  topX, topY + height);
       }
 
       this.homeScene.getStatusBar().updateCoordinates(tempX, tempY);
@@ -91,9 +99,7 @@ public class TriangleEventHandler extends MouseEventHandler {
   public EventHandler<MouseEvent> getOnMouseReleasedEventHandler() {
     return event -> {
       this.paintController.getGUIController().getGuiHelper().setSelectedShape(this.triangle);
-
       HistoryController.getInstance(this.paintController).createHistoryEntry();
-
       this.triangle = null;
     };
   }

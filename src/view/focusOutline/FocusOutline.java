@@ -11,6 +11,7 @@ import model.Shape;
 import model.shapes.Ellipse;
 import model.shapes.Line;
 import model.shapes.Polygon;
+import model.shapes.Triangle;
 import util.HomeConstants;
 
 public class FocusOutline {
@@ -43,10 +44,14 @@ public class FocusOutline {
 
     if (this.selectedShape instanceof Polygon) {
       Polygon polygon = (Polygon) this.selectedShape;
-      double width = Math.abs(polygon.getPoints().get(0) - polygon.getPoints().get(6));
+      double width = Math.abs(polygon.getPoints().get(2) - polygon.getPoints().get(4));
       double height = Math.abs(polygon.getPoints().get(1) - polygon.getPoints().get(3));
 
-      this.highlightedRectangle.setX(polygon.getPoints().get(0));
+      if (this.selectedShape instanceof Triangle) {
+    	  this.highlightedRectangle.setX(polygon.getPoints().get(0) - width / 2.0);
+      } else {
+    	  this.highlightedRectangle.setX(polygon.getPoints().get(0));  
+      }
       this.highlightedRectangle.setY(polygon.getPoints().get(1));
       this.highlightedRectangle.setWidth(width);
       this.highlightedRectangle.setHeight(height);

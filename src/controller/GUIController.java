@@ -9,6 +9,7 @@ import eventHandlers.MouseEventHandler;
 import eventHandlers.RectangleEventHandler;
 import eventHandlers.SelectEventHandler;
 import eventHandlers.SquareEventHandler;
+import eventHandlers.TriangleEventHandler;
 import javafx.scene.Cursor;
 import javafx.stage.Stage;
 import model.Drawing;
@@ -73,6 +74,13 @@ public class GUIController {
         break;
       case SQUARE:
     	mouseEventHandler = new SquareEventHandler(this.paintController);
+    	drawingArea.setCursor(Cursor.CROSSHAIR);
+    	for (Shape shape : shapes) {
+            shape.setCursor(Cursor.CROSSHAIR);
+        }
+    	break;
+      case TRIANGLE:
+    	mouseEventHandler = new TriangleEventHandler(this.paintController);
     	drawingArea.setCursor(Cursor.CROSSHAIR);
     	for (Shape shape : shapes) {
             shape.setCursor(Cursor.CROSSHAIR);
