@@ -23,8 +23,6 @@ public class DrawingController {
     this.drawing = new Drawing(this.paintController);
     this.setDrawingTitle(title);
     this.setupDrawingArea(width, height);
-    HistoryController.getInstance(this.paintController).setDrawing(this.drawing);
-    HistoryController.getInstance(this.paintController).createHistoryEntry();
     return this.drawing;
   }
 

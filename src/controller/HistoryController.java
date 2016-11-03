@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Stack;
 import model.Drawing;
+import model.GUIHelper;
 
 public class HistoryController {
 
@@ -52,10 +53,11 @@ public class HistoryController {
 
   public void undo() {
     if (this.canUndo()) {
-      this.paintController.getGUIController().getGuiHelper().setSelectedDrawTool(null);
+      GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
       this.redoStack.push(this.undoStack.pop());
       this.drawing = undoStack.peek().clone();
       this.paintController.getDrawingController().setDrawing(this.drawing);
+      guiHelper.setSelectedShape(null);
       this.paintController.getDrawingController().getDrawing().notifyObservers();
     }
   }

@@ -718,8 +718,8 @@ public class MenuBar extends javafx.scene.control.MenuBar implements Observer {
   @Override
   public void update() {
     GUIHelper guiHelper = new GUIHelper(this.paintController);
-    this.edit.undo.setDisable(!HistoryController.getInstance(this.paintController).canRedo());
-    this.edit.redo.setDisable(!HistoryController.getInstance(this.paintController).canUndo());
+    this.edit.undo.setDisable(!HistoryController.getInstance(this.paintController).canUndo());
+    this.edit.redo.setDisable(!HistoryController.getInstance(this.paintController).canRedo());
     this.tool.fillColorPicker.setValue(guiHelper.getFillColor());
     this.tool.strokeColorPicker.setValue(guiHelper.getStrokeColor());
 

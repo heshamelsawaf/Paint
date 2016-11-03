@@ -2,6 +2,7 @@ package view.newDrawing;
 
 import java.util.InputMismatchException;
 
+import controller.HistoryController;
 import controller.PaintController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -122,6 +123,8 @@ public class NewDrawingScene extends Scene {
       GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
       this.registerObservers(newDrawing, guiHelper);
       this.paintController.getGUIController().setSelectedTool(DrawingTools.SELECT);
+      HistoryController.getInstance(this.paintController).setDrawing(newDrawing);
+      HistoryController.getInstance(this.paintController).createHistoryEntry();
       this.dismiss();
     } catch (InputMismatchException e) {
       e.printStackTrace();
