@@ -17,6 +17,7 @@ import model.GUIHelper;
 import model.Shape;
 import util.Message;
 import view.DrawingTools;
+import view.help.HelpStage;
 import view.main.DrawingArea;
 import view.main.Home;
 import view.newDrawing.NewDrawingStage;
@@ -48,6 +49,12 @@ public class GUIController {
     newDrawingStage.requestFocus();
   }
 
+  public void openHelpDialog(Stage parentStage) {
+    HelpStage helpStage = new HelpStage(this.paintController, parentStage);
+    helpStage.show();
+    helpStage.requestFocus();
+  }
+
   public void setSelectedTool(DrawingTools drawingTool) {
     DrawingArea drawingArea = this.getHome().getHomeScene().getDrawingArea();
     Drawing drawing = this.paintController.getDrawingController().getDrawing();
@@ -73,19 +80,13 @@ public class GUIController {
         }
         break;
       case SQUARE:
-    	mouseEventHandler = new SquareEventHandler(this.paintController);
-    	drawingArea.setCursor(Cursor.CROSSHAIR);
-    	for (Shape shape : shapes) {
-            shape.setCursor(Cursor.CROSSHAIR);
+        this.getHome().getHomeScene().hideBorderMessage();
+        mouseEventHandler = new SquareEventHandler(this.paintController);
+        drawingArea.setCursor(Cursor.CROSSHAIR);
+        for (Shape shape : shapes) {
+          shape.setCursor(Cursor.CROSSHAIR);
         }
-    	break;
-      case TRIANGLE:
-    	mouseEventHandler = new TriangleEventHandler(this.paintController);
-    	drawingArea.setCursor(Cursor.CROSSHAIR);
-    	for (Shape shape : shapes) {
-            shape.setCursor(Cursor.CROSSHAIR);
-        }
-    	break;
+        break;
       case ELLIPSE:
         this.getHome().getHomeScene().displayBorderMessage(Message.PERFECT_CIRCLE);
         mouseEventHandler = new EllipseEventHandler(this.paintController);
@@ -95,15 +96,24 @@ public class GUIController {
         }
         break;
       case CIRCLE:
-    	mouseEventHandler = new CircleEventHandler(this.paintController);
-      	drawingArea.setCursor(Cursor.CROSSHAIR);
-      	for (Shape shape : shapes) {
-              shape.setCursor(Cursor.CROSSHAIR);
+        this.getHome().getHomeScene().hideBorderMessage();
+        mouseEventHandler = new CircleEventHandler(this.paintController);
+        drawingArea.setCursor(Cursor.CROSSHAIR);
+        for (Shape shape : shapes) {
+          shape.setCursor(Cursor.CROSSHAIR);
         }
-      	break;
+        break;
       case LINE:
         this.getHome().getHomeScene().displayBorderMessage(Message.PERFECT_LINE);
         mouseEventHandler = new LineEventHandler(this.paintController);
+        drawingArea.setCursor(Cursor.CROSSHAIR);
+        for (Shape shape : shapes) {
+          shape.setCursor(Cursor.CROSSHAIR);
+        }
+        break;
+      case TRIANGLE:
+        this.getHome().getHomeScene().displayBorderMessage(Message.EQUILATERAL_TRIANGLE);
+        mouseEventHandler = new TriangleEventHandler(this.paintController);
         drawingArea.setCursor(Cursor.CROSSHAIR);
         for (Shape shape : shapes) {
           shape.setCursor(Cursor.CROSSHAIR);
@@ -120,7 +130,6 @@ public class GUIController {
       shape.setOnMouseReleased(mouseEventHandler.getOnMouseReleasedEventHandler());
 
     }
-
     this.guiHelper.setSelectedDrawTool(drawingTool);
   }
 
