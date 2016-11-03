@@ -31,7 +31,7 @@ public class RotateEventHandler extends MouseEventHandler {
     return event -> {
       super.getOnMouseDraggedEventHandler().handle(event);
 
-      this.drawing.rotateShape(event.getX() - pivot);
+      this.drawing.rotateShape(event.getX() - pivot, false);
       this.setDelta(true);
     };
   }

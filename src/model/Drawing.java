@@ -121,7 +121,7 @@ public class Drawing implements Cloneable {
     while ((index = this.shapes.indexOf(shape)) > 0) {
       Collections.swap(this.shapes, index, index - 1);
     }
-
+    HistoryController.getInstance(this.paintController).createHistoryEntry();
     this.notifyObservers();
   }
 
@@ -129,7 +129,7 @@ public class Drawing implements Cloneable {
     int index = this.shapes.indexOf(shape);
     if (index > 0) {
       Collections.swap(this.shapes, index, index - 1);
-
+      HistoryController.getInstance(this.paintController).createHistoryEntry();
       this.notifyObservers();
     }
   }
@@ -139,6 +139,7 @@ public class Drawing implements Cloneable {
     while ((index = this.shapes.indexOf(shape)) < this.shapes.size() - 1) {
       Collections.swap(this.shapes, index, index + 1);
     }
+    HistoryController.getInstance(this.paintController).createHistoryEntry();
     this.notifyObservers();
   }
 
@@ -146,11 +147,12 @@ public class Drawing implements Cloneable {
     int index = this.shapes.indexOf(shape);
     if (index < this.shapes.size() - 1) {
       Collections.swap(this.shapes, index, index + 1);
+      HistoryController.getInstance(this.paintController).createHistoryEntry();
       this.notifyObservers();
     }
   }
 
-  public void rotateShape(double angle) {
+  public void rotateShape(double angle, boolean createSaveEntry) {
     GUIHelper guiHelper = this.paintController.getGUIController().getGuiHelper();
     FocusOutline focusOutline = guiHelper.getFocusOutline();
 
@@ -164,6 +166,9 @@ public class Drawing implements Cloneable {
 
     for (ResizeAnchor resizeAnchor : focusOutline.getResizeAnchors()) {
       resizeAnchor.getTransforms().add(rotate);
+    }
+    if (createSaveEntry) {
+      HistoryController.getInstance(this.paintController).createHistoryEntry();
     }
   }
 
