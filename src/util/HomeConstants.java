@@ -43,6 +43,19 @@ public final class HomeConstants {
   public static final String NEW_PROJECT_CANCEL_BUTTON_LABEL = "Cancel";
 
 
+  public static final double HELP_VBOX_PADDING_TOP = 10;
+  public static final double HELP_VBOX_PADDING_RIGHT = 10;
+  public static final double HELP_VBOX_PADDING_BOTTOM = 10;
+  public static final double HELP_VBOX_PADDING_LEFT = 10;
+  public static final double HELP_VBOX_SPACING = 5;
+  public static final String HELP_TITLE = "Valar morghulis";
+  public static final String HELP_DISMISS_BUTTON = "FUCK OFF!";
+  public static final String HELP_MESSAGE_1 =
+      "This fuck** was depeloped by both motherfuckers Ahmed Walid and Hesham 5ara Sawaf so please go **** yourself";
+  public static final String HELP_MESSAGE_2 =
+      "The North Remembers";
+
+
 
   private HomeConstants() {}
 }
